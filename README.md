@@ -31,6 +31,9 @@ The instructions assume you are not new to Debian, though you may have no experi
 ## Related Links
 
  * because of the high resolution screen it is worth reading through some [HiDPI related materials](https://wiki.archlinux.org/index.php/HiDPI) otherwise you will very quickly go short sighted
+ * patches based on
+      * [Surface Pro 3](https://github.com/neoreeps/surface-pro-3/blob/master/wily_surface.patch) instructions
+      * [[PATCH v3] surface pro 4: Add support for Surface Pro 4 Buttons](https://lkml.org/lkml/2015/12/27/136)
 
 # Preflight
 
@@ -65,7 +68,7 @@ Now we need to disable SecureBoot to let us boot Linux later on.
  - under 'Secure Boot', click on 'Change configuration'
  - select 'None' from the menu and click on OK
 
-Before we go and shrink the Windows parition, lets start off by getting the latest updates (including firmwares) installed (I did this on 2015-12-31), so prepare yourself for a long and tediously slow process of watching progress bars and lots of reboot cycles as Windows 'does its thing'.
+Before we go and shrink the Windows parition, lets start off by getting the latest updates (including firmwares) installed (I did this on 2015-12-31), so prepare yourself for a long and tediously slow process (hours) of watching progress bars and lots of reboot cycles as Windows 'does its thing'.
 
 We now need to free up a space on drive `C:` and get ready for shrinking by:
 
@@ -138,31 +141,41 @@ You laptop should reboot and you will see the GRUB bootloader and Debian should 
 
 # Configuring
 
-## Kernel
-
-Install firmware-misc-nonfree (skylake i915)
-
-apt-get install build-essential fakeroot libncurses5-dev kernel-package
-CONCURRENCY_LEVEL=`getconf _NPROCESSORS_ONLN` fakeroot make-kpkg --initrd --append-to-version=-sf4 kernel_image kernel_headers
-
-
-https://github.com/neoreeps/surface-pro-3/blob/master/wily_surface.patch
-https://lkml.org/lkml/2015/12/27/136
-
-xzcat ../linux-config-4.3/config.amd64_none_amd64.xz > .config
-echo CONFIG_SURFACE_PRO_BUTTON=m > .config
-
-Parameters for your kernel are set in [`/etc/default/grub`](etc/default/grub) where you need:
-
-    i915.preliminary_hw_support=1 intel_idle.max_cstate=2
-
-Also edit your [`/etc/initramfs-tools/modules`](etc/initramfs-tools/modules) file to include `hid_multitouch` so that you can use the keyboard before mounting the root filesystem.
-
 ## Networking
 
 All you need to do is copy the contents of [`interfaces.d`](etc/network/interfaces.d) into `/etc/network/interfaces.d/`; plus create a suitable `/etc/wpa_supplicant/wpa_supplicant.conf` file (if you are not using any network management tool).
 
 **N.B.** to make the wireless networking responsive, you need to disable power saving with `iw dev mlan0 set power_save off`; this has already been slipped into [`/etc/network/interfaces.d/mlan0`](etc/network/interfaces.d/mlan0) for you
+
+## Kernel
+
+First you need to set some kernel boot arguments which are set in [`/etc/default/grub`](etc/default/grub):
+
+    i915.preliminary_hw_support=1 intel_idle.max_cstate=2
+
+Also, so that your keyboard works before the root filesystem is mounted, edit your [`/etc/initramfs-tools/modules`](etc/initramfs-tools/modules) file to include `hid_multitouch`.
+
+Run the following to get your system ready to compile a kernel:
+
+    sudo apt-get install build-essential fakeroot libncurses5-dev kernel-package
+    sudo apt-get install -t jessie-backports linux-source-4.3 firmware-linux firmware-misc-nonfree intel-microcode
+    tar -C /usr/src -xf /usr/src/linux-source-4.3.tar.xz
+    cd /usr/src/linux-source-4.3
+    find /usr/src/debian-mmsp4/patches -type f | sort | xargs -t -I{} sh -c "cat {} | patch -p1"
+    xzcat ../linux-config-4.3/config.amd64_none_amd64.xz > .config
+    echo CONFIG_SURFACE_PRO_BUTTON=m > .config
+
+Now run `make menuconfig` then exit out saving your changes so the button module is properly included.
+
+Time to compile the kernel (this will take about 30 minutes):
+
+    CONCURRENCY_LEVEL=`getconf _NPROCESSORS_ONLN` fakeroot make-kpkg --initrd --append-to-version=-mssp4 kernel_image kernel_headers
+
+Once compiled, you should install your new kernel:
+
+    sudo dpkg -i /usr/src/linux-image-4.3.3-mssp4_4.3.3-mssp4-10.00.Custom_amd64.deb
+
+Now reboot into your new kernel.
 
 ## Graphics
 
