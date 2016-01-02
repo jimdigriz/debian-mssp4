@@ -38,9 +38,9 @@ You will require:
 
  * an external USB keyboard, as the typing cover is not supported by Debian's kernel
  * a USB hub as there is only one USB port
- * a USB key `dd`'ed with the `amd64` live ISO for [gparted](http://gparted.sourceforge.net/); I used `gparted-live-0.24.0-2-amd64.iso`
- * a USB key `dd`'ed with the [*non-free* `amd64` Debian network installer](http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/); I used `firmware-8.2.0-amd64-netinst.iso`
- * a wireless network you can connect to (or an USB Ethernet adapter)
+ * a USB key `dd`'ed with the amd64 live ISO for [gparted](http://gparted.sourceforge.net/); I used `gparted-live-0.24.0-2-amd64.iso`
+ * a USB key `dd`'ed with the [non-free amd64 Debian network installer](http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/); I used `firmware-8.2.0-amd64-netinst.iso`
+ * an (open, WEP or WPA PSK) wireless network you can connect to (or an USB Ethernet adapter)
 
 ## Prepping Windows 10
 
@@ -48,18 +48,18 @@ The aim here is to shink down the Windows partition to make room for Debian.
 
 I wanted to keep Windows as Microsoft are constantly releasing updated firmwares which will only apply from under Windows.  Of course if you plan not on dual booting you could skip all this, though I would not recommend to have something to apply those firmware updates with.
 
-Lets start by disabling Bitlocker (you can re-enable it later) so that gparted can resize the partition later.  This is done by clicking on Start, and clicking on 'File Manager'.  From here you will be able to go to where drive `C:` is located, and right-clicking on it will give you an option to 'Manage Bitlocker'.  From there you will be able to click on 'Disable Bitlocker'.
+Lets start by disabling Bitlocker (you can re-enable it after the resize) so that gparted can resize the partition later.  This is done by clicking on Start, and clicking on 'File Manager'.  From here you will be able to go to where drive `C:` is located, and right-clicking on it will give you an option to 'Manage Bitlocker'.  From there you will be able to click on 'Disable Bitlocker'.
 
 **N.B.** if there is an exclamation mark on the drive `C:` icon, you will need to firstly enable it
 
 Now we need to disable SecureBoot to let us boot Linux later on.
 
  - Either:
-  * from Windows, click on Start -> Power -> (hold down shift) -> click on 'Restart'
-   - go to 'Troubleshoot'
-   - go to 'Advanced options'
-   - select 'UEFI Firmwre Settings'
-  * whilst powered off, hold down the '+' volume button and turn on the laptop
+      * from Windows, click on Start -> Power -> (hold down shift) -> click on 'Restart'
+           - go to 'Troubleshoot'
+           - go to 'Advanced options'
+           - select 'UEFI Firmwre Settings'
+      * whilst powered off, hold down the '+' volume button and turn on the laptop
  - you will be dropped into the Surface UEFI system
  - go to 'Security'
  - under 'Secure Boot', click on 'Change configuration'
@@ -77,18 +77,17 @@ We now need to free up a space on drive `C:` and get ready for shrinking by:
 ## Shrinking the Windows Parition
 
 Insert the gparted USB key and boot it by either:
+
  * from Windows, click on Start -> Power -> (hold down shift) -> click on 'Restart'
       - go to 'Use a device'
       - select 'USB Storage'
- * go to the Surface UEFI system
+ * go to the Surface UEFI system by powering on whilst holding down the '+' volume button
       - go to the 'Boot configuration' section
       - left swipe on 'USB Storage' to boot off your USB key
 
 You should be able to boot into gparted now, and get something that lets you reduce the size of the NTFS partition; for me Windows took up 22GB of space so I left it in a 60GB partition to leave it enough room for Windows Update.
 
 **WARNING:** `gparted-live-0.24.0-2-amd64.iso` seems to lock up after a few minutes of running, you do *NOT* want this midway through the resize.  All I can recommend is 'be quick', sorry.
-
-**N.B.** I would recommend keeping the ~2.5GB recovery partition so if you every need to return the laptop, you will find the process dead easy; though it seems you could move the partition to external media or download it from the Microsoft website
 
 Once shrunk, you should test that you can still boot into Windows, and if you can, we are ready to move on.  If not, you will have to figure out what is wrong.
 
@@ -114,11 +113,38 @@ For reference, my partition table looks like:
 
 # Installing Debian
 
+Boot off your Debian installer USB key and work through it.  Early on though you will be prompted that no Ethernet interface was detected and that you need to choose one, you need to select `mwifiex_pcie` (though `mwl8k` works too), then you will be prompted to supply details on how to connect to your wireless network then the installation will continue as expected.
 
+**N.B.** I would recommend keeping the ~2.5GB recovery partition so if you ever need to return the laptop, you will find the process dead easy; though it seems you could move the partition to external media or download it from the Microsoft website
+
+For your information, I went for a `/boot` parition and put everything else on LVM.
+
+When the installer gets to the point of installing GRUB as your bootloader, it will fail.  To resolve this you will need to 'Execute a shell' and type the following:
+
+    mount --bind /sys /target/sys
+    chroot /target /bin/bash
+    apt-get install grub-efi
+    update-grub
+    grub-install /dev/nvme0n1
+    exit
+    umount /target/sys
+    exit
+
+Now click on 'Continue without a bootloader'.
+
+You laptop should reboot and you will see the GRUB bootloader and Debian should boot.
+
+**N.B.** until you install a newer (backports) kernel  GRUB will not detect and boot Windows
 
 # Configuring
 
 ## Kernel
+
+Install firmware-misc-nonfree (skylake i915)
+
+apt-get install build-essential fakeroot libncurses5-dev kernel-package
+CONCURRENCY_LEVEL=`getconf _NPROCESSORS_ONLN` fakeroot make-kpkg --initrd --append-to-version=-sf4 kernel_image kernel_headers
+
 
 https://github.com/neoreeps/surface-pro-3/blob/master/wily_surface.patch
 https://lkml.org/lkml/2015/12/27/136
