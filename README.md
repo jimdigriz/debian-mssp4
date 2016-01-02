@@ -16,18 +16,18 @@ The instructions assume you are not new to Debian, though you may have no experi
 
 ## Outstanding Issues
 
- * hotplugging the typing cover, or going through a sleep/resume cycle, often results in it no longer responding
+ * hot plugging the typing cover, or going through a sleep/resume cycle, often results in it no longer responding
  * camera
  * touchscreen (and pen)
  * screen rotation
- * orientiation (and other) sensors
+ * orientation (and other) sensors
  * SecureBoot is not enabled
  * H.264 video decoding
- * bluetooth
+ * Bluetooth
  * need to improve power saving
       * wireless power saving is disabled
       * `i915.enable_rc6=7` works it seems, need to give it more testing
-      * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modesetting to black out the screen and crash the system
+      * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modeset'ing to black out the screen and crash the system
  * gparted lockup investigation
 
 ## Related Links
@@ -46,17 +46,17 @@ You will require:
  * a USB hub as there is only one USB port
  * a USB key `dd`'ed with the amd64 live ISO for [gparted](http://gparted.sourceforge.net/); I used `gparted-live-0.24.0-2-amd64.iso`
  * a USB key `dd`'ed with the [non-free amd64 Debian network installer](http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/); I used `firmware-8.2.0-amd64-netinst.iso`
- * an (open, WEP or WPA PSK) wireless network you can connect to (or an USB Ethernet adapter)
+ * an (open, WEP or WPA PSK) wireless network you can connect to (or an USB Ethernet adaptor)
 
 ## Prepping Windows 10
 
-The aim here is to shink down the Windows partition to make room for Debian.
+The aim here is to shrink down the Windows partition to make room for Debian.
 
 I wanted to keep Windows as Microsoft are constantly releasing updated firmwares which will only apply from under Windows.  Of course if you plan not on dual booting you could skip all this, though I would not recommend to have something to apply those firmware updates with.
 
 Lets start by disabling Bitlocker (you can re-enable it after the resize) so that gparted can resize the partition later.  This is done by clicking on Start, and clicking on 'File Manager'.  From here you will be able to go to where drive `C:` is located, and right-clicking on it will give you an option to 'Manage Bitlocker'.  From there you will be able to click on 'Disable Bitlocker'.
 
-**N.B.** if there is an exclamation mark on the drive `C:` icon, you will need to firstly enable it
+**N.B.** if there is an exclamation mark on the drive `C:` icon, you will need to firstly enable Bitlocker before you can fully disable it
 
 Now we need to disable SecureBoot to let us boot Linux later on.
 
@@ -64,14 +64,14 @@ Now we need to disable SecureBoot to let us boot Linux later on.
       * from Windows, click on Start -> Power -> (hold down shift) -> click on 'Restart'
            - go to 'Troubleshoot'
            - go to 'Advanced options'
-           - select 'UEFI Firmwre Settings'
+           - select 'UEFI Firmware Settings'
       * whilst powered off, hold down the '+' volume button and turn on the laptop
  - you will be dropped into the Surface UEFI system
  - go to 'Security'
  - under 'Secure Boot', click on 'Change configuration'
  - select 'None' from the menu and click on OK
 
-Before we go and shrink the Windows parition, lets start off by getting the latest updates (including firmwares) installed (I did this on 2015-12-31), so prepare yourself for a long and tediously slow process (hours) of watching progress bars and lots of reboot cycles as Windows 'does its thing'.
+Before we go and shrink the Windows partition, lets start off by getting the latest updates (including firmwares) installed (I did this on 2015-12-31), so prepare yourself for a long and tediously slow process (hours) of watching progress bars and lots of reboot cycles as Windows 'does its thing'.
 
 We now need to free up a space on drive `C:` and get ready for shrinking by:
 
@@ -80,7 +80,7 @@ We now need to free up a space on drive `C:` and get ready for shrinking by:
  - [run disk cleanup (including on the system files)](http://windows.microsoft.com/en-us/windows-10/disk-cleanup-in-windows-10) - here you can delete any old versions of Windows which can take up ~25GB
  - run *twice* `CHKDSK` on drive `C:`, this is done by opening a command prompt as administrator and typing `chkdsk /f c:`, you will need to reboot for the chkdsk to work; remember to do it a second time too!
 
-## Shrinking the Windows Parition
+## Shrinking the Windows Partition
 
 Insert the gparted USB key and boot it by either:
 
@@ -123,9 +123,9 @@ Boot off your Debian installer USB key and work through it.  Early on though you
 
 **N.B.** I would recommend keeping the ~2.5GB recovery partition so if you ever need to return the laptop, you will find the process dead easy; though it seems you could move the partition to external media or download it from the Microsoft website
 
-For your information, I went for a `/boot` parition and put everything else on LVM.
+For your information, I went for a `/boot` partition and put everything else on LVM.
 
-When the installer gets to the point of installing GRUB as your bootloader, it will fail.  To resolve this you will need to 'Execute a shell' and type the following:
+When the installer gets to the point of installing GRUB as your boot loader, it will fail.  To resolve this you will need to 'Execute a shell' and type the following:
 
     mount --bind /sys /target/sys
     chroot /target /bin/bash
