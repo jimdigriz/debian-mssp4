@@ -1,0 +1,3 @@
+deb http://http.debian.net/debian jessie-backports main
+deb [arch=amd64] http://http.debian.net/debian jessie-backports contrib non-free
+#deb-src http://http.debian.net/debian jessie-backports main contrib non-free

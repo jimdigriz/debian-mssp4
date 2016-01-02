@@ -1,0 +1,9 @@
+deb http://http.debian.net/debian/ jessie main non-free contrib
+#deb-src http://http.debian.net/debian/ jessie main non-free contrib
+
+deb http://security.debian.org/ jessie/updates main contrib non-free
+#deb-src http://security.debian.org/ jessie/updates main contrib non-free
+
+# jessie-updates, previously known as 'volatile'
+deb http://http.debian.net/debian/ jessie-updates main contrib non-free
+#deb-src http://http.debian.net/debian/ jessie-updates main contrib non-free
