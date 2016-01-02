@@ -143,6 +143,19 @@ You laptop should reboot and you will see the GRUB bootloader and Debian should 
 
 # Configuring
 
+## Add Additional Repositories
+
+You need to add [Debian backports](http://backports.debian.org/) and stretch, as well as some suitable pinning, this is done with the files:
+
+ * [`/etc/apt/sources.list`](etc/apt/sources.list)
+ * [`/etc/apt/sources.list.d/debian-backports.list`](etc/apt/sources.list.d/debian-backports.list)
+ * [`/etc/apt/sources.list.d/debian-stretch.list`](etc/apt/sources.list.d/debian-stretch.list)
+ * [`/etc/apt/preferences.d/pin`](etc/apt/preferences.d/pin)
+
+Now run:
+
+    sudo apt-get update
+
 ## Networking
 
 All you need to do is copy the contents of [`interfaces.d`](etc/network/interfaces.d) into `/etc/network/interfaces.d/`; plus create a suitable `/etc/wpa_supplicant/wpa_supplicant.conf` file (if you are not using any network management tool).
