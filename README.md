@@ -163,7 +163,7 @@ Run the following to get your system ready to compile a kernel:
     sudo apt-get install -t jessie-backports linux-source-4.3 firmware-linux firmware-misc-nonfree intel-microcode
     tar -C /usr/src -xf /usr/src/linux-source-4.3.tar.xz
     cd /usr/src/linux-source-4.3
-    find /usr/src/debian-mmsp4/patches -type f | sort | xargs -t -I{} sh -c "cat {} | patch -p1"
+    find /usr/src/debian-mssp4/patches -type f | sort | xargs -t -I{} sh -c "cat {} | patch -p1"
     xzcat ../linux-config-4.3/config.amd64_none_amd64.xz > .config
     echo CONFIG_SURFACE_PRO_BUTTON=m > .config
 
