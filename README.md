@@ -16,7 +16,6 @@ The instructions assume you are not new to Debian, though you may have no experi
 
 ## Outstanding Issues
 
- * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modesetting to black out the screen and crash the system
  * hotplugging the typing cover, or going through a sleep/resume cycle, often results in it no longer responding
  * camera
  * touchscreen (and pen)
@@ -25,8 +24,11 @@ The instructions assume you are not new to Debian, though you may have no experi
  * SecureBoot is not enabled
  * H.264 video decoding
  * bluetooth
- * wireless power saving is disabled
- * gparted lockup
+ * need to improve power saving
+      * wireless power saving is disabled
+      * `i915.enable_rc6=7` works it seems, need to give it more testing
+      * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modesetting to black out the screen and crash the system
+ * gparted lockup investigation
 
 ## Related Links
 
