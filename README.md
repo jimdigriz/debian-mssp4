@@ -179,9 +179,14 @@ Run the following to get your system ready to compile a kernel:
     cd /usr/src/linux-source-4.3
     find /usr/src/debian-mssp4/patches -type f | sort | xargs -t -I{} sh -c "cat {} | patch -p1"
     xzcat ../linux-config-4.3/config.amd64_none_amd64.xz > .config
-    echo CONFIG_SURFACE_PRO_BUTTON=m > .config
+    
+    cat <<'EOF' >> .config
+    echo CONFIG_SURFACE_PRO_BUTTON=m
+    echo CONFIG_MFD_INTEL_LPSS_ACPI=m
+    echo CONFIG_MFD_INTEL_LPSS_PCI=m
+    EOF
 
-Now run `make menuconfig` then exit out saving your changes so the button module is properly included.
+Now run `make menuconfig` then exit out saving your changes so the button/lpss modules are properly included.
 
 Time to compile the kernel (this will take about 30 minutes):
 
