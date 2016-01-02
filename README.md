@@ -36,6 +36,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * patches based on
       * [Surface Pro 3](https://github.com/neoreeps/surface-pro-3/blob/master/wily_surface.patch) instructions
       * [[PATCH v3] surface pro 4: Add support for Surface Pro 4 Buttons](https://lkml.org/lkml/2015/12/27/136)
+ * [reddit - Surface Linux: Penguins like nice things too](https://www.reddit.com/r/surfacelinux)
 
 # Preflight
 
