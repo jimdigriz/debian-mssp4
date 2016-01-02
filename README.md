@@ -74,14 +74,15 @@ We now need to free up a space on drive `C:` and get ready for shrinking by:
  - [run disk cleanup (including on the system files)](http://windows.microsoft.com/en-us/windows-10/disk-cleanup-in-windows-10) - here you can delete any old versions of Windows which can take up ~25GB
  - run *twice* `CHKDSK` on drive `C:`, this is done by opening a command prompt as administrator and typing `chkdsk /f c:`, you will need to reboot for the chkdsk to work; remember to do it a second time too!
 
-Time to shrink windows.  Insert the gparted USB key and boot it by:
- - Either:
-  * from Windows, click on Start -> Power -> (hold down shift) -> click on 'Restart'
-   - go to 'Use a device'
-   - select 'USB Storage'
-  * go to the Surface UEFI system
-   - go to the 'Boot configuration' section
-   - left swipe on 'USB Storage' to boot off your USB key
+## Shrinking the Windows Parition
+
+Insert the gparted USB key and boot it by either:
+ * from Windows, click on Start -> Power -> (hold down shift) -> click on 'Restart'
+      - go to 'Use a device'
+      - select 'USB Storage'
+ * go to the Surface UEFI system
+      - go to the 'Boot configuration' section
+      - left swipe on 'USB Storage' to boot off your USB key
 
 You should be able to boot into gparted now, and get something that lets you reduce the size of the NTFS partition; for me Windows took up 22GB of space so I left it in a 60GB partition to leave it enough room for Windows Update.
 
