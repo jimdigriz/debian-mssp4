@@ -202,10 +202,49 @@ All you need to do is so run:
 
 Then select the 'Terminus' font, and the 16x32 sizing.
 
-**N.B.** you can set the keyboard mapping for the console (and X11) with `localectl ...`
+**N.B.** you can set the keyboard mapping for the console (and Xorg) with `localectl ...`
 
 Unfortunately there is an outstanding bug ([console-setup w/ systemd forgets font setting](https://bugs.debian.org/759657)) which means you have to slip in [`/etc/udev/rules.d/90-setupcon.rules`](etc/udev/rules.d/90-setupcon.rules) to stop them being shrunk again (and the keyboard mapping being forced back to US)
 
-### X11
+### Xorg
 
-[xserver-xorg-video-intel (2:2.99.917+git20151217-1~exp1)](https://packages.debian.org/experimental/xserver-xorg-video-intel)
+Start off by installing Xorg (the pinning will bring it in from stretch):
+
+    sudo apt-get install xserver-xorg xserver-xorg-input-multitouch libgl1-mesa-dri libgl1-mesa-glx libgl1-mesa-dri libgl1-mesa-glx
+
+Now download manually [xserver-xorg-video-intel (2:2.99.917+git20151217-1~exp1)](https://packages.debian.org/experimental/xserver-xorg-video-intel) and install it with:
+
+    sudo dpkg -i xserver-xorg-video-intel_2.99.917+git20151217-1~exp1_amd64.deb
+
+You should be able to start Xorg (I recommend installing the [lightdm](http://freedesktop.org/wiki/Software/LightDM/) package) and it will have 2D and 3D acceleration enabled.  You can check this by running:
+
+    alex@quatermain:~$ grep AIGLX /var/log/Xorg.0.log
+    [     5.124] (==) AIGLX enabled
+    [     5.183] (II) AIGLX: enabled GLX_MESA_copy_sub_buffer
+    [     5.183] (II) AIGLX: enabled GLX_ARB_create_context
+    [     5.183] (II) AIGLX: enabled GLX_ARB_create_context_profile
+    [     5.183] (II) AIGLX: enabled GLX_EXT_create_context_es2_profile
+    [     5.183] (II) AIGLX: enabled GLX_INTEL_swap_event
+    [     5.183] (II) AIGLX: enabled GLX_SGI_swap_control and GLX_MESA_swap_control
+    [     5.183] (II) AIGLX: enabled GLX_EXT_framebuffer_sRGB
+    [     5.183] (II) AIGLX: enabled GLX_ARB_fbconfig_float
+    [     5.183] (II) AIGLX: GLX_EXT_texture_from_pixmap backed by buffer objects
+    [     5.183] (II) AIGLX: enabled GLX_ARB_create_context_robustness
+    [     5.183] (II) AIGLX: Loaded and initialized i965
+
+Then from within X you should see something like:
+
+    alex@quatermain:~$ xdriinfo 
+    Screen 0: i965
+    
+    alex@quatermain:~$ glxinfo | head
+    name of display: :0
+    display: :0  screen: 0
+    direct rendering: Yes
+    server glx vendor string: SGI
+    server glx version string: 1.4
+    server glx extensions:
+        GLX_ARB_create_context, GLX_ARB_create_context_profile, 
+        GLX_ARB_create_context_robustness, GLX_ARB_fbconfig_float, 
+        GLX_ARB_framebuffer_sRGB, GLX_ARB_multisample, 
+        GLX_EXT_create_context_es2_profile, GLX_EXT_framebuffer_sRGB, 
