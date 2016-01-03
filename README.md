@@ -36,7 +36,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * patches based on
       * [Surface Pro 3](https://github.com/neoreeps/surface-pro-3/blob/master/wily_surface.patch) instructions
       * [[PATCH v3] surface pro 4: Add support for Surface Pro 4 Buttons](https://lkml.org/lkml/2015/12/27/136)
-      * [[PATCH v2 00/16] intel-lpss: support non-ACPI platforms](https://lkml.org/lkml/2015/11/30/441)
+      * [[PATCH v2 14/16] mfd: intel-lpss: Pass SDA hold time to I2C host controller driver](https://lkml.org/lkml/2015/11/30/436)
  * [reddit - Surface Linux: Penguins like nice things too](https://www.reddit.com/r/surfacelinux)
 
 # Preflight
