@@ -17,14 +17,15 @@ The instructions assume you are not new to Debian, though you may have no experi
 ## Outstanding Issues
 
  * hot plugging the typing cover, or going through a sleep/resume cycle, often results in it no longer responding
- * camera
- * touchscreen (and pen)
+ * camera - hides on the PCI bus at [8086:1926](http://pci-ids.ucw.cz/read/PC/8086/1926)
+ * touchscreen - hides on the PCI bus at 8086:9d3e
+      * pen
  * sensors
       * although detected, [something in 4.3 breaks](https://lkml.org/lkml/2015/12/17/808) the IIO sensors though from producing any output
       * auto-orientation screen rotation
  * SecureBoot is not enabled
  * H.264 video decoding
- * Bluetooth
+ * Bluetooth - is USB, hangs off the USB3 hub (powered off?)
  * need to improve power saving
       * wireless power saving is disabled
       * `i915.enable_rc6=7` works it seems, need to give it more testing
