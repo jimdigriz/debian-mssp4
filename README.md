@@ -13,15 +13,15 @@ The instructions assume you are not new to Debian, though you may have no experi
  * audio (including the microphone)
  * wireless
  * suspend/resume works
- * sensors
 
 ## Outstanding Issues
 
  * hot plugging the typing cover, or going through a sleep/resume cycle, often results in it no longer responding
  * camera
  * touchscreen (and pen)
- * screen rotation
- * orientation (and other) sensors
+ * sensors
+      * although detected, [something in 4.3 breaks](https://lkml.org/lkml/2015/12/17/808) the IIO sensors though from producing any output
+      * auto-orientation screen rotation
  * SecureBoot is not enabled
  * H.264 video decoding
  * Bluetooth
