@@ -43,6 +43,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * Hibernation
       * [Ubuntu Hibernation](https://help.ubuntu.com/community/PowerManagement/Hibernate)
       * [ArchLinux pm-utils](https://wiki.archlinux.org/index.php/Pm-utils)
+ * [reverse scrolling](https://n00bsys0p.wordpress.com/2011/07/26/reverse-xorg-scrolling-in-linux-natural-scrolling/)
  * [reddit - Surface Linux: Penguins like nice things too](https://www.reddit.com/r/surfacelinux)
 
 # Preflight
@@ -228,12 +229,7 @@ To lock your X11 console, you will need a few packages (here we use `i3lock`):
 
     sudo apt-get install xautolock xss-lock
 
-Then your `~/.xsession` file should look like:
-
-    xautolock -time 5 -locker "i3lock -d" &
-    xss-lock -- xautolock -locknow &
-    
-    exec i3
+Then set your [`~/.xsession`](misc/xsession) accordingly to run these.
 
 ## Graphics
 
