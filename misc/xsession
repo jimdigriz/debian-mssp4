@@ -3,7 +3,7 @@ TOUCHPAD_ID=$(xinput list | sed -n '/slave *pointer/ { /XTEST/! { s/.*id=\([0-9]
 xinput set-button-map $TOUCHPAD_ID $(xinput get-button-map $TOUCHPAD_ID | sed 's/ 4 5 / 5 4 /')
 
 # autolocking and plumbing into loginctl
-xautolock -time 5 -locker "i3lock -d" &
+xautolock -time 5 -locker "i3lock -d -n" &
 xss-lock -- xautolock -locknow &
 
 exec i3
