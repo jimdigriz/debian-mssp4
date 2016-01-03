@@ -1,0 +1,51 @@
+00:00.0 Host bridge [0600]: Intel Corporation Sky Lake Host Bridge/DRAM Registers [8086:1904] (rev 09)
+	Subsystem: Intel Corporation Device [8086:2015]
+00:02.0 VGA compatible controller [0300]: Intel Corporation Sky Lake Integrated Graphics [8086:1926] (rev 0a)
+	Subsystem: Microsoft Corporation Device [1414:0015]
+	Kernel driver in use: i915
+00:05.0 Multimedia controller [0480]: Intel Corporation Sky Lake Imaging Unit [8086:1919] (rev 01)
+	Subsystem: Intel Corporation Device [8086:2015]
+00:08.0 System peripheral [0880]: Intel Corporation Sky Lake Gaussian Mixture Model [8086:1911]
+	Subsystem: Intel Corporation Device [8086:2015]
+00:14.0 USB controller [0c03]: Intel Corporation Device [8086:9d2f] (rev 21)
+	Subsystem: Intel Corporation Device [8086:7270]
+	Kernel driver in use: xhci_hcd
+00:14.2 Signal processing controller [1180]: Intel Corporation Device [8086:9d31] (rev 21)
+	Subsystem: Intel Corporation Device [8086:7270]
+00:14.3 Multimedia controller [0480]: Intel Corporation Device [8086:9d32] (rev 01)
+	Subsystem: Intel Corporation Device [8086:7270]
+00:15.0 Signal processing controller [1180]: Intel Corporation Device [8086:9d60] (rev 21)
+	Subsystem: Intel Corporation Device [8086:7270]
+	Kernel driver in use: intel-lpss
+00:15.1 Signal processing controller [1180]: Intel Corporation Device [8086:9d61] (rev 21)
+	Subsystem: Intel Corporation Device [8086:7270]
+	Kernel driver in use: intel-lpss
+00:15.2 Signal processing controller [1180]: Intel Corporation Device [8086:9d62] (rev 21)
+	Subsystem: Intel Corporation Device [8086:7270]
+	Kernel driver in use: intel-lpss
+00:15.3 Signal processing controller [1180]: Intel Corporation Device [8086:9d63] (rev 21)
+	Subsystem: Intel Corporation Device [8086:7270]
+	Kernel driver in use: intel-lpss
+00:16.0 Communication controller [0780]: Intel Corporation Device [8086:9d3a] (rev 21)
+	Subsystem: Intel Corporation Device [8086:7270]
+	Kernel driver in use: mei_me
+00:16.4 Communication controller [0780]: Intel Corporation Device [8086:9d3e] (rev 21)
+00:1c.0 PCI bridge [0604]: Intel Corporation Device [8086:9d14] (rev f1)
+	Kernel driver in use: pcieport
+00:1d.0 PCI bridge [0604]: Intel Corporation Device [8086:9d18] (rev f1)
+	Kernel driver in use: pcieport
+00:1f.0 ISA bridge [0601]: Intel Corporation Device [8086:9d48] (rev 21)
+	Subsystem: Intel Corporation Device [8086:7270]
+00:1f.2 Memory controller [0580]: Intel Corporation Device [8086:9d21] (rev 21)
+	Subsystem: Intel Corporation Device [8086:7270]
+00:1f.3 Audio device [0403]: Intel Corporation Device [8086:9d70] (rev 21)
+	Subsystem: Intel Corporation Device [8086:7270]
+	Kernel driver in use: snd_hda_intel
+00:1f.4 SMBus [0c05]: Intel Corporation Device [8086:9d23] (rev 21)
+	Subsystem: Intel Corporation Device [8086:7270]
+01:00.0 Non-Volatile memory controller [0108]: Samsung Electronics Co Ltd Device [144d:a802] (rev 01)
+	Subsystem: Samsung Electronics Co Ltd Device [144d:a801]
+	Kernel driver in use: nvme
+02:00.0 Ethernet controller [0200]: Marvell Technology Group Ltd. 88W8897 [AVASTAR] 802.11ac Wireless [11ab:2b38]
+	Subsystem: Device [0003:045e]
+	Kernel driver in use: mwifiex_pcie
