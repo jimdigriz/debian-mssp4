@@ -36,6 +36,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * patches based on
       * [Surface Pro 3](https://github.com/neoreeps/surface-pro-3/blob/master/wily_surface.patch) instructions
       * [[PATCH v3] surface pro 4: Add support for Surface Pro 4 Buttons](https://lkml.org/lkml/2015/12/27/136)
+      * [[PATCH v2 00/16] intel-lpss: support non-ACPI platforms](https://lkml.org/lkml/2015/11/30/441)
  * [reddit - Surface Linux: Penguins like nice things too](https://www.reddit.com/r/surfacelinux)
 
 # Preflight
@@ -181,9 +182,9 @@ Run the following to get your system ready to compile a kernel:
     xzcat ../linux-config-4.3/config.amd64_none_amd64.xz > .config
     
     cat <<'EOF' >> .config
-    echo CONFIG_SURFACE_PRO_BUTTON=m
-    echo CONFIG_MFD_INTEL_LPSS_ACPI=m
-    echo CONFIG_MFD_INTEL_LPSS_PCI=m
+    CONFIG_SURFACE_PRO_BUTTON=m
+    CONFIG_MFD_INTEL_LPSS_ACPI=m
+    CONFIG_MFD_INTEL_LPSS_PCI=m
     EOF
 
 Now run `make menuconfig` then exit out saving your changes so the button/lpss modules are properly included.
