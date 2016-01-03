@@ -1,4 +1,4 @@
-Package: xserver-xorg xserver-xorg-input-multitouch libgl1-mesa-dri libgl1-mesa-glx libgl1-mesa-dri libgl1-mesa-glx
+Package: xserver-xorg xserver-xorg-input-multitouch libgl1-mesa-dri libgl1-mesa-glx libgl1-mesa-dri libgl1-mesa-glx xss-lock
 Pin: release n=stretch
 Pin-Priority: 990
 
