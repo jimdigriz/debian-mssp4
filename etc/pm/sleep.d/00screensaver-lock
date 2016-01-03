@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# 00screensaver-lock: lock workstation on hibernate or suspend
+
+ case "$1" in
+   hibernate|suspend)
+      loginctl lock-sessions
+   ;;
+   thaw|resume)
+   ;;
+   *) exit $NA
+   ;;
+esac

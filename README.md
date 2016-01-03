@@ -12,7 +12,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * power and volume buttons on the screen
  * audio (including the microphone)
  * wireless
- * suspend/resume works
+ * suspend, hibernate and resume works
 
 ## Outstanding Issues
 
@@ -39,6 +39,9 @@ The instructions assume you are not new to Debian, though you may have no experi
       * [[PATCH v3] surface pro 4: Add support for Surface Pro 4 Buttons](https://lkml.org/lkml/2015/12/27/136)
       * [[PATCH v2 14/16] mfd: intel-lpss: Pass SDA hold time to I2C host controller driver](https://lkml.org/lkml/2015/11/30/436)
  * [iio-sensor-proxy](https://github.com/hadess/iio-sensor-proxy) - `systemctl enable iio-sensor-proxy.service`
+ * Hibernation
+      * [Ubuntu Hibernation](https://help.ubuntu.com/community/PowerManagement/Hibernate)
+      * [ArchLinux pm-utils](https://wiki.archlinux.org/index.php/Pm-utils)
  * [reddit - Surface Linux: Penguins like nice things too](https://www.reddit.com/r/surfacelinux)
 
 # Preflight
@@ -120,6 +123,8 @@ For reference, my partition table looks like:
     
     Partition table entries are not in disk order.
 
+**N.B.** you should set your swap space to about 1.5x the amount of memory you have to make sure you have space to hibernate
+
 # Installing Debian
 
 Boot off your Debian installer USB key and work through it.  Early on though you will be prompted that no Ethernet interface was detected and that you need to choose one, you need to select `mwifiex_pcie` (though `mwl8k` works too), then you will be prompted to supply details on how to connect to your wireless network then the installation will continue as expected.
@@ -170,7 +175,9 @@ All you need to do is copy the contents of [`interfaces.d`](etc/network/interfac
 
 First you need to set some kernel boot arguments which are set in [`/etc/default/grub`](etc/default/grub):
 
-    i915.preliminary_hw_support=1 intel_idle.max_cstate=2
+    resume=/dev/mapper/lvm--quatermain-swap i915.preliminary_hw_support=1 intel_idle.max_cstate=2
+
+**N.B.** you must adjust the `resume` argument to match where your swap space is, or if you plan not to use hibernation, replace it with `noresume`
 
 Also, so that your keyboard works before the root filesystem is mounted, edit your [`/etc/initramfs-tools/modules`](etc/initramfs-tools/modules) file to include `hid_multitouch`.
 
@@ -184,12 +191,13 @@ Run the following to get your system ready to compile a kernel:
     xzcat ../linux-config-4.3/config.amd64_none_amd64.xz > .config
     
     cat <<'EOF' >> .config
+    CONFIG_BLK_DEV_NVME=y
     CONFIG_SURFACE_PRO_BUTTON=m
     CONFIG_MFD_INTEL_LPSS_ACPI=m
     CONFIG_MFD_INTEL_LPSS_PCI=m
     EOF
 
-Now run `make menuconfig` then exit out saving your changes so the button/lpss modules are properly included.
+Now run `make menuconfig` then exit out saving your changes so the button/lpss modules are properly included (we make `nvme` built in so hibernation works).
 
 Time to compile the kernel (this will take about 30 minutes):
 
@@ -200,6 +208,31 @@ Once compiled, you should install your new kernel:
     sudo dpkg -i /usr/src/linux-image-4.3.3-mssp4_4.3.3-mssp4-10.00.Custom_amd64.deb
 
 Now reboot into your new kernel.
+
+## Hibernation
+
+Install the needed packages:
+
+    sudo apt-get install uswsusp pm-utils
+
+Now copy to [`/etc/pm/sleep.d`](etc/pm/sleep.d) a number of helper files.
+
+You should be able to hiberate (`sudo pm-hibernate`) and resume now.
+
+**N.B.** if it does not work and stalls on boot, there probably is a problem with your `resume` kernel parameter (did you compile the kernel with `nvme` built in?), so to break the stalling add `noresume`
+
+### Screen Locking
+
+To lock your X11 console, you will need a few packages (here we use `i3lock`):
+
+    sudo apt-get install xautolock xss-lock
+
+Then your `~/.xsession` file should look like:
+
+    xautolock -time 5 -locker "i3lock -d" &
+    xss-lock -- xautolock -locknow &
+    
+    exec i3
 
 ## Graphics
 

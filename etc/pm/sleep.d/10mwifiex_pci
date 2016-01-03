@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# 10mwifiex_pci: unload wifi on hibernate or suspend
+
+ case "$1" in
+   hibernate|suspend)
+      find /sys/bus/pci/drivers/mwifiex_pcie -type l -name '[0-9]*' | xargs basename -a | xargs -I{} sh -c "printf {} > /sys/bus/pci/drivers/mwifiex_pcie/unbind"
+   ;;
+   thaw|resume)
+      lspci -D -mm | awk '/88W8897/ { print $1 }' | xargs -I{} sh -c "printf {} > /sys/bus/pci/drivers/mwifiex_pcie/bind"
+   ;;
+   *) exit $NA
+   ;;
+esac
