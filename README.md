@@ -252,7 +252,7 @@ Unfortunately there is an outstanding bug ([console-setup w/ systemd forgets fon
 
 Start off by installing Xorg (the pinning will bring it in from stretch):
 
-    sudo apt-get install xserver-xorg xserver-xorg-input-multitouch libgl1-mesa-dri libgl1-mesa-glx libgl1-mesa-dri libgl1-mesa-glx
+    sudo apt-get install xserver-xorg xserver-xorg-input-multitouch libgl1-mesa-dri libgl1-mesa-glx libgl1-mesa-dri libgl1-mesa-glx big-cursor
 
 Now download manually [xserver-xorg-video-intel (2:2.99.917+git20151217-1~exp1)](https://packages.debian.org/experimental/xserver-xorg-video-intel) and install it with:
 
