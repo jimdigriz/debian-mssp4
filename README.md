@@ -28,6 +28,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * Bluetooth - is USB, hangs off the USB3 hub (powered off?)
  * need to improve power saving
       * suspend uses lots of power (will not last 24 hours)
+      * suspend is only accessible via closing the lid, S3 is not exposed via ACPI
       * wireless power saving is disabled
       * `i915.enable_rc6=7` works it seems, need to give it more testing
       * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modeset'ing to black out the screen and crash the system
@@ -212,7 +213,19 @@ Once compiled, you should install your new kernel:
 
 Now reboot into your new kernel.
 
-## Hibernation
+## Power
+
+### Resume
+
+Run the following to have your laptop resume when you open your typing cover or press a key:
+
+    echo enabled | sudo tee /sys/devices/pci0000:00/0000:00:14.0/power/wakeup >/dev/null
+    echo enabled | sudo tee /sys/devices/pci0000:00/0000:00:14.0/usb1/power/wakeup >/dev/null
+    echo enabled | sudo tee /sys/devices/pci0000:00/0000:00:14.0/usb1/1-7/power/wakeup >/dev/null
+
+**N.B.** this should be converted into a suitable in a udev rule, but for now I am just documenting the ad-hoc approach
+
+### Hibernation
 
 Install the needed packages:
 
@@ -224,7 +237,7 @@ You should be able to hiberate (`sudo pm-hibernate`) and resume now.
 
 **N.B.** if it does not work and stalls on boot, there probably is a problem with your `resume` kernel parameter (did you compile the kernel with `nvme` built in?), so to break the stalling add `noresume`
 
-### Screen Locking
+#### Screen Locking
 
 To lock your X11 console, you will need a few packages (here we use `i3lock`):
 
