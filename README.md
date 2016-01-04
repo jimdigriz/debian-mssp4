@@ -27,6 +27,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * H.264 video decoding
  * Bluetooth - is USB, hangs off the USB3 hub (powered off?)
  * need to improve power saving
+      * suspend uses lots of power (will not last 24 hours)
       * wireless power saving is disabled
       * `i915.enable_rc6=7` works it seems, need to give it more testing
       * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modeset'ing to black out the screen and crash the system
