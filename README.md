@@ -239,7 +239,7 @@ You should be able to hiberate (`sudo pm-hibernate`) and resume now.
 
 #### Screen Locking
 
-To lock your X11 console, you will need a few packages (here we use `i3lock`):
+To lock your X11 console, you will need a few packages:
 
     sudo apt-get install xautolock xss-lock
 
