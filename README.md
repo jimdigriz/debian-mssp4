@@ -29,6 +29,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * need to improve power saving
       * suspend uses lots of power (will not last 24 hours)
       * suspend is only accessible via closing the lid, S3 is not exposed via ACPI (means `echo mem > /sys/power/state` does not work)
+      * on resume, the reverse scroll is removed (USB reconnect probably)
       * wireless power saving is disabled
       * `i915.enable_rc6=7` works it seems, need to give it more testing
       * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modeset'ing to black out the screen and crash the system
