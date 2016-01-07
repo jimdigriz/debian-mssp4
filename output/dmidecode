@@ -1,0 +1,320 @@
+# dmidecode 2.12
+# SMBIOS entry point at 0x8bcc8000
+SMBIOS 3.0 present.
+# SMBIOS implementations newer than version 2.8 are not
+# fully supported by this version of dmidecode.
+17 structures occupying 946 bytes.
+Table at 0x8BCC7000.
+
+Handle 0x0000, DMI type 7, 19 bytes
+Cache Information
+	Socket Designation: L1 Cache
+	Configuration: Enabled, Not Socketed, Level 1
+	Operational Mode: Write Back
+	Location: Internal
+	Installed Size: 64 kB
+	Maximum Size: 64 kB
+	Supported SRAM Types:
+		Synchronous
+	Installed SRAM Type: Synchronous
+	Speed: Unknown
+	Error Correction Type: Parity
+	System Type: Data
+	Associativity: 8-way Set-associative
+
+Handle 0x0001, DMI type 7, 19 bytes
+Cache Information
+	Socket Designation: L1 Cache
+	Configuration: Enabled, Not Socketed, Level 1
+	Operational Mode: Write Back
+	Location: Internal
+	Installed Size: 64 kB
+	Maximum Size: 64 kB
+	Supported SRAM Types:
+		Synchronous
+	Installed SRAM Type: Synchronous
+	Speed: Unknown
+	Error Correction Type: Parity
+	System Type: Instruction
+	Associativity: 8-way Set-associative
+
+Handle 0x0002, DMI type 7, 19 bytes
+Cache Information
+	Socket Designation: L2 Cache
+	Configuration: Enabled, Not Socketed, Level 2
+	Operational Mode: Write Back
+	Location: Internal
+	Installed Size: 512 kB
+	Maximum Size: 512 kB
+	Supported SRAM Types:
+		Synchronous
+	Installed SRAM Type: Synchronous
+	Speed: Unknown
+	Error Correction Type: Single-bit ECC
+	System Type: Unified
+	Associativity: 4-way Set-associative
+
+Handle 0x0003, DMI type 7, 19 bytes
+Cache Information
+	Socket Designation: L3 Cache
+	Configuration: Enabled, Not Socketed, Level 3
+	Operational Mode: Write Back
+	Location: Internal
+	Installed Size: 4096 kB
+	Maximum Size: 4096 kB
+	Supported SRAM Types:
+		Synchronous
+	Installed SRAM Type: Synchronous
+	Speed: Unknown
+	Error Correction Type: Multi-bit ECC
+	System Type: Unified
+	Associativity: 16-way Set-associative
+
+Handle 0x0004, DMI type 4, 48 bytes
+Processor Information
+	Socket Designation: U3E1
+	Type: Central Processor
+	Family: Core i7
+	Manufacturer: Intel(R) Corporation
+	ID: E3 06 04 00 FF FB EB BF
+	Signature: Type 0, Family 6, Model 78, Stepping 3
+	Flags:
+		FPU (Floating-point unit on-chip)
+		VME (Virtual mode extension)
+		DE (Debugging extension)
+		PSE (Page size extension)
+		TSC (Time stamp counter)
+		MSR (Model specific registers)
+		PAE (Physical address extension)
+		MCE (Machine check exception)
+		CX8 (CMPXCHG8 instruction supported)
+		APIC (On-chip APIC hardware supported)
+		SEP (Fast system call)
+		MTRR (Memory type range registers)
+		PGE (Page global enable)
+		MCA (Machine check architecture)
+		CMOV (Conditional move instruction supported)
+		PAT (Page attribute table)
+		PSE-36 (36-bit page size extension)
+		CLFSH (CLFLUSH instruction supported)
+		DS (Debug store)
+		ACPI (ACPI supported)
+		MMX (MMX technology supported)
+		FXSR (FXSAVE and FXSTOR instructions supported)
+		SSE (Streaming SIMD extensions)
+		SSE2 (Streaming SIMD extensions 2)
+		SS (Self-snoop)
+		HTT (Multi-threading)
+		TM (Thermal monitor supported)
+		PBE (Pending break enabled)
+	Version: Intel(R) Core(TM) i7-6650U CPU @ 2.20GHz
+	Voltage: 0.8 V
+	External Clock: 100 MHz
+	Max Speed: 3400 MHz
+	Current Speed: 2200 MHz
+	Status: Populated, Enabled
+	Upgrade: Other
+	L1 Cache Handle: 0x0001
+	L2 Cache Handle: 0x0002
+	L3 Cache Handle: 0x0003
+	Serial Number: Not Specified
+	Asset Tag: Not Specified
+	Part Number: Not Specified
+	Core Count: 2
+	Core Enabled: 2
+	Thread Count: 4
+	Characteristics:
+		64-bit capable
+		Multi-Core
+		Hardware Thread
+		Execute Protection
+		Enhanced Virtualization
+		Power/Performance Control
+
+Handle 0x0005, DMI type 16, 23 bytes
+Physical Memory Array
+	Location: System Board Or Motherboard
+	Use: System Memory
+	Error Correction Type: None
+	Maximum Capacity: 16 GB
+	Error Information Handle: Not Provided
+	Number Of Devices: 2
+
+Handle 0x0006, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0005
+	Error Information Handle: Not Provided
+	Total Width: 64 bits
+	Data Width: 64 bits
+	Size: 4096 MB
+	Form Factor: SODIMM
+	Set: None
+	Locator: ChannelA-DIMM0
+	Bank Locator: BANK 0
+	Type: <OUT OF SPEC>
+	Type Detail: Synchronous
+	Speed: 1867 MHz
+	Manufacturer: Samsung
+	Serial Number: 85000000
+	Asset Tag: Not Specified
+	Part Number:                   
+	Rank: 2
+	Configured Clock Speed: 1867 MHz
+	Minimum voltage:  Unknown
+	Maximum voltage:  Unknown
+	Configured voltage:  1.200 V
+
+Handle 0x0007, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0005
+	Error Information Handle: Not Provided
+	Total Width: Unknown
+	Data Width: Unknown
+	Size: No Module Installed
+	Form Factor: Unknown
+	Set: None
+	Locator: ChannelA-DIMM1
+	Bank Locator: BANK 1
+	Type: Unknown
+	Type Detail: None
+	Speed: Unknown
+	Manufacturer: Not Specified
+	Serial Number: Not Specified
+	Asset Tag: Not Specified
+	Part Number: Not Specified
+	Rank: Unknown
+	Configured Clock Speed: Unknown
+	Minimum voltage:  Unknown
+	Maximum voltage:  Unknown
+	Configured voltage:  Unknown
+
+Handle 0x0008, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0005
+	Error Information Handle: Not Provided
+	Total Width: 64 bits
+	Data Width: 64 bits
+	Size: 4096 MB
+	Form Factor: SODIMM
+	Set: None
+	Locator: ChannelB-DIMM0
+	Bank Locator: BANK 2
+	Type: <OUT OF SPEC>
+	Type Detail: Synchronous
+	Speed: 1867 MHz
+	Manufacturer: Samsung
+	Serial Number: 85000000
+	Asset Tag: Not Specified
+	Part Number:                   
+	Rank: 2
+	Configured Clock Speed: 1867 MHz
+	Minimum voltage:  Unknown
+	Maximum voltage:  Unknown
+	Configured voltage:  1.200 V
+
+Handle 0x0009, DMI type 17, 40 bytes
+Memory Device
+	Array Handle: 0x0005
+	Error Information Handle: Not Provided
+	Total Width: Unknown
+	Data Width: Unknown
+	Size: No Module Installed
+	Form Factor: Unknown
+	Set: None
+	Locator: ChannelB-DIMM1
+	Bank Locator: BANK 3
+	Type: Unknown
+	Type Detail: None
+	Speed: Unknown
+	Manufacturer: Not Specified
+	Serial Number: Not Specified
+	Asset Tag: Not Specified
+	Part Number: Not Specified
+	Rank: Unknown
+	Configured Clock Speed: Unknown
+	Minimum voltage:  Unknown
+	Maximum voltage:  Unknown
+	Configured voltage:  Unknown
+
+Handle 0x000A, DMI type 19, 31 bytes
+Memory Array Mapped Address
+	Starting Address: 0x00000000000
+	Ending Address: 0x001FFFFFFFF
+	Range Size: 8 GB
+	Physical Array Handle: 0x0005
+	Partition Width: 2
+
+Handle 0x000B, DMI type 0, 24 bytes
+BIOS Information
+	Vendor: Microsoft Corporation
+	Version: 103.873.768
+	Release Date: 11/09/2015
+	ROM Size: 16384 kB
+	Characteristics:
+		PCI is supported
+		BIOS is upgradeable
+		BIOS shadowing is allowed
+		Selectable boot is supported
+		EDD is supported
+		Print screen service is supported (int 5h)
+		8042 keyboard services are supported (int 9h)
+		Printer services are supported (int 17h)
+		ACPI is supported
+		USB legacy is supported
+		BIOS boot specification is supported
+		Targeted content distribution is supported
+		UEFI is supported
+
+Handle 0x000C, DMI type 1, 27 bytes
+System Information
+	Manufacturer: Microsoft Corporation
+	Product Name: Surface Pro 4
+	Version: D:0B:08F:1C:03P:38
+	Serial Number: 079806554753
+	UUID: 0F46563E-2F78-3A13-77E1-C4899048A280
+	Wake-up Type: Power Switch
+	SKU Number: Surface_Pro_4
+	Family: Surface
+
+Handle 0x000D, DMI type 2, 17 bytes
+Base Board Information
+	Manufacturer: Microsoft Corporation
+	Product Name: Surface Pro 4
+	Version: Not Specified
+	Serial Number: A01075224506547A
+	Asset Tag: Not Specified
+	Features:
+		Board is a hosting board
+	Location In Chassis: Not Specified
+	Chassis Handle: 0x0000
+	Type: Unknown
+	Contained Object Handles: 0
+
+Handle 0x000E, DMI type 3, 24 bytes
+Chassis Information
+	Manufacturer: Microsoft Corporation
+	Type: Other
+	Lock: Not Present
+	Version: Not Specified
+	Serial Number: 079806554753
+	Asset Tag: <BAD INDEX>
+	Boot-up State: Safe
+	Power Supply State: Safe
+	Thermal State: Unknown
+	Security Status: Unknown
+	OEM Information: 0x00000000
+	Height: Unspecified
+	Number Of Power Cords: 1
+	Contained Elements: 0
+	SKU Number: Not Specified
+
+Handle 0x000F, DMI type 24, 5 bytes
+Hardware Security
+	Power-On Password Status: Not Implemented
+	Keyboard Password Status: Not Implemented
+	Administrator Password Status: Enabled
+	Front Panel Reset Status: Not Implemented
+
+Handle 0xFEFF, DMI type 127, 4 bytes
+End Of Table
+
