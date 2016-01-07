@@ -38,6 +38,7 @@ The instructions assume you are not new to Debian, though you may have no experi
 ## Related Links
 
  * because of the high resolution screen it is worth reading through some [HiDPI related materials](https://wiki.archlinux.org/index.php/HiDPI) otherwise you will very quickly go short sighted
+ * wishing for a matte screen, I got the [iLLumiShield](http://www.amazon.co.uk/gp/product/B0169CKLBK) and find it does the job great
  * patches based on
       * [Surface Pro 3](https://github.com/neoreeps/surface-pro-3/blob/master/wily_surface.patch) instructions
       * [[PATCH v3] surface pro 4: Add support for Surface Pro 4 Buttons](https://lkml.org/lkml/2015/12/27/136)
