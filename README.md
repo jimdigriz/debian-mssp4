@@ -189,8 +189,8 @@ Also, so that your keyboard works before the root filesystem is mounted, edit yo
 
 Run the following to get your system ready to compile a kernel:
 
-    sudo apt-get install build-essential fakeroot libncurses5-dev kernel-package
-    sudo apt-get install -t jessie-backports linux-source-4.3 firmware-linux firmware-misc-nonfree intel-microcode
+    sudo apt-get install build-essential fakeroot kernel-package
+    sudo apt-get install linux-source-4.3 firmware-libertas firmware-misc-nonfree intel-microcode
     tar -C /usr/src -xf /usr/src/linux-source-4.3.tar.xz
     cd /usr/src/linux-source-4.3
     find /usr/src/debian-mssp4/patches -type f | sort | xargs -t -I{} sh -c "cat {} | patch -p1"
@@ -203,9 +203,9 @@ Run the following to get your system ready to compile a kernel:
     CONFIG_MFD_INTEL_LPSS_PCI=m
     EOF
 
-Now run `make menuconfig` then exit out saving your changes so the button/lpss modules are properly included (we make `nvme` built in so hibernation works).
+Now run `make oldconfig` so the button/lpss modules are properly included (we make `nvme` built in so hibernation works).
 
-Time to compile the kernel (this will take about 30 minutes):
+Time to compile the kernel (this will take about 40 minutes):
 
     CONCURRENCY_LEVEL=`getconf _NPROCESSORS_ONLN` fakeroot make-kpkg --initrd --append-to-version=-mssp4 kernel_image kernel_headers
 
@@ -265,11 +265,7 @@ Unfortunately there is an outstanding bug ([console-setup w/ systemd forgets fon
 
 Start off by installing Xorg (the pinning will bring it in from stretch):
 
-    sudo apt-get install xserver-xorg xserver-xorg-input-multitouch libgl1-mesa-dri libgl1-mesa-glx libgl1-mesa-dri libgl1-mesa-glx big-cursor
-
-Now download manually [xserver-xorg-video-intel (2:2.99.917+git20151217-1~exp1)](https://packages.debian.org/experimental/xserver-xorg-video-intel) and install it with:
-
-    sudo dpkg -i xserver-xorg-video-intel_2.99.917+git20151217-1~exp1_amd64.deb
+    sudo apt-get install xserver-xorg xserver-xorg-input-multitouch xserver-xorg-video-intel libgl1-mesa-dri libgl1-mesa-glx big-cursor
 
 You should be able to start Xorg (I recommend installing the [lightdm](http://freedesktop.org/wiki/Software/LightDM/) package) and it will have 2D and 3D acceleration enabled.  You can check this by running:
 
@@ -286,6 +282,8 @@ You should be able to start Xorg (I recommend installing the [lightdm](http://fr
     [     5.183] (II) AIGLX: GLX_EXT_texture_from_pixmap backed by buffer objects
     [     5.183] (II) AIGLX: enabled GLX_ARB_create_context_robustness
     [     5.183] (II) AIGLX: Loaded and initialized i965
+
+If this does not work then you should check that the apt pinning brought in `libdrm-intel1` and`libgl1-mesa-{dri,glx}` from stretch and `xserver-xorg-video-intel` from jessie-backports.
 
 Then from within X you should see something like:
 

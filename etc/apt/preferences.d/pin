@@ -1,5 +1,13 @@
-Package: xserver-xorg xserver-xorg-input-multitouch libgl1-mesa-dri libgl1-mesa-glx libgl1-mesa-dri libgl1-mesa-glx xss-lock
+Package: libncurses5-dev libtinfo5 ncurses-bin libtinfo-dev libncursesw5 libncurses5 gcc-5-base libstdc++6 libdrm2 libdrm-amdgpu1 libllvm3.7 libgl1-mesa-dri libgl1-mesa-glx libglapi-mesa libdrm-intel1
 Pin: release n=stretch
+Pin-Priority: 990
+
+Package: xss-lock offlineimap
+Pin: release n=stretch
+Pin-Priority: 990
+
+Package: xserver-xorg-video-intel
+Pin: release n=jessie-backports
 Pin-Priority: 990
 
 Package: *
