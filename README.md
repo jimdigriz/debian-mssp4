@@ -304,7 +304,7 @@ Then from within X you should see something like:
         GLX_ARB_framebuffer_sRGB, GLX_ARB_multisample, 
         GLX_EXT_create_context_es2_profile, GLX_EXT_framebuffer_sRGB, 
 
-## Hardware Video Decoding
+#### Hardware Video Decoding
 
 Lets install the drivers and a video player:
 
