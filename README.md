@@ -134,7 +134,7 @@ For reference, my partition table looks like:
 
 # Installing Debian
 
-Boot off your Debian installer USB key and work through it.  Early on though you will be prompted that no Ethernet interface was detected and that you need to choose one, you need to select `mwifiex_pcie` (though `mwl8k` works too), then you will be prompted to supply details on how to connect to your wireless network then the installation will continue as expected.
+Boot off your Debian installer USB key and work through it.  Early on though you will be prompted on which Ethernet card you have, select "no Ethernet interface", then the next page you will be prompted to supply details on how to connect to your wireless network then the installation will continue as expected.
 
 **N.B.** I would recommend keeping the ~2.5GB recovery partition so if you ever need to return the laptop, you will find the process dead easy; though it seems you could move the partition to external media or download it from the Microsoft website
 
