@@ -12,6 +12,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * power and volume buttons on the screen
  * audio (including the microphone)
  * wireless
+ * microSD reader - presented as a USB reader appearing when you insert a card
  * suspend, hibernate and resume works
 
 ## Outstanding Issues
