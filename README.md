@@ -166,6 +166,7 @@ You need to add [Debian backports](http://backports.debian.org/) and stretch, as
  * [`/etc/apt/sources.list`](etc/apt/sources.list)
  * [`/etc/apt/sources.list.d/debian-backports.list`](etc/apt/sources.list.d/debian-backports.list)
  * [`/etc/apt/sources.list.d/debian-stretch.list`](etc/apt/sources.list.d/debian-stretch.list)
+ * [`/etc/apt/sources.list.d/debian-multimedia.list`](etc/apt/sources.list.d/debian-multimedia.list)
  * [`/etc/apt/preferences.d/pin`](etc/apt/preferences.d/pin)
 
 Now run:
