@@ -1,4 +1,4 @@
-Package: libncurses5-dev libtinfo5 libtinfo-dev libncursesw5 libncurses5 gcc-5-base libstdc++6 libdrm2 libdrm-amdgpu1 libllvm3.7 libgl1-mesa-dri libgl1-mesa-glx libglapi-mesa libdrm-intel1
+Package: libncurses5-dev libtinfo5 libtinfo-dev libncursesw5 libncurses5 gcc-5-base libstdc++6 libdrm2 libdrm-amdgpu1 libllvm3.7 libgl1-mesa-dri libgl1-mesa-glx libglapi-mesa libdrm-intel1 i965-va-driver libva1 vainfo
 Pin: release n=stretch
 Pin-Priority: 990
 

@@ -26,7 +26,6 @@ The instructions assume you are not new to Debian, though you may have no experi
       * although detected, [something in 4.3 breaks](https://lkml.org/lkml/2015/12/17/808) the IIO sensors though from producing any output
       * auto-orientation screen rotation
  * SecureBoot is not enabled
- * H.264 video decoding
  * need to improve power saving
       * suspend uses lots of power (will not last 24 hours)
       * suspend is only accessible via closing the lid, S3 is not exposed via ACPI (means `echo mem > /sys/power/state` does not work)
@@ -302,3 +301,20 @@ Then from within X you should see something like:
         GLX_ARB_create_context_robustness, GLX_ARB_fbconfig_float, 
         GLX_ARB_framebuffer_sRGB, GLX_ARB_multisample, 
         GLX_EXT_create_context_es2_profile, GLX_EXT_framebuffer_sRGB, 
+
+## Hardware Video Decoding
+
+Lets install the drivers and a video player:
+
+    sudo apt-get install mpv/jessie-backports libva1 i965-va-driver vainfo
+
+Test if you have VA-API acceleration available with:
+
+    vainfo
+
+If so, now configure `mpv` to use the API.
+
+    mkdir ~/.config/mpv
+    echo hwdec=vaapi > ~/.config/mpv/mpv.conf
+
+When you play videos, you should find the CPU utilisation drops substantially (I saw 35% down to 10%).

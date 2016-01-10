@@ -1,0 +1,5 @@
+deb [arch=amd64] http://debian.ids-services.de/debian-multimedia/ jessie main
+#deb-src http://debian.ids-services.de/debian-multimedia/ jessie main
+
+deb [arch=amd64] http://debian.ids-services.de/debian-multimedia/ jessie-backports main
+#deb-src http://debian.ids-services.de/debian-multimedia/ jessie-backports main
