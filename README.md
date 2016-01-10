@@ -9,6 +9,7 @@ The instructions assume you are not new to Debian, though you may have no experi
   * multitouch touchpad (two finger scrolling, etc)
   * special keys
  * 2D and 3D (OpenGL) acceleration
+ * hardware video decoding
  * power and volume buttons on the screen
  * audio (including the microphone)
  * wireless (is a 88W8897, a wireless/bluetooth combo module)
