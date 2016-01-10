@@ -11,7 +11,8 @@ The instructions assume you are not new to Debian, though you may have no experi
  * 2D and 3D (OpenGL) acceleration
  * power and volume buttons on the screen
  * audio (including the microphone)
- * wireless
+ * wireless (is a 88W8897, a wireless/bluetooth combo module)
+     * bluetooth - this only appears once you use the wireless card firmware from [firmware-libertas (20151207-1~bpo8+1) [pcie8897_uapsta.bin version 15.68.4.p112]](https://packages.debian.org/jessie-backports/firmware-libertas)
  * microSD reader - presented as a USB reader appearing when you insert a card
  * suspend, hibernate and resume works
 
@@ -26,7 +27,6 @@ The instructions assume you are not new to Debian, though you may have no experi
       * auto-orientation screen rotation
  * SecureBoot is not enabled
  * H.264 video decoding
- * Bluetooth - is USB, hangs off the USB3 hub (powered off?)
  * need to improve power saving
       * suspend uses lots of power (will not last 24 hours)
       * suspend is only accessible via closing the lid, S3 is not exposed via ACPI (means `echo mem > /sys/power/state` does not work)
@@ -191,7 +191,7 @@ Also, so that your keyboard works before the root filesystem is mounted, edit yo
 Run the following to get your system ready to compile a kernel:
 
     sudo apt-get install build-essential fakeroot kernel-package
-    sudo apt-get install linux-source-4.3 firmware-libertas firmware-misc-nonfree intel-microcode
+    sudo apt-get install linux-source-4.3 firmware-libertas/jessie-backports firmware-misc-nonfree intel-microcode
     tar -C /usr/src -xf /usr/src/linux-source-4.3.tar.xz
     cd /usr/src/linux-source-4.3
     find /usr/src/debian-mssp4/patches -type f | sort | xargs -t -I{} sh -c "cat {} | patch -p1"
