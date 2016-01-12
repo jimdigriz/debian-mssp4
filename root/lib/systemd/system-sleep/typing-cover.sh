@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# typing-cover: let the typing cover wake us up
+# typing-cover: let the typing cover wake us up, done here to prevent double event leading to wakeup
 
 set -eu
 
