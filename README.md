@@ -254,9 +254,9 @@ Unfortunately there is an outstanding bug ([console-setup w/ systemd forgets fon
 
 Start off by installing Xorg (the pinning will bring it in from stretch):
 
-    sudo apt-get install xserver-xorg xserver-xorg-input-multitouch xserver-xorg-video-intel libgl1-mesa-dri libgl1-mesa-glx big-cursor
+    sudo apt-get install xserver-xorg xserver-xorg-input-mtrack xserver-xorg-video-intel libgl1-mesa-dri libgl1-mesa-glx big-cursor
 
-You should be able to start Xorg (I recommend installing the [lightdm](http://freedesktop.org/wiki/Software/LightDM/) package) and it will have 2D and 3D acceleration enabled.  You can check this by running:
+Now create [`/etc/X11/xorg.conf.d/10-mssp4-typing-cover.conf`](root/etc/X11/xorg.conf.d/10-mssp4-typing-cover.conf) and then you should be able to start Xorg (I recommend installing the [lightdm](http://freedesktop.org/wiki/Software/LightDM/) package) and it will have 2D and 3D acceleration enabled.  You can check this by running:
 
     alex@quatermain:~$ grep AIGLX /var/log/Xorg.0.log
     [     5.124] (==) AIGLX enabled
