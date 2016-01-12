@@ -221,13 +221,12 @@ Now reboot into your new kernel.
 
 ### Resume
 
-Run the following to have your laptop resume when you open your typing cover or press a key:
+When suspended, the laptop can be woken up by installing [`/etc/udev/rules.d/90-mssp4-typing-cover.rules`](etc/udev/rules.d/90-mssp4-typing-cover.rules); to spare a reboot just disconnect and reconnect the typing cover.
 
-    echo enabled | sudo tee /sys/devices/pci0000:00/0000:00:14.0/power/wakeup >/dev/null
-    echo enabled | sudo tee /sys/devices/pci0000:00/0000:00:14.0/usb1/power/wakeup >/dev/null
-    echo enabled | sudo tee /sys/devices/pci0000:00/0000:00:14.0/usb1/1-7/power/wakeup >/dev/null
+You can confirm this is working if you see `enabled` from both the following commands:
 
-**N.B.** this should be converted into a suitable in a udev rule, but for now I am just documenting the ad-hoc approach
+    cat /sys/bus/usb/devices/usb1/1-7/power/wakeup
+    cat /sys/bus/usb/devices/usb1/power/wakeup
 
 ### Hibernation
 
