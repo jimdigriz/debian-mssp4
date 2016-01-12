@@ -1,2 +1,0 @@
-SUBSYSTEM=="usb", ATTRS{idVendor}=="1d6b", ATTRS{idProduct}=="0002", ATTRS{busnum}=="1", ATTRS{devpath}=="0", RUN+="/bin/sh -c 'echo enabled > /sys$env{DEVPATH}/../power/wakeup'"
-SUBSYSTEM=="usb", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="07e8", RUN+="/bin/sh -c 'echo enabled > /sys$env{DEVPATH}/../power/wakeup'"

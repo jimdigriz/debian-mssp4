@@ -35,6 +35,7 @@ The instructions assume you are not new to Debian, though you may have no experi
       * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modeset'ing to black out the screen and crash the system
  * on resume, the reverse scroll is removed (USB reconnect probably)
  * wifi can occasionly still a bit iffy on resume
+ * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup
  * gparted lockup investigation
 
 ## Related Links
@@ -48,7 +49,6 @@ The instructions assume you are not new to Debian, though you may have no experi
  * [iio-sensor-proxy](https://github.com/hadess/iio-sensor-proxy) - `systemctl enable iio-sensor-proxy.service`
  * Hibernation
       * [Ubuntu Hibernation](https://help.ubuntu.com/community/PowerManagement/Hibernate)
-      * [ArchLinux pm-utils](https://wiki.archlinux.org/index.php/Pm-utils)
  * [reverse scrolling](https://n00bsys0p.wordpress.com/2011/07/26/reverse-xorg-scrolling-in-linux-natural-scrolling/)
  * [reddit - Surface Linux: Penguins like nice things too](https://www.reddit.com/r/surfacelinux)
 
@@ -164,11 +164,11 @@ You laptop should reboot and you will see the GRUB bootloader and Debian should 
 
 You need to add [Debian backports](http://backports.debian.org/) and stretch, as well as some suitable pinning, this is done with the files:
 
- * [`/etc/apt/sources.list`](etc/apt/sources.list)
- * [`/etc/apt/sources.list.d/debian-backports.list`](etc/apt/sources.list.d/debian-backports.list)
- * [`/etc/apt/sources.list.d/debian-stretch.list`](etc/apt/sources.list.d/debian-stretch.list)
- * [`/etc/apt/sources.list.d/debian-multimedia.list`](etc/apt/sources.list.d/debian-multimedia.list)
- * [`/etc/apt/preferences.d/pin`](etc/apt/preferences.d/pin)
+ * [`/etc/apt/sources.list`](root/etc/apt/sources.list)
+ * [`/etc/apt/sources.list.d/debian-backports.list`](root/etc/apt/sources.list.d/debian-backports.list)
+ * [`/etc/apt/sources.list.d/debian-stretch.list`](root/etc/apt/sources.list.d/debian-stretch.list)
+ * [`/etc/apt/sources.list.d/debian-multimedia.list`](root/etc/apt/sources.list.d/debian-multimedia.list)
+ * [`/etc/apt/preferences.d/pin`](root/etc/apt/preferences.d/pin)
 
 Now run:
 
@@ -176,19 +176,19 @@ Now run:
 
 ## Networking
 
-All you need to do is copy the contents of [`interfaces.d`](etc/network/interfaces.d) into `/etc/network/interfaces.d/`; plus create a suitable `/etc/wpa_supplicant/wpa_supplicant.conf` file (if you are not using any network management tool).
+All you need to do is copy the contents of [`interfaces.d`](root/etc/network/interfaces.d) into `/etc/network/interfaces.d/`; plus create a suitable `/etc/wpa_supplicant/wpa_supplicant.conf` file (if you are not using any network management tool).
 
-**N.B.** to make the wireless networking responsive, you need to disable power saving with `iw dev mlan0 set power_save off`; this has already been slipped into [`/etc/network/interfaces.d/mlan0`](etc/network/interfaces.d/mlan0) for you
+**N.B.** to make the wireless networking responsive, you need to disable power saving with `iw dev mlan0 set power_save off`; this has already been slipped into [`/etc/network/interfaces.d/mlan0`](root/etc/network/interfaces.d/mlan0) for you
 
 ## Kernel
 
-First you need to set some kernel boot arguments which are set in [`/etc/default/grub`](etc/default/grub):
+First you need to set some kernel boot arguments which are set in [`/etc/default/grub`](root/etc/default/grub):
 
     resume=/dev/mapper/lvm--quatermain-swap i915.preliminary_hw_support=1 intel_idle.max_cstate=2
 
 **N.B.** you must adjust the `resume` argument to match where your swap space is, or if you plan not to use hibernation, replace it with `noresume`
 
-Also, so that your keyboard works before the root filesystem is mounted, edit your [`/etc/initramfs-tools/modules`](etc/initramfs-tools/modules) file to include `hid_multitouch`.
+Also, so that your keyboard works before the root filesystem is mounted, edit your [`/etc/initramfs-tools/modules`](root/etc/initramfs-tools/modules) file to include `hid_multitouch`.
 
 Run the following to get your system ready to compile a kernel:
 
@@ -220,34 +220,21 @@ Now reboot into your new kernel.
 
 ## Power
 
-### Resume
-
-When suspended, the laptop can be woken up by installing [`/etc/udev/rules.d/90-mssp4-typing-cover.rules`](etc/udev/rules.d/90-mssp4-typing-cover.rules); to spare a reboot just disconnect and reconnect the typing cover.
-
-You can confirm this is working if you see `enabled` from both the following commands:
-
-    cat /sys/bus/usb/devices/usb1/1-7/power/wakeup
-    cat /sys/bus/usb/devices/usb1/power/wakeup
-
-### Hibernation
-
 Install the needed packages:
 
-    sudo apt-get install uswsusp pm-utils
+    sudo apt-get install uswsusp
 
-Now copy to [`/etc/pm/sleep.d`](etc/pm/sleep.d) a number of helper files.
+Copy in the [`/lib/systemd/system-sleep`](root/lib/systemd/system-sleep) helper files
 
-You should be able to hiberate (`sudo pm-hibernate`) and resume now.
+You also should be able to hiberate (`sudo pm-hibernate`) and resume, though if you have problems, such as stalls at boot time, there probably is a problem with your `resume` kernel parameter (did you compile the kernel with `nvme` built in?), so to break out of the stall add `noresume` to your kernel parameters.
 
-**N.B.** if it does not work and stalls on boot, there probably is a problem with your `resume` kernel parameter (did you compile the kernel with `nvme` built in?), so to break the stalling add `noresume`
-
-#### Screen Locking
+### Screen Locking
 
 To lock your X11 console, you will need a few packages:
 
     sudo apt-get install xautolock xss-lock
 
-Then set your [`~/.xsession`](misc/xsession) accordingly to run these.
+Then set your [`~/.xsession`](root/home/USER/.xsession) accordingly to run these.
 
 ## Graphics
 
@@ -261,7 +248,7 @@ Then select the 'Terminus' font, and the 16x32 sizing.
 
 **N.B.** you can set the keyboard mapping for the console (and Xorg) with `localectl ...`
 
-Unfortunately there is an outstanding bug ([console-setup w/ systemd forgets font setting](https://bugs.debian.org/759657)) which means you have to slip in [`/etc/udev/rules.d/90-setupcon.rules`](etc/udev/rules.d/90-setupcon.rules) to stop them being shrunk again (and the keyboard mapping being forced back to US)
+Unfortunately there is an outstanding bug ([console-setup w/ systemd forgets font setting](https://bugs.debian.org/759657)) which means you have to slip in [`/etc/udev/rules.d/90-setupcon.rules`](root/etc/udev/rules.d/90-setupcon.rules) to stop them being shrunk again (and the keyboard mapping being forced back to US)
 
 ### Xorg
 
