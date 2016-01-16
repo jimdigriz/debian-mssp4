@@ -12,6 +12,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * hardware video decoding
  * power and volume buttons on the screen
  * audio (including the microphone)
+ * sensors - `dev_rotation` though gives nothing but zeros
  * wireless (is a 88W8897, a wireless/bluetooth combo module)
      * bluetooth - this only appears once you use the wireless card firmware from [firmware-libertas (20151207-1~bpo8+1) [pcie8897_uapsta.bin version 15.68.4.p112]](https://packages.debian.org/jessie-backports/firmware-libertas)
  * microSD reader - presented as a USB reader appearing when you insert a card
@@ -23,15 +24,11 @@ The instructions assume you are not new to Debian, though you may have no experi
  * camera - hides on the PCI bus at [8086:1926](http://pci-ids.ucw.cz/read/PC/8086/1926)
  * touchscreen - hides on the PCI bus at 8086:9d3e
       * pen - though you can pair with it, you only get the eraser switch event
- * sensors
-      * although detected, [something in 4.3 breaks](https://lkml.org/lkml/2015/12/17/808) the IIO sensors though from producing any output
-      * auto-orientation screen rotation
  * SecureBoot is not enabled
  * need to improve power saving
       * suspend uses lots of power (will not last 24 hours)
       * suspend is only accessible via closing the lid, S3 is not exposed via ACPI (means `echo mem > /sys/power/state` does not work)
       * wireless power saving is disabled
-      * `i915.enable_rc6=7` works it seems, need to give it more testing
       * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modeset'ing to black out the screen and crash the system
  * on resume, the reverse scroll is removed (USB reconnect probably)
  * wifi can occasionly still a bit iffy on resume
@@ -184,9 +181,11 @@ All you need to do is copy the contents of [`interfaces.d`](root/etc/network/int
 
 First you need to set some kernel boot arguments which are set in [`/etc/default/grub`](root/etc/default/grub):
 
-    resume=/dev/mapper/lvm--quatermain-swap i915.preliminary_hw_support=1 intel_idle.max_cstate=2
+    resume=/dev/mapper/lvm--quatermain-swap intel_idle.max_cstate=2
 
 **N.B.** you must adjust the `resume` argument to match where your swap space is, or if you plan not to use hibernation, replace it with `noresume`
+
+Now copy into place [`/etc/modprobe.d/i915.conf`](root/etc/modprobe.d/i915.conf), this provides a number of power-saving options as well as enabling modeset support for Skylake chipsets.
 
 Also, so that your keyboard works before the root filesystem is mounted, edit your [`/etc/initramfs-tools/modules`](root/etc/initramfs-tools/modules) file to include `hid_multitouch`.
 
@@ -256,7 +255,7 @@ Start off by installing Xorg (the pinning will bring it in from stretch):
 
     sudo apt-get install xserver-xorg xserver-xorg-input-mtrack xserver-xorg-video-intel libgl1-mesa-dri libgl1-mesa-glx big-cursor
 
-Now create [`/etc/X11/xorg.conf.d/10-mssp4-typing-cover.conf`](root/etc/X11/xorg.conf.d/10-mssp4-typing-cover.conf) and then you should be able to start Xorg (I recommend installing the [lightdm](http://freedesktop.org/wiki/Software/LightDM/) package) and it will have 2D and 3D acceleration enabled.  You can check this by running:
+Now populate [`/etc/X11/xorg.conf.d`](root/etc/X11/xorg.conf.d) and then you should be able to start Xorg (I recommend installing the [lightdm](http://freedesktop.org/wiki/Software/LightDM/) package) and it will have 2D and 3D acceleration enabled.  You can check this by running:
 
     alex@quatermain:~$ grep AIGLX /var/log/Xorg.0.log
     [     5.124] (==) AIGLX enabled
@@ -307,3 +306,33 @@ If so, now configure `mpv` to use the API.
     echo hwdec=vaapi > ~/.config/mpv/mpv.conf
 
 When you play videos, you should find the CPU utilisation drops substantially (I saw 35% down to 10%).
+
+## Sensors
+
+### `dev_rotation`
+
+This sensor seems not to do anything for now which means `xrandr` auto-rotation is not available:
+
+    watch -n1 cat /sys/bus/iio/devices/iio\:device*/in_rot_quaternion_raw
+
+**N.B.** of interest though, is that when you rotate the laptop onto its side, if you have the typing cover still plugged in it gets disabled
+
+### `als`
+
+You can check the light level by running the following:
+
+    watch -n1 cat /sys/bus/iio/devices/iio\:device*/in_intensity_both_raw
+
+Interact with the sensor by covering and uncovering sensor located the farthest on the right at the top of the screen.
+
+### `accel_3d`
+
+Move the laptop about whilst running in a terminal:
+
+     watch -n1 cat /sys/bus/iio/devices/iio:device*/in_accel_[xyz]_raw
+
+### `gyro_3d`
+
+Move the laptop about whilst running in a terminal:
+
+     watch -n1 cat /sys/bus/iio/devices/iio:device*/in_anglvel_[xyz]_raw
