@@ -109,7 +109,7 @@ You should be able to boot into gparted now, and get something that lets you red
 
 **WARNING:** `gparted-live-0.24.0-2-amd64.iso` seems to lock up after a few minutes of running, you do *NOT* want this midway through the resize.  All I can recommend is 'be quick', sorry.
 
-Once shrunk, you should test that you can still boot into Windows, and if you can, we are ready to move on.  If not, you will have to figure out what is wrong.
+Once shrunk, you should test that you can still boot into Windows, and if you can, we are ready to move on (though you may wish to first go back into Window and re-enable hibernation, the paging file and Bitlocker).  If not, you will have to figure out what is wrong.
 
 For reference, my partition table looks like:
 
@@ -132,8 +132,6 @@ For reference, my partition table looks like:
     Partition table entries are not in disk order.
 
 **N.B.** you should set your swap space to about 1.5x the amount of memory you have to make sure you have space to hibernate
-
-Once done here, you may want to go back into Windows and re-enable hibernation and the paging file.
 
 # Installing Debian
 
