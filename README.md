@@ -133,6 +133,8 @@ For reference, my partition table looks like:
 
 **N.B.** you should set your swap space to about 1.5x the amount of memory you have to make sure you have space to hibernate
 
+Once done here, you may want to go back into Windows and re-enable hibernation and the paging file.
+
 # Installing Debian
 
 Boot off your Debian installer USB key and work through it.  Early on though you will be prompted on which Ethernet card you have, select "no Ethernet interface", then the next page you will be prompted to supply details on how to connect to your wireless network then the installation will continue as expected.
