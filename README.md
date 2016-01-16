@@ -68,7 +68,7 @@ The aim here is to shrink down the Windows partition to make room for Debian.
 
 I wanted to keep Windows as Microsoft are constantly releasing updated firmwares which will only apply from under Windows.  Of course if you plan not on dual booting you could skip all this, though I would not recommend to have something to apply those firmware updates with.
 
-Lets start by disabling Bitlocker (you can re-enable it after the resize) so that gparted can resize the partition later.  This is done by clicking on Start, and clicking on 'File Manager'.  From here you will be able to go to where drive `C:` is located, and right-clicking on it will give you an option to 'Manage Bitlocker'.  From there you will be able to click on 'Disable Bitlocker'.
+Lets start by disabling Bitlocker so that gparted can resize the partition later.  This is done by clicking on Start, and clicking on 'File Manager'.  From here you will be able to go to where drive `C:` is located, and right-clicking on it will give you an option to 'Manage Bitlocker'.  From there you will be able to click on 'Disable Bitlocker'.
 
 **N.B.** if there is an exclamation mark on the drive `C:` icon, you will need to firstly enable Bitlocker before you can fully disable it
 
