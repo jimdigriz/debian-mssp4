@@ -186,6 +186,7 @@ It is possible to get Debian booting with Secure Boot.  However, there are a num
      * `grub-mkstandalone` simply puts all the modules in a memdisk, so you still get the same problem
      * building in *all* modules does not work as there is a module (no idea which, let me know if you work it out!) that stops GRUB detecting anything except for procfs
      * it is really difficult to get a definitive list of what modules you need, it is a bit trial and error, plus you may want extras like `cat`, `lspci`, etc
+     * everytime the grub package updates, you *should* rebuild the image and re-enroll it
 
 Start off by going into GRUB, and before Linux boots, go to the command line (pressing 'c').  On the command line, type `lsmod` and note down the modules loaded, now go back to booting into Linux.
 
