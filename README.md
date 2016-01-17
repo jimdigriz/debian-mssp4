@@ -31,7 +31,7 @@ The instructions assume you are not new to Debian, though you may have no experi
       * wireless power saving is disabled
       * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modeset'ing to black out the screen and crash the system
  * on resume, the reverse scroll is removed (USB reconnect probably)
- * wifi can occasionly still a bit iffy on resume
+ * wifi can occasionally still a bit iffy on resume
  * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup
  * the GRUB with SecureBoot needs some more work, the fonts are bust, plus I need to find the problematic module so we can just load the lot in making the process simpler
  * gparted lockup investigation
@@ -222,7 +222,7 @@ Now, when you boot for the first time, you will be asked to enroll `loader.efi`,
 
 ### Troubleshooting
 
-If you get the following when runnings `efibootmgr`:
+If you get the following when running `efibootmgr`:
 
     efibootmgr: Could not set variable Boot0006: No such file or directory
     efibootmgr: Could not prepare boot variable: No such file or directory
@@ -294,7 +294,7 @@ Install the needed packages:
 
 Copy in the [`/lib/systemd/system-sleep`](root/lib/systemd/system-sleep) helper files
 
-You also should be able to hiberate (`sudo pm-hibernate`) and resume, though if you have problems, such as stalls at boot time, there probably is a problem with your `resume` kernel parameter (did you compile the kernel with `nvme` built in?), so to break out of the stall add `noresume` to your kernel parameters.
+You also should be able to hibernate (`sudo pm-hibernate`) and resume, though if you have problems, such as stalls at boot time, there probably is a problem with your `resume` kernel parameter (did you compile the kernel with `nvme` built in?), so to break out of the stall add `noresume` to your kernel parameters.
 
 ### Screen Locking
 
