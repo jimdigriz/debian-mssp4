@@ -5,7 +5,7 @@ The instructions assume you are not new to Debian, though you may have no experi
 ## What is Working
 
  * dual booting
- * Secure Boot
+ * SecureBoot
  * typing cover keyboard
   * multitouch touchpad (two finger scrolling, etc) - though [scrolling is really insensitive](https://github.com/BlueDragonX/xf86-input-mtrack/issues/104)
   * special keys
@@ -33,7 +33,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * on resume, the reverse scroll is removed (USB reconnect probably)
  * wifi can occasionly still a bit iffy on resume
  * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup
- * the GRUB with Secure Boot needs some more work, the fonts are bust, plus I need to find the problematic module so we can just load the lot in making the process simpler
+ * the GRUB with SecureBoot needs some more work, the fonts are bust, plus I need to find the problematic module so we can just load the lot in making the process simpler
  * gparted lockup investigation
 
 ## Related Links
@@ -178,7 +178,7 @@ Now run:
 
 ## SecureBoot
 
-It is possible to get Debian booting with Secure Boot.  However, there are a number of constraints:
+It is possible to get Debian booting with SecureBoot.  However, there are a number of constraints:
 
  * you use the [Linux Foundation Secure Boot System, `PreLoader.efi`](http://blog.hansenpartnership.com/linux-foundation-secure-boot-system-released/)
  * GRUB [cannot load modules](http://askubuntu.com/questions/642653/loopback-module-for-grub-with-secure-boot), so you need to generate a GRUB image with the modules you need built it
@@ -214,11 +214,11 @@ Now we generate a suitable GRUB image with built-in configuration we generate an
         configfile search_fs_uuid search ls reboot halt \
         password password_pbkdf2 echo linux linuxefi chain fat efifwsetup
 
-Then reboot into the UEFI GUI interface to configure the boot order to be 'debian' *followed* by 'PreLoader', then under Security, set Secure Boot to 'Microsoft & 3rd party CA'.
+Then reboot into the UEFI GUI interface to configure the boot order to be 'debian' *followed* by 'PreLoader', then under Security, set SecureBoot to 'Microsoft & 3rd party CA'.
 
-**N.B.** we make `debian` the first boot option, so that when you run with Secure Boot disabled, it will boot automatically, whilst with Secure Boot enabled `debian` will be silently skipped and `PreLoader` will be automatically run
+**N.B.** we make `debian` the first boot option, so that when you run with SecureBoot disabled, it will boot automatically, whilst with SecureBoot enabled `debian` will be silently skipped and `PreLoader` will be automatically run
 
-Now, when you boot for the first time, you will be asked to enroll `loader.efi`, once done, your laptop will now boot with Secure Boot enabled.
+Now, when you boot for the first time, you will be asked to enroll `loader.efi`, once done, your laptop will now boot with SecureBoot enabled.
 
 ### Troubleshooting
 
