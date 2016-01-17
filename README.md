@@ -5,6 +5,7 @@ The instructions assume you are not new to Debian, though you may have no experi
 ## What is Working
 
  * dual booting
+ * Secure Boot
  * typing cover keyboard
   * multitouch touchpad (two finger scrolling, etc) - though [scrolling is really insensitive](https://github.com/BlueDragonX/xf86-input-mtrack/issues/104)
   * special keys
