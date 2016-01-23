@@ -25,12 +25,10 @@ The instructions assume you are not new to Debian, though you may have no experi
  * camera - hides on the PCI bus at [8086:1926](http://pci-ids.ucw.cz/read/PC/8086/1926)
  * touchscreen - hides on the PCI bus at 8086:9d3e
       * pen - though you can pair with it, you only get the eraser switch event
+ * opening the lid, does not trigger a resume
  * need to improve power saving
-      * suspend uses lots of power (will not last 24 hours)
-      * suspend is only accessible via closing the lid, S3 is not exposed via ACPI (means `echo mem > /sys/power/state` does not work)
       * wireless power saving is disabled
       * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modeset'ing to black out the screen and crash the system
- * on resume, the reverse scroll is removed (USB reconnect probably)
  * wifi can occasionally still a bit iffy on resume
  * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup
  * the GRUB with SecureBoot needs some more work, the fonts are bust, plus I need to find the problematic module so we can just load the lot in making the process simpler
@@ -292,9 +290,11 @@ Install the needed packages:
 
     sudo apt-get install uswsusp
 
-Copy in the [`/lib/systemd/system-sleep`](root/lib/systemd/system-sleep) helper files
+Copy in the [`/lib/systemd/system-sleep`](root/lib/systemd/system-sleep) helper files, [`/etc/systemd/sleep.conf](root/etc/systemd/sleep.conf) and [`/etc/uswsusp.conf` (amending the resume partition if necessary)](root/etc/uswsusp.conf).
 
-You also should be able to hibernate (`sudo pm-hibernate`) and resume, though if you have problems, such as stalls at boot time, there probably is a problem with your `resume` kernel parameter (did you compile the kernel with `nvme` built in?), so to break out of the stall add `noresume` to your kernel parameters.
+You should be able to suspend (`echo freeze | sudo tee /sys/power/state`, or close the typing cover), hibernate (`s2disk`) and resume (hold the power button for roughly eight seconds).
+
+If you have problems, such as stalls at boot time, there probably is a problem with your `resume` kernel parameter (did you compile the kernel with `nvme` built in?), so to break out of the stall add `noresume` to your kernel parameters.
 
 ### Screen Locking
 
