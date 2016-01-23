@@ -290,9 +290,9 @@ Install the needed packages:
 
     sudo apt-get install uswsusp
 
-Copy in the [`/lib/systemd/system-sleep`](root/lib/systemd/system-sleep) helper files, [`/etc/systemd/sleep.conf](root/etc/systemd/sleep.conf) and [`/etc/uswsusp.conf` (amending the resume partition if necessary)](root/etc/uswsusp.conf).
+Copy in the [`/lib/systemd/system-sleep`](root/lib/systemd/system-sleep) helper files and [`/etc/systemd/sleep.conf](root/etc/systemd/sleep.conf).
 
-You should be able to suspend (`echo freeze | sudo tee /sys/power/state`, or close the typing cover), hibernate (`s2disk`) and resume (hold the power button for roughly five seconds).
+You should be able to suspend (`echo freeze | sudo tee /sys/power/state`, or close the typing cover), hibernate (`echo disk | sudo tee /sys/power/state`) and resume (hold the power button for roughly five seconds).
 
 If you have problems, such as stalls at boot time, there probably is a problem with your `resume` kernel parameter (did you compile the kernel with `nvme` built in?), so to break out of the stall add `noresume` to your kernel parameters.
 
