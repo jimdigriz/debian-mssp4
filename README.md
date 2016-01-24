@@ -376,6 +376,8 @@ If so, now configure `mpv` to use the API.
 
 When you play videos, you should find the CPU utilisation drops substantially (I saw 35% down to 10%).
 
+**N.B.** Firefox does [not support any video hardware decoding](https://bugzilla.mozilla.org/show_bug.cgi?id=563206)
+
 ## Sensors
 
 ### `dev_rotation`
