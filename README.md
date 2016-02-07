@@ -30,6 +30,7 @@ The instructions assume you are not new to Debian, though you may have no experi
       * wireless power saving is disabled
       * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modeset'ing to black out the screen and crash the system
  * wifi can occasionally still a bit iffy on resume
+ * [Caps Lock key light](https://patchwork.kernel.org/patch/7844371/)
  * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup
  * the GRUB with SecureBoot needs some more work, the fonts are bust, plus I need to find the problematic module so we can just load the lot in making the process simpler
  * gparted lockup investigation
@@ -176,7 +177,9 @@ Now run:
 
 ## SecureBoot
 
-It is possible to get Debian booting with SecureBoot.  However, there are a number of constraints:
+It is possible to get Debian booting with SecureBoot.  However, as well as having the listed restrictions below, it is a bit of a pain to set up, plus to be frank it is a lot of effort and hassle just to avoid seeing a red padlock on boot.  Indeed there is some slight benefit of security, but if you insist on running untrusted code as root under Linux or administrator under Windows, then it hardly is going to save you ;)
+
+Anyway, if you do want to do this, you should be aware of the following constraints:
 
  * you use the [Linux Foundation Secure Boot System, `PreLoader.efi`](http://blog.hansenpartnership.com/linux-foundation-secure-boot-system-released/)
  * GRUB [cannot load modules](http://askubuntu.com/questions/642653/loopback-module-for-grub-with-secure-boot), so you need to generate a GRUB image with the modules you need built it
