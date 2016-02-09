@@ -29,6 +29,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * need to improve power saving
       * wireless power saving is disabled
       * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modeset'ing to black out the screen and crash the system
+      * the DSDT wraps the [S3 'suspend to RAM'](http://acpi.sourceforge.net/documentation/sleep.html) in a conditional which is false so is not available.  The laptops excessive battery use (including in Windows too!) when sleeping is because it actually sleeps in the much more battery hungry S1 state.  However, amending the DSDT manually to remove the conditional results in `echo mem > /sys/power/state` making the laptop power up as if power cycled.  Something Microsoft should fix, though I suspect they would have already if they could.
  * wifi can occasionally still a bit iffy on resume
  * [Caps Lock key light](https://patchwork.kernel.org/patch/7844371/)
  * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup
