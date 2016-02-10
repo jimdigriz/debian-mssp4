@@ -27,7 +27,7 @@ The instructions assume you are not new to Debian, though you may have no experi
      * pen - though you can pair with it, you only get the eraser switch event
  * opening the lid, does not trigger a resume
  * need to improve power saving
-     * wireless power saving is disabled
+     * need to turn off the keyboard backlight when suspending
      * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modeset'ing to black out the screen and crash the system
      * there is no true [S3 'suspend to RAM']((http://acpi.sourceforge.net/documentation/sleep.html))
          * the DSDT wraps S3 in a conditional which is false so is not available
