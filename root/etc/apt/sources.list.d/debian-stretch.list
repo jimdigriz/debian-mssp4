@@ -1,1 +1,2 @@
-deb http://http.debian.net/debian stretch main
+deb [arch=amd64] http://http.debian.net/debian stretch main
+#deb-src http://http.debian.net/debian stretch main

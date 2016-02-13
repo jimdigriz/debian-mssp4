@@ -329,7 +329,7 @@ Unfortunately there is an outstanding bug ([console-setup w/ systemd forgets fon
 
 ### Xorg
 
-Start off by installing Xorg (the pinning will bring it in from stretch):
+Start off by installing Xorg:
 
     sudo apt-get install xserver-xorg xserver-xorg-input-mtrack xserver-xorg-video-intel libgl1-mesa-dri libgl1-mesa-glx big-cursor
 
@@ -349,7 +349,7 @@ Now populate [`/etc/X11/xorg.conf.d`](root/etc/X11/xorg.conf.d) and then you sho
     [     5.183] (II) AIGLX: enabled GLX_ARB_create_context_robustness
     [     5.183] (II) AIGLX: Loaded and initialized i965
 
-If this does not work then you should check that the apt pinning brought in `libdrm-intel1` and`libgl1-mesa-{dri,glx}` from stretch and `xserver-xorg-video-intel` from jessie-backports.
+If this does not work then you should check that the apt pinning brought in `libdrm-intel1`, `libgl1-mesa-{dri,glx}` and `xserver-xorg-video-intel` from jessie-backports.
 
 Then from within X you should see something like:
 
