@@ -251,8 +251,6 @@ Now reboot so the EFI firmware can garbage collect and free up the space, then y
 
 All you need to do is copy the contents of [`interfaces.d`](root/etc/network/interfaces.d) into `/etc/network/interfaces.d/`; plus create a suitable `/etc/wpa_supplicant/wpa_supplicant.conf` file (if you are not using any network management tool).
 
-**N.B.** to make the wireless networking responsive, you need to disable power saving with `iw dev mlan0 set power_save off`; this has already been slipped into [`/etc/network/interfaces.d/mlan0`](root/etc/network/interfaces.d/mlan0) for you
-
 ## Kernel
 
 First you need to set some kernel boot arguments which are set in [`/etc/default/grub`](root/etc/default/grub):
