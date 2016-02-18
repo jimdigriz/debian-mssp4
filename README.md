@@ -28,7 +28,6 @@ The instructions assume you are not new to Debian, though you may have no experi
  * opening the lid, does not trigger a resume
  * need to improve power saving
      * need to turn off the keyboard backlight when suspending
-     * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modeset'ing to black out the screen and crash the system
      * there is no true [S3 'suspend to RAM']((http://acpi.sourceforge.net/documentation/sleep.html))
          * the DSDT wraps S3 in a conditional which is false so is not available
          * the laptops excessive battery use, including in Windows too, is due to when sleeping it actually sleeps in the much more battery hungry S1 state
@@ -255,9 +254,11 @@ All you need to do is copy the contents of [`interfaces.d`](root/etc/network/int
 
 First you need to set some kernel boot arguments which are set in [`/etc/default/grub`](root/etc/default/grub):
 
-    resume=/dev/mapper/lvm--quatermain-swap intel_idle.max_cstate=2
+    resume=/dev/mapper/lvm--quatermain-swap
 
 **N.B.** you must adjust the `resume` argument to match where your swap space is, or if you plan not to use hibernation, replace it with `noresume`
+
+**N.B.** if you are running a UEFI BIOS from before Feb 2016, then you will need to include `intel_idle.max_cstate=2` to prevert the GPU locking up when kernel modeset'ing kicks in
 
 Now copy into place [`/etc/modprobe.d/i915.conf`](root/etc/modprobe.d/i915.conf), this provides a number of power-saving options as well as enabling modeset support for Skylake chipsets.
 
