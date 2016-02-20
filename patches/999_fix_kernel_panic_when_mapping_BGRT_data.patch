@@ -1,0 +1,114 @@
+diff --git a/arch/x86/platform/efi/efi-bgrt.c b/arch/x86/platform/efi/efi-bgrt.c
+index 9a52b5c4438f..bf51f4c02562 100644
+--- a/arch/x86/platform/efi/efi-bgrt.c
++++ b/arch/x86/platform/efi/efi-bgrt.c
+@@ -31,8 +31,7 @@ struct bmp_header {
+ void __init efi_bgrt_init(void)
+ {
+ 	acpi_status status;
+-	void __iomem *image;
+-	bool ioremapped = false;
++	void *image;
+ 	struct bmp_header bmp_header;
+ 
+ 	if (acpi_disabled)
+@@ -73,20 +72,14 @@ void __init efi_bgrt_init(void)
+ 		return;
+ 	}
+ 
+-	image = efi_lookup_mapped_addr(bgrt_tab->image_address);
++	image = early_memremap(bgrt_tab->image_address, sizeof(bmp_header));
+ 	if (!image) {
+-		image = early_ioremap(bgrt_tab->image_address,
+-				       sizeof(bmp_header));
+-		ioremapped = true;
+-		if (!image) {
+-			pr_err("Ignoring BGRT: failed to map image header memory\n");
+-			return;
+-		}
++		pr_err("Ignoring BGRT: failed to map image header memory\n");
++		return;
+ 	}
+ 
+-	memcpy_fromio(&bmp_header, image, sizeof(bmp_header));
+-	if (ioremapped)
+-		early_iounmap(image, sizeof(bmp_header));
++	memcpy(&bmp_header, image, sizeof(bmp_header));
++	early_memunmap(image, sizeof(bmp_header));
+ 	bgrt_image_size = bmp_header.size;
+ 
+ 	bgrt_image = kmalloc(bgrt_image_size, GFP_KERNEL | __GFP_NOWARN);
+@@ -96,18 +89,14 @@ void __init efi_bgrt_init(void)
+ 		return;
+ 	}
+ 
+-	if (ioremapped) {
+-		image = early_ioremap(bgrt_tab->image_address,
+-				       bmp_header.size);
+-		if (!image) {
+-			pr_err("Ignoring BGRT: failed to map image memory\n");
+-			kfree(bgrt_image);
+-			bgrt_image = NULL;
+-			return;
+-		}
++	image = early_memremap(bgrt_tab->image_address, bmp_header.size);
++	if (!image) {
++		pr_err("Ignoring BGRT: failed to map image memory\n");
++		kfree(bgrt_image);
++		bgrt_image = NULL;
++		return;
+ 	}
+ 
+-	memcpy_fromio(bgrt_image, image, bgrt_image_size);
+-	if (ioremapped)
+-		early_iounmap(image, bmp_header.size);
++	memcpy(bgrt_image, image, bgrt_image_size);
++	early_memunmap(image, bmp_header.size);
+ }
+diff --git a/drivers/firmware/efi/efi.c b/drivers/firmware/efi/efi.c
+index 31fc864eb037..6b11d4d16a33 100644
+--- a/drivers/firmware/efi/efi.c
++++ b/drivers/firmware/efi/efi.c
+@@ -324,38 +324,6 @@ u64 __init efi_mem_desc_end(efi_memory_desc_t *md)
+ 	return end;
+ }
+ 
+-/*
+- * We can't ioremap data in EFI boot services RAM, because we've already mapped
+- * it as RAM.  So, look it up in the existing EFI memory map instead.  Only
+- * callable after efi_enter_virtual_mode and before efi_free_boot_services.
+- */
+-void __iomem *efi_lookup_mapped_addr(u64 phys_addr)
+-{
+-	struct efi_memory_map *map;
+-	void *p;
+-	map = efi.memmap;
+-	if (!map)
+-		return NULL;
+-	if (WARN_ON(!map->map))
+-		return NULL;
+-	for (p = map->map; p < map->map_end; p += map->desc_size) {
+-		efi_memory_desc_t *md = p;
+-		u64 size = md->num_pages << EFI_PAGE_SHIFT;
+-		u64 end = md->phys_addr + size;
+-		if (!(md->attribute & EFI_MEMORY_RUNTIME) &&
+-		    md->type != EFI_BOOT_SERVICES_CODE &&
+-		    md->type != EFI_BOOT_SERVICES_DATA)
+-			continue;
+-		if (!md->virt_addr)
+-			continue;
+-		if (phys_addr >= md->phys_addr && phys_addr < end) {
+-			phys_addr += md->virt_addr - md->phys_addr;
+-			return (__force void __iomem *)(unsigned long)phys_addr;
+-		}
+-	}
+-	return NULL;
+-}
+-
+ static __initdata efi_config_table_type_t common_tables[] = {
+ 	{ACPI_20_TABLE_GUID, "ACPI 2.0", &efi.acpi20},
+ 	{ACPI_TABLE_GUID, "ACPI", &efi.acpi},
+-- 
+2.1.4
+
+  

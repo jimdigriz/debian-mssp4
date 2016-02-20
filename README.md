@@ -28,7 +28,6 @@ The instructions assume you are not new to Debian, though you may have no experi
  * opening the lid, does not trigger a resume
  * need to improve power saving
      * need to turn off the keyboard backlight when suspending
-     * CPU cannot go lower than C2 sleep state otherwise it causes the GPU whilst modeset'ing to black out the screen and crash the system
      * there is no true [S3 'suspend to RAM']((http://acpi.sourceforge.net/documentation/sleep.html))
          * the DSDT wraps S3 in a conditional which is false so is not available
          * the laptops excessive battery use, including in Windows too, is due to when sleeping it actually sleeps in the much more battery hungry S1 state
@@ -46,9 +45,10 @@ The instructions assume you are not new to Debian, though you may have no experi
  * because of the high resolution screen it is worth reading through some [HiDPI related materials](https://wiki.archlinux.org/index.php/HiDPI) otherwise you will very quickly go short sighted
  * wishing for a matte screen, I got the [iLLumiShield](http://www.amazon.co.uk/gp/product/B0169CKLBK) and find it does the job great
  * patches based on
-      * [Surface Pro 3](https://github.com/neoreeps/surface-pro-3/blob/master/wily_surface.patch) instructions
-      * [[PATCH v3] surface pro 4: Add support for Surface Pro 4 Buttons](https://lkml.org/lkml/2015/12/27/136)
+      * [[PATCH v5] surface pro 4: Add support for Surface Pro 4 Buttons](https://lkml.org/lkml/2016/1/17/15)
+      * [[PATCH 1/2] HID: Use multitouch driver for Type Covers](http://lkml.iu.edu/hypermail/linux/kernel/1512.1/05130.html)
       * [[PATCH v2 14/16] mfd: intel-lpss: Pass SDA hold time to I2C host controller driver](https://lkml.org/lkml/2015/11/30/436)
+      * [[PATCH] x86/efi-bgrt: Fix kernel panic when mapping BGRT data](https://lkml.org/lkml/2015/12/10/599) - kernel 4.4 crashes with a unable to handle kernel paging request in `efi_bgrt_init()`
  * [iio-sensor-proxy](https://github.com/hadess/iio-sensor-proxy) - `systemctl enable iio-sensor-proxy.service`
  * Hibernation
       * [Ubuntu Hibernation](https://help.ubuntu.com/community/PowerManagement/Hibernate)
@@ -255,9 +255,11 @@ All you need to do is copy the contents of [`interfaces.d`](root/etc/network/int
 
 First you need to set some kernel boot arguments which are set in [`/etc/default/grub`](root/etc/default/grub):
 
-    resume=/dev/mapper/lvm--quatermain-swap intel_idle.max_cstate=2
+    resume=/dev/mapper/lvm--quatermain-swap
 
 **N.B.** you must adjust the `resume` argument to match where your swap space is, or if you plan not to use hibernation, replace it with `noresume`
+
+**N.B.** if you are running a kernel earlier than 4.4, you will also need to add `intel_idle.max_cstate=2` otherwise the GPU whilst modeset'ing will black out the screen and crash the system
 
 Now copy into place [`/etc/modprobe.d/i915.conf`](root/etc/modprobe.d/i915.conf), this provides a number of power-saving options as well as enabling modeset support for Skylake chipsets.
 
@@ -266,17 +268,14 @@ Also, so that your keyboard works before the root filesystem is mounted, edit yo
 Run the following to get your system ready to compile a kernel:
 
     sudo apt-get install build-essential fakeroot kernel-package
-    sudo apt-get install linux-source-4.3 firmware-libertas/jessie-backports firmware-misc-nonfree intel-microcode
-    tar -C /usr/src -xf /usr/src/linux-source-4.3.tar.xz
-    cd /usr/src/linux-source-4.3
+    sudo apt-get install linux-source-4.4 firmware-libertas/jessie-backports firmware-misc-nonfree intel-microcode
+    tar -C /usr/src -xf /usr/src/linux-source-4.4.tar.xz
+    cd /usr/src/linux-source-4.4
     find /usr/src/debian-mssp4/patches -type f | sort | xargs -t -I{} sh -c "cat {} | patch -p1"
-    xzcat ../linux-config-4.3/config.amd64_none_amd64.xz > .config
+    xzcat ../linux-config-4.4/config.amd64_none_amd64.xz > .config
     
     cat <<'EOF' >> .config
     CONFIG_BLK_DEV_NVME=y
-    CONFIG_SURFACE_PRO_BUTTON=m
-    CONFIG_MFD_INTEL_LPSS_ACPI=m
-    CONFIG_MFD_INTEL_LPSS_PCI=m
     EOF
 
 Now run `make oldconfig` so the button/lpss modules are properly included (we make `nvme` built in so hibernation works).
@@ -287,7 +286,7 @@ Time to compile the kernel (this will take about 40 minutes):
 
 Once compiled, you should install your new kernel:
 
-    sudo dpkg -i /usr/src/linux-image-4.3.3-mssp4_4.3.3-mssp4-10.00.Custom_amd64.deb
+    sudo dpkg -i /usr/src/linux-image-4.4.2-mssp4_4.4.2-mssp4-10.00.Custom_amd64.deb
 
 Now reboot into your new kernel.
 

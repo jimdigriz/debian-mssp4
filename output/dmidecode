@@ -3,7 +3,7 @@
 SMBIOS 3.0 present.
 # SMBIOS implementations newer than version 2.8 are not
 # fully supported by this version of dmidecode.
-17 structures occupying 946 bytes.
+17 structures occupying 947 bytes.
 Table at 0x8BCC7000.
 
 Handle 0x0000, DMI type 7, 19 bytes
@@ -110,7 +110,7 @@ Processor Information
 	Version: Intel(R) Core(TM) i7-6650U CPU @ 2.20GHz
 	Voltage: 0.8 V
 	External Clock: 100 MHz
-	Max Speed: 3400 MHz
+	Max Speed: 8300 MHz
 	Current Speed: 2200 MHz
 	Status: Populated, Enabled
 	Upgrade: Other
@@ -247,8 +247,8 @@ Memory Array Mapped Address
 Handle 0x000B, DMI type 0, 24 bytes
 BIOS Information
 	Vendor: Microsoft Corporation
-	Version: 103.873.768
-	Release Date: 11/09/2015
+	Version: 104.1085.768
+	Release Date: 01/29/2016
 	ROM Size: 16384 kB
 	Characteristics:
 		PCI is supported
@@ -293,7 +293,7 @@ Base Board Information
 Handle 0x000E, DMI type 3, 24 bytes
 Chassis Information
 	Manufacturer: Microsoft Corporation
-	Type: Other
+	Type: Laptop
 	Lock: Not Present
 	Version: Not Specified
 	Serial Number: 079806554753
