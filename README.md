@@ -18,21 +18,16 @@ The instructions assume you are not new to Debian, though you may have no experi
      * bluetooth - this only appears once you use the wireless card firmware from [firmware-libertas (20151207-1~bpo8+1) [pcie8897_uapsta.bin version 15.68.4.p112]](https://packages.debian.org/jessie-backports/firmware-libertas)
  * microSD reader - presented as a USB reader appearing when you insert a card
  * suspend, hibernate and resume works
+     * opening the typing cover, as well as (dis)connecting it, triggers resume
 
 ## Outstanding Issues
 
- * hot plugging the typing cover, or going through a sleep/resume cycle, often results in it no longer responding
  * camera - hides on the PCI bus at [8086:1926](http://pci-ids.ucw.cz/read/PC/8086/1926)
  * touchscreen - hides on the PCI bus at 8086:9d3e
      * pen - though you can pair with it, you only get the eraser switch event
- * opening the lid, does not trigger a resume
- * need to improve power saving
-     * need to turn off the keyboard backlight when suspending
-     * there is no true [S3 'suspend to RAM']((http://acpi.sourceforge.net/documentation/sleep.html))
-         * the DSDT wraps S3 in a conditional which is false so is not available
-         * the laptops excessive battery use, including in Windows too, is due to when sleeping it actually sleeps in the much more battery hungry S1 state
-         * amending the DSDT manually to remove the conditional results in `echo mem > /sys/power/state` making the laptop power up as if power cycled.  Probably works better with [`acpi_rev_override` (`_REV=2`)](https://mjg59.dreamwidth.org/34542.html) and `acpi_os_name="Windows 2012"` (or earlier)
-         * since the Surface Pro 3, [connected standby](https://lwn.net/Articles/580451/) replaces S3, which [although supported by Linux fundementally by Linux, some practical work is still needed](http://mjg59.dreamwidth.org/34542.html?thread=1378798#cmt1378798)
+ * there is no [S3 'suspend to RAM'](http://acpi.sourceforge.net/documentation/sleep.html) available as since the Surface Pro 3, [connected standby](https://lwn.net/Articles/580451/) replaces it; [although supported by Linux fundementally by Linux, some practical work is still needed](http://mjg59.dreamwidth.org/34542.html?thread=1378798#cmt1378798)
+     * the laptops excessive battery use, including in Windows too, is due to when sleeping it actually sleeps in the much more battery hungry S1 state
+     * amending the DSDT manually to remove the conditional that masks out S3 results in `echo mem > /sys/power/state` making the laptop power up as if power cycled.  Probably works better with [`acpi_rev_override` (`_REV=2`)](https://mjg59.dreamwidth.org/34542.html) and `acpi_os_name="Windows 2012"` (or earlier)
  * wifi can occasionally still a bit iffy on resume
  * [Caps Lock key light](https://patchwork.kernel.org/patch/7844371/)
  * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup
