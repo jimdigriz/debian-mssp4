@@ -23,17 +23,17 @@ The instructions assume you are not new to Debian, though you may have no experi
 ## Outstanding Issues
 
  * camera - hides on the PCI bus at [8086:1926](http://pci-ids.ucw.cz/read/PC/8086/1926)
- * [AC adapter events](https://bugzilla.kernel.org/show_bug.cgi?id=109891)
+ * [AC adaptor events](https://bugzilla.kernel.org/show_bug.cgi?id=109891)
      * [DSDT changes required to fix this](https://www.reddit.com/r/SurfaceLinux/comments/46o3mh/fix_udev_power_adapter_event_by_patching_acpi/)
  * touchscreen - hides on the PCI bus at 8086:9d3e
      * pen - though you can pair with it, you only get the eraser switch event
- * there is no [S3 'suspend to RAM'](http://acpi.sourceforge.net/documentation/sleep.html) available as since the Surface Pro 3, [connected standby](https://lwn.net/Articles/580451/) replaces it; [although supported by Linux fundementally by Linux, some practical work is still needed](http://mjg59.dreamwidth.org/34542.html?thread=1378798#cmt1378798)
+ * there is no [S3 'suspend to RAM'](http://acpi.sourceforge.net/documentation/sleep.html) available as since the Surface Pro 3, [connected standby](https://lwn.net/Articles/580451/) replaces it; [although supported by Linux fundamentally by Linux, some practical work is still needed](http://mjg59.dreamwidth.org/34542.html?thread=1378798#cmt1378798)
      * the laptops excessive battery use whilst suspended, including whilst under Windows too, is due to it sleeping in the much more battery hungry S1 state
      * amending the DSDT manually to remove the conditional that masks out S3 results in `echo mem > /sys/power/state` making the laptop power up as if power cycled.  Probably works better with [`acpi_rev_override` (`_REV=2`)](https://mjg59.dreamwidth.org/34542.html) and `acpi_os_name="Windows 2012"` (or earlier)
  * [Caps Lock key light](https://patchwork.kernel.org/patch/7844371/)
  * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup
  * the GRUB with SecureBoot needs some more work, the fonts are bust, plus I need to find the problematic module so we can just load the lot in making the process simpler
- * gparted lockup investigation
+ * `gparted` lockup investigation
 
 ## Related Links
 
@@ -217,7 +217,7 @@ Install the needed packages:
 
     sudo apt-get install uswsusp
 
-Copy in the [`/lib/systemd/system-sleep`](root/lib/systemd/system-sleep) helper files and [`/etc/systemd/sleep.conf](root/etc/systemd/sleep.conf).
+Copy in the [`/lib/systemd/system-sleep`](root/lib/systemd/system-sleep) helper files and [`/etc/systemd/sleep.conf`](root/etc/systemd/sleep.conf).
 
 You should be able to suspend (`echo freeze | sudo tee /sys/power/state`, or close the typing cover), hibernate (`echo disk | sudo tee /sys/power/state`) and resume (hold the power button for roughly five seconds).
 
@@ -353,7 +353,7 @@ Anyway, if you do want to do this, you should be aware of the following constrai
      * `grub-mkstandalone` simply puts all the modules in a memdisk, so you still get the same problem
      * building in *all* modules does not work as there is a module (no idea which, let me know if you work it out!) that stops GRUB detecting anything except for procfs
      * it is really difficult to get a definitive list of what modules you need, it is a bit trial and error, plus you may want extras like `cat`, `lspci`, etc
-     * everytime the grub package updates, you *should* rebuild the image and re-enroll it
+     * every time the grub package updates, you *should* rebuild the image and re-enroll it
 
 Start off by going into GRUB, and before Linux boots, go to the command line (pressing 'c').  On the command line, type `lsmod` and note down the modules loaded, now go back to booting into Linux.
 
