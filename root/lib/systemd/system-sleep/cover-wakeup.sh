@@ -14,6 +14,7 @@ pre)
 		echo enabled > /sys/bus/usb/devices/usb1/1-7/power/wakeup
 	else
 		grep -q 'XHC.*enabled' /proc/acpi/wakeup && echo XHC > /proc/acpi/wakeup
+		echo disabled > /sys/bus/usb/devices/usb1/power/wakeup
 	fi
 	;;
 post)
