@@ -58,7 +58,9 @@ You will require:
 
  * an external USB keyboard, as the typing cover is not supported by Debian's kernel
  * a USB hub as there is only one USB port
- * a USB key `dd`'ed with the amd64 live ISO for [gparted](http://gparted.sourceforge.net/); I used `gparted-live-0.24.0-2-amd64.iso`
+ * a USB key `dd`'ed with the amd64 live ISO for [gparted](http://gparted.sourceforge.net/)
+      * **WARNING:** `gparted-live-0.24.0-2-amd64.iso` locked up after a few minutes of running, you of course do *not* want this midway through the resize.  All I can recommend if you use this version, is to be quick
+      * I have tried to boot `0.25.0-1` but it fails for various reasons whilst `0.25.0-3` the {md5,sha1}sums for the ISOs mis-match which explains why they do not work
  * a USB key `dd`'ed with the [non-free amd64 Debian network installer](http://cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware/current/amd64/iso-cd/); I used `firmware-8.2.0-amd64-netinst.iso`
  * an (open, WEP or WPA PSK) wireless network you can connect to (or an USB Ethernet adaptor)
 
@@ -106,8 +108,6 @@ Insert the gparted USB key and boot it by either:
       - left swipe on 'USB Storage' to boot off your USB key
 
 You should be able to boot into gparted now, and get something that lets you reduce the size of the NTFS partition; for me Windows took up 22GB of space so I left it in a 60GB partition to leave it enough room for Windows Update.
-
-**WARNING:** `gparted-live-0.24.0-2-amd64.iso` seems to lock up after a few minutes of running, you do *NOT* want this midway through the resize.  All I can recommend is 'be quick', sorry.
 
 Once shrunk, you should test that you can still boot into Windows, and if you can, we are ready to move on (though you may wish to first go back into Window and re-enable hibernation, the paging file and Bitlocker).  If not, you will have to figure out what is wrong.
 
