@@ -23,6 +23,8 @@ The instructions assume you are not new to Debian, though you may have no experi
 ## Outstanding Issues
 
  * camera - hides on the PCI bus at [8086:1926](http://pci-ids.ucw.cz/read/PC/8086/1926)
+ * [AC adapter events](https://bugzilla.kernel.org/show_bug.cgi?id=109891)
+     * [DSDT changes required to fix this](https://www.reddit.com/r/SurfaceLinux/comments/46o3mh/fix_udev_power_adapter_event_by_patching_acpi/)
  * touchscreen - hides on the PCI bus at 8086:9d3e
      * pen - though you can pair with it, you only get the eraser switch event
  * there is no [S3 'suspend to RAM'](http://acpi.sourceforge.net/documentation/sleep.html) available as since the Surface Pro 3, [connected standby](https://lwn.net/Articles/580451/) replaces it; [although supported by Linux fundementally by Linux, some practical work is still needed](http://mjg59.dreamwidth.org/34542.html?thread=1378798#cmt1378798)
