@@ -10,7 +10,7 @@ The instructions assume you are not new to Debian, though you may have no experi
      * multitouch touchpad (two finger scrolling, etc) - though [scrolling is really insensitive](https://github.com/BlueDragonX/xf86-input-mtrack/issues/104)
      * special keys
  * 2D and 3D (OpenGL) acceleration
- * hardware video decoding
+     * hardware video decoding
  * power and volume buttons on the screen
  * audio (including the microphone)
  * sensors - `dev_rotation` though gives nothing but zeros
