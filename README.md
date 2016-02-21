@@ -32,8 +32,7 @@ The instructions assume you are not new to Debian, though you may have no experi
          * the DSDT wraps S3 in a conditional which is false so is not available
          * the laptops excessive battery use, including in Windows too, is due to when sleeping it actually sleeps in the much more battery hungry S1 state
          * amending the DSDT manually to remove the conditional results in `echo mem > /sys/power/state` making the laptop power up as if power cycled.  Probably works better with [`acpi_rev_override` (`_REV=2`)](https://mjg59.dreamwidth.org/34542.html) and `acpi_os_name="Windows 2012"` (or earlier)
-         * since the Surface Pro 3, [connected standby](https://lwn.net/Articles/580451/) replaces S3
-         * might be able to persuade the laptop to use [Intel Rapid Start Technology](http://mjg59.dreamwidth.org/26022.html) if it is available to get S3
+         * since the Surface Pro 3, [connected standby](https://lwn.net/Articles/580451/) replaces S3, which [although supported by Linux fundementally by Linux, some practical work is still needed](http://mjg59.dreamwidth.org/34542.html?thread=1378798#cmt1378798)
  * wifi can occasionally still a bit iffy on resume
  * [Caps Lock key light](https://patchwork.kernel.org/patch/7844371/)
  * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup
