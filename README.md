@@ -7,8 +7,8 @@ The instructions assume you are not new to Debian, though you may have no experi
  * dual booting
  * SecureBoot
  * typing cover keyboard
-  * multitouch touchpad (two finger scrolling, etc) - though [scrolling is really insensitive](https://github.com/BlueDragonX/xf86-input-mtrack/issues/104)
-  * special keys
+     * multitouch touchpad (two finger scrolling, etc) - though [scrolling is really insensitive](https://github.com/BlueDragonX/xf86-input-mtrack/issues/104)
+     * special keys
  * 2D and 3D (OpenGL) acceleration
  * hardware video decoding
  * power and volume buttons on the screen
