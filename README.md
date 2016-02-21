@@ -164,83 +164,9 @@ You laptop should reboot and you will see the GRUB bootloader and Debian should 
 
 ## Add Additional Repositories
 
-You need to add [Debian backports](http://backports.debian.org/) and stretch, as well as some suitable pinning, this is done with the files:
-
- * [`/etc/apt/sources.list`](root/etc/apt/sources.list)
- * [`/etc/apt/sources.list.d/debian-backports.list`](root/etc/apt/sources.list.d/debian-backports.list)
- * [`/etc/apt/sources.list.d/debian-stretch.list`](root/etc/apt/sources.list.d/debian-stretch.list)
- * [`/etc/apt/sources.list.d/debian-multimedia.list`](root/etc/apt/sources.list.d/debian-multimedia.list)
- * [`/etc/apt/preferences.d/pin`](root/etc/apt/preferences.d/pin)
-
-Now run:
+You need to add [Debian backports](http://backports.debian.org/), stretch, sid, as well as some suitable pinning.  So copy into place the required files under [`/etc/apt/`](root/etc/apt/).  Now run:
 
     sudo apt-get update
-
-## SecureBoot
-
-It is possible to get Debian booting with SecureBoot.  However, as well as having the listed restrictions below, it is a bit of a pain to set up, plus to be frank it is a lot of effort and hassle just to avoid seeing a red padlock on boot.  Indeed there is some slight benefit of security, but if you insist on running untrusted code as root under Linux or administrator under Windows, then it hardly is going to save you ;)
-
-Anyway, if you do want to do this, you should be aware of the following constraints:
-
- * you use the [Linux Foundation Secure Boot System, `PreLoader.efi`](http://blog.hansenpartnership.com/linux-foundation-secure-boot-system-released/)
- * GRUB [cannot load modules](http://askubuntu.com/questions/642653/loopback-module-for-grub-with-secure-boot), so you need to generate a GRUB image with the modules you need built it
-     * the solution below needs you to understand how to get GRUB to the point of being able to load `/boot/grub/grub.cfg`; my example below involves just a dedicated unencrypted non-LVM `/boot` mount point, you might need to adapt the `/tmp/grub.cfg` file accordingly for your own setup
-     * `grub-mkstandalone` simply puts all the modules in a memdisk, so you still get the same problem
-     * building in *all* modules does not work as there is a module (no idea which, let me know if you work it out!) that stops GRUB detecting anything except for procfs
-     * it is really difficult to get a definitive list of what modules you need, it is a bit trial and error, plus you may want extras like `cat`, `lspci`, etc
-     * everytime the grub package updates, you *should* rebuild the image and re-enroll it
-
-Start off by going into GRUB, and before Linux boots, go to the command line (pressing 'c').  On the command line, type `lsmod` and note down the modules loaded, now go back to booting into Linux.
-
-**N.B.** for reference, my list is: `fshelp` `ext2` `part_gpt` `boot` `extcmd` `crypto` `terminal` `gettext` `gzio` `normal` `test` `disk` `loadenv` `video` `bufio` `font` `video_fb` `gfxterm` `efi_gop` `efi_uga` `video_bochs` `video_cirrus` `all_video` `gfxterm` `minicmd`
-
-Once booted, run:
-
-    sudo apt-get install efibootmgr
-    
-    sudo mkdir -p /boot/efi/EFI/PreLoader
-    sudo curl -L -o /boot/efi/EFI/PreLoader/PreLoader.efi http://blog.hansenpartnership.com/wp-uploads/2013/PreLoader.efi
-    sudo curl -L -o /boot/efi/EFI/PreLoader/HashTool.efi  http://blog.hansenpartnership.com/wp-uploads/2013/HashTool.efi
-    
-    sudo efibootmgr -c -d /dev/nvme0n1 -p 1 -L Preloader -l /EFI/PreLoader/PreLoader.efi
-
-Now we generate a suitable GRUB image with built-in configuration we generate and a few extras needed modules:
-
-    cat <<EOF > /tmp/grub.cfg
-    search --no-floppy --fs-uuid --set=prefix $(blkid -o udev $(df /boot/grub/grub.cfg | sed '1d; s/ .*//') | awk -F= '/ID_FS_UUID=/ { print $2 }')
-    configfile (\$prefix)/grub/grub.cfg
-    EOF
-    
-    sudo grub-mkimage -O x86_64-efi -o /boot/efi/EFI/PreLoader/loader.efi -c /tmp/grub.cfg \
-        [list of modules from the GRUB `lsmod` run earlier] \
-        configfile search_fs_uuid search ls reboot halt \
-        password password_pbkdf2 echo linux linuxefi chain fat efifwsetup
-
-Then reboot into the UEFI GUI interface to configure the boot order to be 'debian' *followed* by 'PreLoader', then under Security, set SecureBoot to 'Microsoft & 3rd party CA'.
-
-**N.B.** we make `debian` the first boot option, so that when you run with SecureBoot disabled, it will boot automatically, whilst with SecureBoot enabled `debian` will be silently skipped and `PreLoader` will be automatically run
-
-Now, when you boot for the first time, you will be asked to enroll `loader.efi`, once done, your laptop will now boot with SecureBoot enabled.
-
-### Troubleshooting
-
-If you get the following when running `efibootmgr`:
-
-    efibootmgr: Could not set variable Boot0006: No such file or directory
-    efibootmgr: Could not prepare boot variable: No such file or directory
-
-You will find that if you were to run [`strace`](https://en.wikipedia.org/wiki/Strace) you would find out EFI has run out of space and is coming back with `ENOSPC`.
-
-To clear up some space, use:
-
-    mkdir /tmp/efivars
-    mount -t efivarfs none /tmp/efivars
-    rm /tmp/efivars/dump-type0-*
-    umount /tmp/efivars
-    
-    rm /sys/fs/pstore/dmesg-efi-*
-
-Now reboot so the EFI firmware can garbage collect and free up the space, then you should be able to continue where you left off.
 
 ## Networking
 
@@ -414,3 +340,71 @@ Move the laptop about whilst running in a terminal:
 Move the laptop about whilst running in a terminal:
 
      watch -n1 cat /sys/bus/iio/devices/iio:device*/in_anglvel_[xyz]_raw
+
+## SecureBoot
+
+It is possible to get Debian booting with SecureBoot.  However, as well as having the listed restrictions below, it is a bit of a pain to set up, plus to be frank it is a lot of effort and hassle just to avoid seeing a red padlock on boot.  Indeed there is some slight benefit of security, but if you insist on running untrusted code as root under Linux or administrator under Windows, then it hardly is going to save you ;)
+
+Anyway, if you do want to do this, you should be aware of the following constraints:
+
+ * you use the [Linux Foundation Secure Boot System, `PreLoader.efi`](http://blog.hansenpartnership.com/linux-foundation-secure-boot-system-released/)
+ * GRUB [cannot load modules](http://askubuntu.com/questions/642653/loopback-module-for-grub-with-secure-boot), so you need to generate a GRUB image with the modules you need built it
+     * the solution below needs you to understand how to get GRUB to the point of being able to load `/boot/grub/grub.cfg`; my example below involves just a dedicated unencrypted non-LVM `/boot` mount point, you might need to adapt the `/tmp/grub.cfg` file accordingly for your own setup
+     * `grub-mkstandalone` simply puts all the modules in a memdisk, so you still get the same problem
+     * building in *all* modules does not work as there is a module (no idea which, let me know if you work it out!) that stops GRUB detecting anything except for procfs
+     * it is really difficult to get a definitive list of what modules you need, it is a bit trial and error, plus you may want extras like `cat`, `lspci`, etc
+     * everytime the grub package updates, you *should* rebuild the image and re-enroll it
+
+Start off by going into GRUB, and before Linux boots, go to the command line (pressing 'c').  On the command line, type `lsmod` and note down the modules loaded, now go back to booting into Linux.
+
+**N.B.** for reference, my list is: `fshelp` `ext2` `part_gpt` `boot` `extcmd` `crypto` `terminal` `gettext` `gzio` `normal` `test` `disk` `loadenv` `video` `bufio` `font` `video_fb` `gfxterm` `efi_gop` `efi_uga` `video_bochs` `video_cirrus` `all_video` `gfxterm` `minicmd`
+
+Once booted, run:
+
+    sudo apt-get install efibootmgr
+    
+    sudo mkdir -p /boot/efi/EFI/PreLoader
+    sudo curl -L -o /boot/efi/EFI/PreLoader/PreLoader.efi http://blog.hansenpartnership.com/wp-uploads/2013/PreLoader.efi
+    sudo curl -L -o /boot/efi/EFI/PreLoader/HashTool.efi  http://blog.hansenpartnership.com/wp-uploads/2013/HashTool.efi
+    
+    sudo efibootmgr -c -d /dev/nvme0n1 -p 1 -L Preloader -l /EFI/PreLoader/PreLoader.efi
+
+Now we generate a suitable GRUB image with built-in configuration we generate and a few extras needed modules:
+
+    cat <<EOF > /tmp/grub.cfg
+    search --no-floppy --fs-uuid --set=prefix $(blkid -o udev $(df /boot/grub/grub.cfg | sed '1d; s/ .*//') | awk -F= '/ID_FS_UUID=/ { print $2 }')
+    configfile (\$prefix)/grub/grub.cfg
+    EOF
+    
+    sudo grub-mkimage -O x86_64-efi -o /boot/efi/EFI/PreLoader/loader.efi -c /tmp/grub.cfg \
+        [list of modules from the GRUB `lsmod` run earlier] \
+        configfile search_fs_uuid search ls reboot halt \
+        password password_pbkdf2 echo linux linuxefi chain fat efifwsetup
+
+Then reboot into the UEFI GUI interface to configure the boot order to be 'debian' *followed* by 'PreLoader', then under Security, set SecureBoot to 'Microsoft & 3rd party CA'.
+
+**N.B.** we make `debian` the first boot option, so that when you run with SecureBoot disabled, it will boot automatically, whilst with SecureBoot enabled `debian` will be silently skipped and `PreLoader` will be automatically run
+
+Now, when you boot for the first time, you will be asked to enroll `loader.efi`, once done, your laptop will now boot with SecureBoot enabled.
+
+### Troubleshooting
+
+If you get the following when running `efibootmgr`:
+
+    efibootmgr: Could not set variable Boot0006: No such file or directory
+    efibootmgr: Could not prepare boot variable: No such file or directory
+
+You will find that if you were to run [`strace`](https://en.wikipedia.org/wiki/Strace) you would find out EFI has run out of space and is coming back with `ENOSPC`.
+
+To clear up some space, use:
+
+    mkdir /tmp/efivars
+    mount -t efivarfs none /tmp/efivars
+    rm /tmp/efivars/dump-type0-*
+    umount /tmp/efivars
+    
+    rm /sys/fs/pstore/dmesg-efi-*
+
+Now reboot so the EFI firmware can garbage collect and free up the space, then you should be able to continue where you left off.
+
+
