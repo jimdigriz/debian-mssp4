@@ -28,7 +28,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * touchscreen - hides on the PCI bus at 8086:9d3e
      * pen - though you can pair with it, you only get the eraser switch event
  * there is no [S3 'suspend to RAM'](http://acpi.sourceforge.net/documentation/sleep.html) available as since the Surface Pro 3, [connected standby](https://lwn.net/Articles/580451/) replaces it; [although supported by Linux fundementally by Linux, some practical work is still needed](http://mjg59.dreamwidth.org/34542.html?thread=1378798#cmt1378798)
-     * the laptops excessive battery use, including in Windows too, is due to when sleeping it actually sleeps in the much more battery hungry S1 state
+     * the laptops excessive battery use whilst suspended, including whilst under Windows too, is due to it sleeping in the much more battery hungry S1 state
      * amending the DSDT manually to remove the conditional that masks out S3 results in `echo mem > /sys/power/state` making the laptop power up as if power cycled.  Probably works better with [`acpi_rev_override` (`_REV=2`)](https://mjg59.dreamwidth.org/34542.html) and `acpi_os_name="Windows 2012"` (or earlier)
  * [Caps Lock key light](https://patchwork.kernel.org/patch/7844371/)
  * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup
