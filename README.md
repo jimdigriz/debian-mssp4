@@ -182,8 +182,6 @@ First you need to set some kernel boot arguments which are set in [`/etc/default
 
 **N.B.** if you are running a kernel earlier than 4.4, you will also need to add `intel_idle.max_cstate=2` otherwise the GPU whilst modeset'ing will black out the screen and crash the system
 
-Now copy into place [`/etc/modprobe.d/i915.conf`](root/etc/modprobe.d/i915.conf), this provides a number of power-saving options as well as enabling modeset support for Skylake chipsets.
-
 Also, so that your keyboard works before the root filesystem is mounted, edit your [`/etc/initramfs-tools/modules`](root/etc/initramfs-tools/modules) file to include `hid_multitouch`.
 
 Run the following to get your system ready to compile a kernel:
