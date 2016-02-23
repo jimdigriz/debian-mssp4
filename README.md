@@ -31,6 +31,7 @@ The instructions assume you are not new to Debian, though you may have no experi
      * the laptops excessive battery use whilst suspended, including whilst under Windows too, is due to it sleeping in the much more battery hungry S1 state
      * amending the DSDT manually to remove the conditional that masks out S3 results in `echo mem > /sys/power/state` making the laptop power up as if power cycled.  Probably works better with [`acpi_rev_override` (`_REV=2`)](https://mjg59.dreamwidth.org/34542.html) and `acpi_os_name="Windows 2012"` (or earlier)
  * [Caps Lock key light](https://patchwork.kernel.org/patch/7844371/) - 'fixed' by running `sudo kbd_mode -u`
+ * [`i915` driver under kernel 4.4 locks up with rc6 enabled](https://bugs.freedesktop.org/show_bug.cgi?id=94002) - leads to stalls and warnings in the logs stating `GPU HANG: ecode 9:0:0x85dfbfff, in steam [1409], reason: Ring hung, action: reset`
  * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup
  * the GRUB with SecureBoot needs some more work, the fonts are bust, plus I need to find the problematic module so we can just load the lot in making the process simpler
  * `gparted` lockup investigation
@@ -230,6 +231,8 @@ To lock your X11 console, you will need a few packages:
 Then set your [`~/.xsession`](root/home/USER/.xsession) accordingly to run these.
 
 ## Graphics
+
+Copy [`/etc/modprobe/i915.conf`](root/etc/modprobe.d/i915.conf) into place to prevent GPU lockups.
 
 ### Console
 
