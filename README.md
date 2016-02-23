@@ -31,7 +31,9 @@ The instructions assume you are not new to Debian, though you may have no experi
      * the laptops excessive battery use whilst suspended, including whilst under Windows too, is due to it sleeping in the much more battery hungry S1 state
      * amending the DSDT manually to remove the conditional that masks out S3 results in `echo mem > /sys/power/state` making the laptop power up as if power cycled.  Probably works better with [`acpi_rev_override` (`_REV=2`)](https://mjg59.dreamwidth.org/34542.html) and `acpi_os_name="Windows 2012"` (or earlier)
  * [Caps Lock key light](https://patchwork.kernel.org/patch/7844371/) - 'fixed' by running `sudo kbd_mode -u`
- * [`i915` driver under kernel 4.4 locks up with rc6 enabled](https://bugs.freedesktop.org/show_bug.cgi?id=94002) - leads to stalls and warnings in the logs stating `GPU HANG: ecode 9:0:0x85dfbfff, in steam [1409], reason: Ring hung, action: reset`
+ * `i915` driver under kernel 4.4 stalls with rc6 enabled
+     * [Bug 94002 - [drm] GPU HANG: ecode 9:0:0x85dfbfff, in firefox [881], reason: Ring hung, action: reset](https://bugs.freedesktop.org/show_bug.cgi?id=94002)
+     * [NUC6i5SYH GPU HANG: ecode 9:0:0x86dfbff9](https://communities.intel.com/thread/98226?start=0&tstart=0)
  * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup
  * the GRUB with SecureBoot needs some more work, the fonts are bust, plus I need to find the problematic module so we can just load the lot in making the process simpler
  * `gparted` lockup investigation
