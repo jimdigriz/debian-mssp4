@@ -3,7 +3,7 @@ libva info: va_getDriverName() returns 0
 libva info: Trying to open /usr/lib/x86_64-linux-gnu/dri/i965_drv_video.so
 libva info: Found init function __vaDriverInit_0_38
 libva info: va_openDriver() returns 0
-vainfo: VA-API version: 0.38 (libva 1.6.2)
+vainfo: VA-API version: 0.38 (libva 1.4.1)
 vainfo: Driver version: Intel i965 driver for Intel(R) Skylake - 1.6.2
 vainfo: Supported profile and entrypoints
       VAProfileMPEG2Simple            :	VAEntrypointVLD
@@ -32,5 +32,5 @@ vainfo: Supported profile and entrypoints
       VAProfileH264MultiviewHigh      :	VAEntrypointEncSlice
       VAProfileH264StereoHigh         :	VAEntrypointVLD
       VAProfileH264StereoHigh         :	VAEntrypointEncSlice
-      VAProfileHEVCMain               :	VAEntrypointVLD
-      VAProfileHEVCMain               :	VAEntrypointEncSlice
+      <unknown profile>               :	VAEntrypointVLD
+      <unknown profile>               :	VAEntrypointEncSlice
