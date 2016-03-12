@@ -2,7 +2,7 @@ Package: linux-source-4.4
 Pin: release n=sid
 Pin-Priority: 990
 
-Package: xss-lock i965-va-driver libva1 vainfo
+Package: xss-lock i965-va-driver libva1
 Pin: release n=stretch
 Pin-Priority: 990
 
