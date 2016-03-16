@@ -6,7 +6,7 @@ set -eu
 
 case "$1" in
 pre)
-	ifdown --force mlan0
+	ifdown --force mlan0 || true
 	modprobe -r mwifiex_pcie
 	;;
 post)
