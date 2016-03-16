@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# acpi-wakeup: test
+# typing cover wake up
 
 set -eu
 
