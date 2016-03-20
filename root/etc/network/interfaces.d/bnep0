@@ -1,0 +1,10 @@
+iface bnep0 inet dhcp
+	bnep-dev 12:34:56:78:90:AB
+	mtu 576
+	metric 5
+
+	pre-up dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0/dev_$(echo $IF_BNEP_DEV | tr a-f: A-F_) org.bluez.Network1.Connect string:'nap'
+	pre-up for I in $(seq 1 10); do grep -q -F $IFACE: /proc/net/dev && exit 0; sleep 1; done; exit 1
+	pre-up sysctl -q -w net.ipv6.conf.$IFACE.disable_ipv6=1
+	pre-up ip link set dev $IFACE mtu 576
+	post-down dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0/dev_$(echo $IF_BNEP_DEV | tr a-f: A-F_) org.bluez.Network1.Disconnect
