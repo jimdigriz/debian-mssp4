@@ -1,6 +1,5 @@
 iface bnep0 inet dhcp
 	bnep-dev 12:34:56:78:90:AB
-	mtu 576
 	metric 5
 
 	pre-up dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0/dev_$(echo $IF_BNEP_DEV | tr a-f: A-F_) org.bluez.Network1.Connect string:'nap'
