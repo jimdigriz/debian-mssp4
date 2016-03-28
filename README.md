@@ -28,7 +28,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * touchscreen - hides on the PCI bus at 8086:9d3e
      * pen - though you can pair with it, you only get the eraser switch event
  * there is no [S3 'suspend to RAM'](http://acpi.sourceforge.net/documentation/sleep.html) available as since the Surface Pro 3, [connected standby](https://lwn.net/Articles/580451/) replaces it; [although supported by Linux fundamentally by Linux, some practical work is still needed](http://mjg59.dreamwidth.org/34542.html?thread=1378798#cmt1378798)
-     * the laptops excessive battery use whilst suspended, including whilst under Windows too, is due to it sleeping in the much more battery hungry S1 state
+     * this means that S3 'suspend to RAM' (`echo mem > /sys/power/state`) is replaced with S1 'power on suspend' (`echo freeze > /sys/power/state`) which uses a lot more juice; 100% charge lasts about 15 hours
      * amending the DSDT manually to remove the conditional that masks out S3 results in `echo mem > /sys/power/state` making the laptop power up as if power cycled.  Probably works better with [`acpi_rev_override` (`_REV=2`)](https://mjg59.dreamwidth.org/34542.html) and `acpi_os_name="Windows 2012"` (or earlier)
  * [Caps Lock key light](https://patchwork.kernel.org/patch/7844371/) - 'fixed' by running `sudo kbd_mode -u`
  * `i915` driver under kernel 4.4 stalls with rc6 enabled
@@ -231,6 +231,14 @@ To lock your X11 console, you will need a few packages:
     sudo apt-get install xautolock xss-lock
 
 Then set your [`~/.xsession`](root/home/USER/.xsession) accordingly to run these.
+
+### PowerTOP
+
+A number of [PowerTOP](https://01.org/powertop/) suggestions are applied with:
+
+ * [`/etc/sysctl.d/local.conf`](root/etc/sysctl.d/local.conf)
+ * [`/etc/modprobe.d/local.conf`](root/etc/modprobe.d/local.conf)
+ * [`/etc/udev/rules.d/90-local.rules`](root/etc/udev/rules.d/90-local.rules)
 
 ## Graphics
 
