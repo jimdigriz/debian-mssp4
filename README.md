@@ -321,7 +321,20 @@ If so, now configure `mpv` to use the API.
 
 When you play videos, you should find the CPU utilisation drops substantially; I see a 3.5x improvement!.
 
-**N.B.** Firefox does [not support any video hardware decoding](https://bugzilla.mozilla.org/show_bug.cgi?id=563206)
+For Firefox, [which does not support any HTML5 video hardware decoding](https://bugzilla.mozilla.org/show_bug.cgi?id=563206), you can persuade the ([non-pepper](https://wiki.debian.org/PepperFlashPlayer)) `flashplugin-nonfree` package to use [hardware acceleration](http://www.webupd8.org/2013/09/adobe-flash-player-hardware.html):
+
+    sudo apt-get install libvdpau-va-gl1 vdpauinfo
+    sudo mkdir /etc/adobe
+    echo -e "EnableLinuxHWVideoDecode = 1\nOverrideGPUValidation = 1" | sudo tee /etc/adobe/mms.cfg
+    sudo sed -i '/va_gl/ s/^# //' /etc/X11/Xsession.d/20vdpau-va-gl
+
+You will now need to logout and back in to get the `VDPAU_DRIVER` environment variable set, or you can quickly test things with:
+
+    VDPAU_DRIVER=va_gl firefox
+
+For me, I get about 20% CPU usage for Flash at 1080p, whilst with HTML5 I get 170%.  It is worth installing one of the many Firefox extensions that force YouTube (and other sites) to use the Flash player to lower battery (and fan!) usage.
+
+**N.B.** it seems that if you go above 1080p, the acceleration is no longer used and there is a significant uptick in CPU utilisation
 
 ## Sensors
 
