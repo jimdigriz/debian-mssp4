@@ -1,6 +1,4 @@
 allow-hotplug mlan0
 iface mlan0 inet manual
 	wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
-
-iface default inet dhcp
-	metric 1
+	pre-up iw dev $IFACE set power_save off
