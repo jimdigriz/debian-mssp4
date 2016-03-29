@@ -32,6 +32,7 @@ The instructions assume you are not new to Debian, though you may have no experi
      * this means that S3 'suspend to RAM' (`echo mem > /sys/power/state`) is replaced with S1 'power on suspend' (`echo freeze > /sys/power/state`) which uses a lot more juice; 100% charge lasts about 12 hours
      * amending the DSDT manually to remove the conditional that masks out S3 results in `echo mem > /sys/power/state` making the laptop power up as if power cycled.  Probably works better with [`acpi_rev_override` (`_REV=2`)](https://mjg59.dreamwidth.org/34542.html) and `acpi_os_name="Windows 2012"` (or earlier)
  * [Caps Lock key light](https://patchwork.kernel.org/patch/7844371/) - 'fixed' by running `sudo kbd_mode -u`
+ * the wifi driver has to have power saving turned off otherwise latencies kick in after about a minute of idling
  * `i915` driver under kernel 4.4 stalls with rc6 enabled
      * [Bug 94002 - [drm] GPU HANG: ecode 9:0:0x85dfbfff, in firefox [881], reason: Ring hung, action: reset](https://bugs.freedesktop.org/show_bug.cgi?id=94002)
      * [NUC6i5SYH GPU HANG: ecode 9:0:0x86dfbff9](https://communities.intel.com/thread/98226?start=0&tstart=0)
