@@ -202,7 +202,7 @@ Run the following to get your system ready to compile a kernel:
     CONFIG_BLK_DEV_NVME=y
     EOF
 
-Now run `make oldconfig` so the button/lpss modules are properly included (we make `nvme` built in so hibernation works).
+Now run `make oldconfig` so our `.config` changes are incorporated (we make `nvme` built in so hibernation works).
 
 Time to compile the kernel (this will take about 40 minutes):
 
