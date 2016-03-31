@@ -1,0 +1,50 @@
+#!/bin/sh
+
+set -eu
+
+auto () {
+	for P in $(find /sys/bus/iio/devices -name 'iio:device*'); do grep -q als $P/name && break; done
+
+	grep -q als $P/name || { echo 80; exit 0; }
+
+	while true; do
+	        RAW=$(cat $P/in_intensity_both_raw)
+	        [ $RAW -eq 0 ] || break
+	done
+
+	## Using Fuzzy Logic and Light-Sensor for Automatic Adjustment of Backlight Brightness in a Mobile Computer
+	## Cuing-Hung Cheng and Ying-Wen Bai
+	## Graduate Institute of Applied Science and Engineering, Fu-Jen Catholic University, Taiwan
+	## http://cs.ee.fju.edu.tw/paper/201211.pdf
+	# original, with a '+1' safety
+	#echo "27.05+9.932*l(1+$RAW)" | bc -l | cut -d. -f1
+	# customised
+	echo "15+9.932*l(1+$RAW/3)" | bc -l | cut -d. -f1
+}
+
+# xrandr (and also xbacklight) have an inherited 250ms delay due to polling the current state
+set_slow () {
+	xbacklight -time 50 $1%
+}
+get_slow () {
+	xbacklight -get | cut -d. -f1
+}
+
+set_fast () {
+	C=$(get_fast)
+	[ "${1%%[0-9]*}" = "=" ] && O="${1#=}*937/100" || O="($(get_fast)$1)*937/100"
+	T=$(echo "$O" | bc)
+	[ $T -ge   0 ] || T=0
+	[ $T -lt 937 ] || T=937
+	xrandr --current --output eDP1 --set Backlight $T
+}
+get_fast () {
+	echo "$(xrandr --current --props | awk '/Backlight: / { print $2 }')*100/937" | bc
+}
+
+[ "${1:-}" ] || set -- =$(auto)
+
+set_fast $1
+get_fast
+
+exit 0

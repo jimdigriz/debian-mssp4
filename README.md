@@ -320,9 +320,32 @@ Then from within X you should see something like:
 
 #### Backlight
 
-You can install `xbacklight` and use it to control the screen's backlight:
+You can use (range from 0 to 937):
+
+    xrandr --output eDP1 --set Backlight 400
+
+If you prefer, you might want to use:
 
     sudo apt-get install xbacklight
+
+Alternatively, look at `/sys/class/backlight/intel_backlight/{brightness,max_brightness}`.
+
+#### Multimedia Keys
+
+This depends on your environment, however for reference you can look at my i3 configuration snippet (should be graftable onto [xbindkeys](http://www.nongnu.org/xbindkeys/xbindkeys.html)) to get a feel for how I use these keys:
+
+    #bindsym XF86AudioPlay exec mocp --toggle-pause
+    bindsym XF86AudioPlay exec cmus-remote -u
+    
+    bindsym XF86AudioMute exec amixer -q sset Master toggle && notify-send -t 500 Volume $(amixer sget Master | sed -n '$ s/.*\[\(o.*\)\]/\1/ p')
+    bindsym XF86AudioRaiseVolume exec amixer -q sset Master 5%+ unmute && notify-send -t 500 Volume $(amixer sget Master | sed -n '$ s/.*\[\([0-9]*%\).*/\1/ p')
+    bindsym XF86AudioLowerVolume exec amixer -q sset Master 5%- unmute && notify-send -t 500 Volume $(amixer sget Master | sed -n '$ s/.*\[\([0-9]*%\).*/\1/ p')
+    
+    bindsym Mod1+XF86AudioMute exec notify-send -t 500 Brightness 'Measuring light level' && notify-send -t 500 Brightness $(mssp4-backlight)%
+    bindsym Mod1+XF86AudioRaiseVolume exec notify-send -t 500 Brightness $(mssp4-backlight +5)%
+    bindsym Mod1+XF86AudioLowerVolume exec notify-send -t 500 Brightness $(mssp4-backlight -5)%
+
+You should also look at the supporting script [`/usr/local/bin/mssp4-backlight`](root/usr/local/bin/mssp4-backlight).
 
 #### Hardware Video Decoding
 
