@@ -41,23 +41,23 @@ The instructions assume you are not new to Debian, though you may have no experi
  * `gparted` lockup investigation
  * reading sensors (such as the ALS) occasionally takes a long time, [which might be related to bad timings](https://github.com/torvalds/linux/commit/56d4b8a24cef5d66f0d10ac778a520d3c2c68a48), would not be surprising as I am [hacking them about already](patches/003_i2c.patch):
 
-           [10805.080581] i2c_hid i2c-MSHW0030:00: failed to change power setting.
-           [10805.080969] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
-           [10805.081317] i2c_hid i2c-MSHW0030:00: failed to set a report to device.
-           [10805.081609] i2c_hid i2c-MSHW0030:00: failed to set a report to device.
-           [10805.081887] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
-           [10805.484550] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
-           [10810.588300] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
-           [10815.691993] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
-           [10820.795814] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
-           [10825.899475] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
-           [10831.003440] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
-           [10836.107134] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
-           [10841.210879] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
-           [10849.482535] i2c_hid i2c-MSHW0030:00: failed to set a report to device.
-           [10849.482955] i2c_hid i2c-MSHW0030:00: failed to change power setting.
-           [10849.483393] i2c_hid i2c-MSHW0030:00: failed to set a report to device.
-           [10849.483781] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
+        [10805.080581] i2c_hid i2c-MSHW0030:00: failed to change power setting.
+        [10805.080969] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
+        [10805.081317] i2c_hid i2c-MSHW0030:00: failed to set a report to device.
+        [10805.081609] i2c_hid i2c-MSHW0030:00: failed to set a report to device.
+        [10805.081887] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
+        [10805.484550] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
+        [10810.588300] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
+        [10815.691993] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
+        [10820.795814] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
+        [10825.899475] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
+        [10831.003440] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
+        [10836.107134] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
+        [10841.210879] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
+        [10849.482535] i2c_hid i2c-MSHW0030:00: failed to set a report to device.
+        [10849.482955] i2c_hid i2c-MSHW0030:00: failed to change power setting.
+        [10849.483393] i2c_hid i2c-MSHW0030:00: failed to set a report to device.
+        [10849.483781] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
 
 ## Related Links
 
