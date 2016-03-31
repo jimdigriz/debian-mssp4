@@ -22,7 +22,12 @@ The instructions assume you are not new to Debian, though you may have no experi
 
 ## Outstanding Issues
 
- * camera - hides on the PCI bus at [8086:1926](http://pci-ids.ucw.cz/read/PC/8086/1926)
+ * camera
+     * is on an I2C bus on accessible via the graphics card
+     * from the ACPI DSDT you can get information on what the *three* cameras are
+     * front camera (`CAMF`) is a [`OV5693 (INT33BE)`](https://github.com/sayeed99/test/blob/eadd15672fd628eab9ad5bfcaf00d1b7fbafee3f/drivers/external_drivers/camera/drivers/media/i2c/ov5693/ov5693.c)
+     * rear camera (`CAMR`) is a [`OV8865 (INT347A)`](https://github.com/lenovo-yt2-dev/android_kernel_lenovo_baytrail/blob/357b3bc165c76b9cf1f0d2c08e458576018164a3/drivers/external_drivers/camera/drivers/media/i2c/ov8865.c)
+     * third camera (`CAM3`) is a [`OV7251 (INT347E)`](https://github.com/ADVANSEE/0066_linux/blob/ba2479578aa7f35be22f6749f7504ba3a68414dc/drivers/media/video/mxc/capture/ov7251_mipi.c)
  * [AC adaptor events](https://bugzilla.kernel.org/show_bug.cgi?id=109891)
      * [DSDT changes required to fix this](https://www.reddit.com/r/SurfaceLinux/comments/46o3mh/fix_udev_power_adapter_event_by_patching_acpi/)
      * once done, we can turn turbo boost off on battery via `/sys/devices/system/cpu/intel_pstate/no_turbo`
