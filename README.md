@@ -33,6 +33,9 @@ The instructions assume you are not new to Debian, though you may have no experi
      * once done, we can turn turbo boost off on battery via `/sys/devices/system/cpu/intel_pstate/no_turbo`
  * touchscreen - hides on the PCI bus at 8086:9d3e
      * pen - though you can pair with it, you only get the eraser switch event
+ * there is an ACPI `INT3420` entry for 'Intel Bluetooth RF Kill' which would be nice to have
+ * enable the other I2C (`INT344[2-5]`) and SPI (`INT344[01]`) busses via `drivers/mfd/intel-lpss-acpi.c` maybe?
+ * there are a number of hardware sensors via a MAX34407 on the I2C bus
  * there is no [S3 'suspend to RAM'](http://acpi.sourceforge.net/documentation/sleep.html) available as since the Surface Pro 3, [connected standby](https://lwn.net/Articles/580451/) (ACPI state [S0ix](http://www.anandtech.com/show/6355/intels-haswell-architecture/3)) replaces it; [although supported by Linux fundamentally by Linux, some practical work is still needed](http://mjg59.dreamwidth.org/34542.html?thread=1378798#cmt1378798)
      * this means that S3 'suspend to RAM' (`echo mem > /sys/power/state`) is replaced with S1 'power on suspend' (`echo freeze > /sys/power/state`) which uses a lot more juice; 100% charge lasts about 12 hours
      * amending the DSDT manually to remove the conditional that masks out S3 results in `echo mem > /sys/power/state` making the laptop power up as if power cycled.  Probably works better with [`acpi_rev_override` (`_REV=2`)](https://mjg59.dreamwidth.org/34542.html) and `acpi_os_name="Windows 2012"` (or earlier)
