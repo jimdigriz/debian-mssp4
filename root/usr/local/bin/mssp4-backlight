@@ -5,8 +5,10 @@ set -eu
 auto () {
 	for P in $(find /sys/bus/iio/devices -name 'iio:device*'); do grep -q als $P/name && break; done
 
-	grep -q als $P/name || { echo 80; exit 0; }
+	grep -q als $P/name || { echo 80; return; }
 
+	# reading sensors (such as the ALS) occasionally takes a long time too due
+	# to hardware glitching and it sometimes comes back with zero
 	while true; do
 	        RAW=$(cat $P/in_intensity_both_raw)
 	        [ $RAW -eq 0 ] || break
@@ -30,6 +32,7 @@ get_slow () {
 	xbacklight -get | cut -d. -f1
 }
 
+# using xrandr with '--current' is fast, not sure if it can get out of sync though
 set_fast () {
 	C=$(get_fast)
 	[ "${1%%[0-9]*}" = "=" ] && O="${1#=}*937/100" || O="($(get_fast)$1)*937/100"
