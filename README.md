@@ -40,6 +40,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * the GRUB with SecureBoot needs some more work, the fonts are bust, plus I need to find the problematic module so we can just load the lot in making the process simpler
  * `gparted` lockup investigation
  * reading sensors (such as the ALS) occasionally takes a long time, [which might be related to bad timings](https://github.com/torvalds/linux/commit/56d4b8a24cef5d66f0d10ac778a520d3c2c68a48), would not be surprising as I am [hacking them about already](patches/003_i2c.patch):
+
            [10805.080581] i2c_hid i2c-MSHW0030:00: failed to change power setting.
            [10805.080969] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
            [10805.081317] i2c_hid i2c-MSHW0030:00: failed to set a report to device.
