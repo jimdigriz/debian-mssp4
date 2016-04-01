@@ -374,15 +374,15 @@ When you play videos, you should find the CPU utilisation drops substantially; I
 
 ##### Chromium
 
+Lets install Chromium:
+
     sudo apt-get install chromium
 
-Now run [Chromium with the following](https://bugs.chromium.org/p/chromium/issues/detail?id=137247):
+Open a tab to [chrome://gpu/](chrome://gpu/) and should see [hardware acceleration is off for a number of things](https://bugs.chromium.org/p/chromium/issues/detail?id=137247).  To fix this, go to in another tab [chrome://flags/#ignore-gpu-blacklist](chrome://flags/#ignore-gpu-blacklist) and enable 'Override software rendering list'.  When you click on 'Relauch now' you should see 'Video Decode' is now enable in the [chrome://gpu/](chrome://gpu/) tab.
 
-    chromium --ignore-gpu-blacklist --enable-vaapi
+**N.B.** if you are feeling lucky, you can also enable [chrome://flags/#enable-gpu-rasterization](GPU rasterization) too
 
-Install the [h264ify](https://chrome.google.com/webstore/detail/h264ify/aleakchihdccplidncghkekgioiakgal) extension and then test by watching [COSTA RICA IN 4K 60fps (ULTRA HD) w/ Freefly Movi](https://youtu.be/iNJdPyoqt8U).
-
-If you have any problems, then go to [chrome://gpu/](chrome://gpu/) to see if you can work out whats wrong.
+Now install the [h264ify](https://chrome.google.com/webstore/detail/h264ify/aleakchihdccplidncghkekgioiakgal) extension and then test by watching [COSTA RICA IN 4K 60fps (ULTRA HD) w/ Freefly Movi](https://youtu.be/iNJdPyoqt8U) and cranking it up to 2160p.  Under the menu option 'stats for nerds' you should see pretty much zero frame drops and your CPU only going to 100%ish, rather than the 250%+ without and the stuttering that goes with software rendering at this resolution.
 
 ##### Firefox
 
