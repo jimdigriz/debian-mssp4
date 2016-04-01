@@ -378,7 +378,7 @@ Lets install Chromium:
 
     sudo apt-get install chromium
 
-Open a tab to [chrome://gpu/](chrome://gpu/) and should see [hardware acceleration is off for a number of things](https://bugs.chromium.org/p/chromium/issues/detail?id=137247).  To fix this, go to in another tab [chrome://flags/#ignore-gpu-blacklist](chrome://flags/#ignore-gpu-blacklist) and enable 'Override software rendering list'.  When you click on 'Relauch now' you should see 'Video Decode' is now enable in the [chrome://gpu/](chrome://gpu/) tab.
+Open a tab to [chrome://gpu](chrome://gpu) and should see [hardware acceleration is off for a number of things](https://bugs.chromium.org/p/chromium/issues/detail?id=137247).  To fix this, go to in another tab [chrome://flags/#ignore-gpu-blacklist](chrome://flags/#ignore-gpu-blacklist) and enable 'Override software rendering list'.  When you click on 'Relauch now' you should see 'Video Decode' is now enable in the [chrome://gpu](chrome://gpu) tab.
 
 **N.B.** if you are feeling lucky, you can also enable [chrome://flags/#enable-gpu-rasterization](GPU rasterization) too
 
