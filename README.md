@@ -382,6 +382,8 @@ Now run [Chromium with the following](https://bugs.chromium.org/p/chromium/issue
 
 Install the [h264ify](https://chrome.google.com/webstore/detail/h264ify/aleakchihdccplidncghkekgioiakgal) extension and then test by watching [COSTA RICA IN 4K 60fps (ULTRA HD) w/ Freefly Movi](https://youtu.be/iNJdPyoqt8U).
 
+If you have any problems, then go to [chrome://gpu/](chrome://gpu/) to see if you can work out whats wrong.
+
 ##### Firefox
 
 For Firefox, [which does not support any HTML5 video hardware decoding](https://bugzilla.mozilla.org/show_bug.cgi?id=563206), you can persuade the ([non-pepper](https://wiki.debian.org/PepperFlashPlayer)) `flashplugin-nonfree` package to use [hardware acceleration](http://www.webupd8.org/2013/09/adobe-flash-player-hardware.html):
