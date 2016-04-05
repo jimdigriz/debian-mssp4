@@ -1,0 +1,4 @@
+# This is a configuration file for /etc/init.d/sleepd.
+
+# Parameters to pass to sleepd.
+PARAMS="--auto --battery=5 --sleep-command='systemctl suspend' --hibernate-command='systemctl hibernate'"

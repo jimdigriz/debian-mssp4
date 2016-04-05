@@ -245,9 +245,9 @@ Now reboot into your new kernel.
 
 Install the needed packages:
 
-    sudo apt-get install uswsusp
+    sudo apt-get install sleepd
 
-Copy in the [`/lib/systemd/system-sleep`](root/lib/systemd/system-sleep) helper files and [`/etc/systemd/sleep.conf`](root/etc/systemd/sleep.conf).
+Copy in the [`/lib/systemd/system-sleep`](root/lib/systemd/system-sleep) helper files, [`/etc/systemd/sleep.conf`](root/etc/systemd/sleep.conf) and also [`/etc/default/sleepd`](root/etc/default/sleepd).
 
 You should be able to suspend (`echo freeze | sudo tee /sys/power/state`, or close the typing cover), hibernate (`echo disk | sudo tee /sys/power/state`) and resume (hold the power button for roughly five seconds).
 
