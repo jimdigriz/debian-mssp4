@@ -3,7 +3,7 @@
 # typing cover wake up
 
 set -eu
-
+exit 0
 case "$1" in
 pre)
 	# if the cover is plugged in, wake on any cover events,
