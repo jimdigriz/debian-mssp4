@@ -1,0 +1,23 @@
+"xautolock -locknow"
+  Mod4+Control + l
+
+"mocp --toggle-pause"
+  XF86AudioPlay
+
+"amixer -q sset Master toggle && notify-send -t 500 Volume $(amixer sget Master | sed -n '$ s/.*\[\(o.*\)\]/\1/ p')"
+  XF86AudioMute
+
+"amixer -q sset Master 5%+ unmute && notify-send -t 500 Volume $(amixer sget Master | sed -n '$ s/.*\[\([0-9]*%\).*/\1/ p')"
+  XF86AudioRaiseVolume
+
+"amixer -q sset Master 5%- unmute && notify-send -t 500 Volume $(amixer sget Master | sed -n '$ s/.*\[\([0-9]*%\).*/\1/ p')"
+  XF86AudioLowerVolume
+
+"notify-send -t 500 Brightness 'Measuring light level' && notify-send -t 500 Brightness $(mssp4-backlight)%"
+  Mod1 + XF86AudioMute
+
+"notify-send -t 500 Brightness $(mssp4-backlight +5)%"
+  Mod1 + XF86AudioRaiseVolume
+
+"notify-send -t 500 Brightness $(mssp4-backlight -5)%"
+  Mod1 + XF86AudioLowerVolume

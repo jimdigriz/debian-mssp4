@@ -340,20 +340,13 @@ Alternatively, look at `/sys/class/backlight/intel_backlight/{brightness,max_bri
 
 #### Multimedia Keys
 
-This depends on your environment, however for reference you can look at my i3 configuration snippet (should be graftable onto [xbindkeys](http://www.nongnu.org/xbindkeys/xbindkeys.html)) to get a feel for how I use these keys:
+This depends on your environment, though I am using [xbindkeys](http://www.nongnu.org/xbindkeys/xbindkeys.html) which should be pretty usable on all desktop environments.
 
-    #bindsym XF86AudioPlay exec mocp --toggle-pause
-    bindsym XF86AudioPlay exec cmus-remote -u
-    
-    bindsym XF86AudioMute exec amixer -q sset Master toggle && notify-send -t 500 Volume $(amixer sget Master | sed -n '$ s/.*\[\(o.*\)\]/\1/ p')
-    bindsym XF86AudioRaiseVolume exec amixer -q sset Master 5%+ unmute && notify-send -t 500 Volume $(amixer sget Master | sed -n '$ s/.*\[\([0-9]*%\).*/\1/ p')
-    bindsym XF86AudioLowerVolume exec amixer -q sset Master 5%- unmute && notify-send -t 500 Volume $(amixer sget Master | sed -n '$ s/.*\[\([0-9]*%\).*/\1/ p')
-    
-    bindsym Mod1+XF86AudioMute exec notify-send -t 500 Brightness 'Measuring light level' && notify-send -t 500 Brightness $(mssp4-backlight)%
-    bindsym Mod1+XF86AudioRaiseVolume exec notify-send -t 500 Brightness $(mssp4-backlight +5)%
-    bindsym Mod1+XF86AudioLowerVolume exec notify-send -t 500 Brightness $(mssp4-backlight -5)%
+    sudo apt-get install xbindkeys libnotify-bin
 
-You should also look at the supporting script [`/usr/local/bin/mssp4-backlight`](root/usr/local/bin/mssp4-backlight).
+Copy in a [`~/.xbindkeysrc`](root/home/USER/.xbindkeysrc) file and also the screen brightness setting script [`/usr/local/bin/mssp4-backlight`](root/usr/local/bin/mssp4-backlight).
+
+Restart X11 (to pick up the load in your `~/.xsession` file), or run 'xbindkeys' in a terminal.
 
 #### Hardware Video Decoding
 
