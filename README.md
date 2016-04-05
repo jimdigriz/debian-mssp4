@@ -18,7 +18,6 @@ The instructions assume you are not new to Debian, though you may have no experi
      * bluetooth - this only appears once you use the wireless card firmware from [firmware-libertas (20151207-1~bpo8+1) [pcie8897_uapsta.bin version 15.68.4.p112]](https://packages.debian.org/jessie-backports/firmware-libertas)
  * microSD reader - presented as a USB reader appearing when you insert a card
  * suspend, hibernate and resume works
-     * opening the typing cover, as well as (dis)connecting it, triggers resume
 
 ## Outstanding Issues
 
@@ -28,6 +27,7 @@ The instructions assume you are not new to Debian, though you may have no experi
      * front camera (`CAMF`) is a [`OV5693 (INT33BE)`](http://www.ovt.com/products/sensor.php?id=185), there is an [Android driver](https://github.com/sayeed99/test/blob/eadd15672fd628eab9ad5bfcaf00d1b7fbafee3f/drivers/external_drivers/camera/drivers/media/i2c/ov5693/ov5693.c)
      * rear camera (`CAMR`) is a [`OV8865 (INT347A)`](http://www.ovt.com/products/sensor.php?id=134), there is an [Android driver](https://github.com/lenovo-yt2-dev/android_kernel_lenovo_baytrail/blob/357b3bc165c76b9cf1f0d2c08e458576018164a3/drivers/external_drivers/camera/drivers/media/i2c/ov8865.c)
      * third camera (`CAM3`) is a [`OV7251 (INT347E)`](http://www.ovt.com/products/sensor.php?id=146), there is an [Android driver](https://github.com/ADVANSEE/0066_linux/blob/ba2479578aa7f35be22f6749f7504ba3a68414dc/drivers/media/video/mxc/capture/ov7251_mipi.c)
+ * opening the typing cover (or pressing keys) does not not automatically resume
  * [AC adaptor events](https://bugzilla.kernel.org/show_bug.cgi?id=109891)
      * [DSDT changes required to fix this](https://www.reddit.com/r/SurfaceLinux/comments/46o3mh/fix_udev_power_adapter_event_by_patching_acpi/)
      * once done, we can turn turbo boost off on battery via `/sys/devices/system/cpu/intel_pstate/no_turbo`
@@ -44,7 +44,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * `i915` driver under kernel 4.4 stalls with rc6 enabled
      * [Bug 94002 - [drm] GPU HANG: ecode 9:0:0x85dfbfff, in firefox [881], reason: Ring hung, action: reset](https://bugs.freedesktop.org/show_bug.cgi?id=94002)
      * [NUC6i5SYH GPU HANG: ecode 9:0:0x86dfbff9](https://communities.intel.com/thread/98226?start=0&tstart=0)
- * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup
+ * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup; you need to reset the card inbeteen the unload/load with `echo 1 > /sys/bus/pci/devices/0000\:02\:00.0/reset`
  * the GRUB with SecureBoot needs some more work, the fonts are bust, plus I need to find the problematic module so we can just load the lot in making the process simpler
  * `gparted` lockup investigation
  * reading sensors (such as the ALS) occasionally takes a long time, [which might be related to bad timings](https://github.com/torvalds/linux/commit/56d4b8a24cef5d66f0d10ac778a520d3c2c68a48), would not be surprising as I am [hacking them about already](patches/003_i2c.patch):
