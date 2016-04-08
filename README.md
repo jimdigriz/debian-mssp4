@@ -47,6 +47,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup; you need to reset the card inbeteen the unload/load with `echo 1 > /sys/bus/pci/devices/0000\:02\:00.0/reset`
  * the GRUB with SecureBoot needs some more work, the fonts are bust, plus I need to find the problematic module so we can just load the lot in making the process simpler
  * `gparted` lockup investigation
+ * move to using [`triggerhappy`](https://github.com/wertarbyte/triggerhappy) rather than `xbindkeys` so that the [multimedia keys can still work with the screen locked](https://github.com/i3/i3lock/issues/52)
  * reading sensors (such as the ALS) occasionally takes a long time, [which might be related to bad timings](https://github.com/torvalds/linux/commit/56d4b8a24cef5d66f0d10ac778a520d3c2c68a48), would not be surprising as I am [hacking them about already](patches/003_i2c.patch):
 
         [10805.080581] i2c_hid i2c-MSHW0030:00: failed to change power setting.
