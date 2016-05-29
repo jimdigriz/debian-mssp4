@@ -40,11 +40,13 @@ The instructions assume you are not new to Debian, though you may have no experi
      * this means that S3 'suspend to RAM' (`echo mem > /sys/power/state`) is replaced with S1 'power on suspend' (`echo freeze > /sys/power/state`) which uses a lot more juice; 100% charge lasts about 12 hours
      * amending the DSDT manually to remove the conditional that masks out S3 results in `echo mem > /sys/power/state` making the laptop power up as if power cycled.  Probably works better with [`acpi_rev_override` (`_REV=2`)](https://mjg59.dreamwidth.org/34542.html) and `acpi_os_name="Windows 2012"` (or earlier)
  * [Caps Lock key light](https://patchwork.kernel.org/patch/7844371/) - 'fixed' by running `sudo kbd_mode -u`
- * the wifi driver has to have power saving turned off otherwise latencies kick in after about a minute of idling
  * `i915` driver under kernel 4.4/4.5 stalls with rc6 enabled
      * [Bug 94002 - [drm] GPU HANG: ecode 9:0:0x85dfbfff, in firefox [881], reason: Ring hung, action: reset](https://bugs.freedesktop.org/show_bug.cgi?id=94002)
      * [NUC6i5SYH GPU HANG: ecode 9:0:0x86dfbff9](https://communities.intel.com/thread/98226?start=0&tstart=0)
- * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup; you need to reset the card inbeteen the unload/load with `echo 1 > /sys/bus/pci/devices/0000\:02\:00.0/reset`
+ * Wireless
+     * [power saving needs to be turned off](./root/etc/network/interfaces.d/mlan0) otherwise after about a minute of idling, you start seeing 100ms+ first up latencies
+     * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup; you need to reset the card inbeteen the unload/load with `echo 1 > /sys/bus/pci/devices/0000\:02\:00.0/reset`
+     * on kernel 4.5.x (and I guess 4.6.x too) the [driver is pretty flakey](https://github.com/jimdigriz/debian-mssp4/issues/4) though there is a patch on the linked bugzilla
  * the GRUB with SecureBoot needs some more work, the fonts are bust, plus I need to find the problematic module so we can just load the lot in making the process simpler
  * `gparted` lockup investigation
  * move to using [`triggerhappy`](https://github.com/wertarbyte/triggerhappy) rather than `xbindkeys` so that the [multimedia keys can still work with the screen locked](https://github.com/i3/i3lock/issues/52)
@@ -79,6 +81,7 @@ The instructions assume you are not new to Debian, though you may have no experi
       * [Ubuntu Hibernation](https://help.ubuntu.com/community/PowerManagement/Hibernate)
  * [reverse scrolling](https://n00bsys0p.wordpress.com/2011/07/26/reverse-xorg-scrolling-in-linux-natural-scrolling/)
  * [reddit - Surface Linux: Penguins like nice things too](https://www.reddit.com/r/surfacelinux)
+ * [Microsoft Surface Pro 4 update history](https://www.microsoft.com/surface/en-gb/support/install-update-activate/surface-pro-4-update-history)
  * SecureBoot
       * [Using the Linux Foundation's PreLoader](http://www.rodsbooks.com/efi-bootloaders/secureboot.html#preloader)
       * [Accessing UEFI Variables from Linux](http://firmware.intel.com/blog/accessing-uefi-variables-linux)
@@ -100,7 +103,7 @@ You will require:
 
 The aim here is to shrink down the Windows partition to make room for Debian.
 
-I wanted to keep Windows as Microsoft are constantly [releasing updated firmwares which will only apply from under Windows](https://www.microsoft.com/surface/support/install-update-activate/surface-pro-4-update-history).  Of course if you plan not on dual booting you could skip all this, though I would not recommend to have something to apply those firmware updates with.
+I wanted to keep Windows as Microsoft are constantly [releasing updated firmwares which will only apply from under Windows](https://www.microsoft.com/surface/en-gb/support/install-update-activate/surface-pro-4-update-history).  Of course if you plan not on dual booting you could skip all this, though I would not recommend to have something to apply those firmware updates with.
 
 Lets start by disabling Bitlocker so that gparted can resize the partition later.  This is done by clicking on Start, and clicking on 'File Manager'.  From here you will be able to go to where drive `C:` is located, and right-clicking on it will give you an option to 'Manage Bitlocker'.  From there you will be able to click on 'Disable Bitlocker'.
 
@@ -169,7 +172,7 @@ For reference, my partition table looks like:
 
 Boot off your Debian installer USB key and work through it.  Early on though you will be prompted on which Ethernet card you have, select "no Ethernet interface", then the next page you will be prompted to supply details on how to connect to your wireless network then the installation will continue as expected.
 
-**N.B.** I would recommend keeping the ~2.5GB recovery partition so if you ever need to return the laptop, you will find the process dead easy; though it seems you could move the partition to external media or download it from the Microsoft website
+**N.B.** I would recommend keeping the ~2.5GB recovery partition so if you ever need to return the laptop, you will find the process dead easy; though it seems you could [move the partition to external media](https://www.microsoft.com/surface/en-ca/support/storage-files-and-folders/create-a-recovery-drive?os=windows-10) or [download it from the Microsoft website](https://www.microsoft.com/surface/en-ca/support/warranty-service-and-recovery/downloadablerecoveryimage)
 
 For your information, I went for a `/boot` partition and put everything else on LVM.
 
@@ -363,7 +366,7 @@ If so, now configure `mpv` to use the API.
     mkdir ~/.config/mpv
     echo hwdec=vaapi > ~/.config/mpv/mpv.conf
 
-When you play videos, you should find the CPU utilisation drops substantially; I see a 3.5x improvement!.
+When you play videos, you should find the CPU utilisation drops substantially; I saw a 3.5x improvement!
 
 ##### Chromium
 
