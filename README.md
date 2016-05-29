@@ -368,6 +368,8 @@ If so, now configure `mpv` to use the API.
 
 When you play videos, you should find the CPU utilisation drops substantially; I saw a 3.5x improvement!
 
+If this does not work (you see `Using software decoding.` in the output of `mpv`) it may be because this only works for videos encoded with a codec where VA-API accelerated decoding is available (you will see `Using hardware decoding.` when it works).  For hints, example the output of `vainfo` and compare it to what `mpv` says the video codec is (for example `h264`).
+
 ##### Chromium (and Opera)
 
 Lets install Chromium:
