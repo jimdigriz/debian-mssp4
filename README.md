@@ -368,7 +368,7 @@ If so, now configure `mpv` to use the API.
 
 When you play videos, you should find the CPU utilisation drops substantially; I saw a 3.5x improvement!
 
-##### Chromium
+##### Chromium (and Opera)
 
 Lets install Chromium:
 
