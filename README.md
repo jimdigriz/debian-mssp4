@@ -39,18 +39,14 @@ The instructions assume you are not new to Debian, though you may have no experi
  * there is no [S3 'suspend to RAM'](http://acpi.sourceforge.net/documentation/sleep.html) available as since the Surface Pro 3, [connected standby](https://lwn.net/Articles/580451/) (ACPI state [S0ix](http://www.anandtech.com/show/6355/intels-haswell-architecture/3)) replaces it; [although supported by Linux fundamentally by Linux, some practical work is still needed](http://mjg59.dreamwidth.org/34542.html?thread=1378798#cmt1378798)
      * this means that S3 'suspend to RAM' (`echo mem > /sys/power/state`) is replaced with S1 'power on suspend' (`echo freeze > /sys/power/state`) which uses a lot more juice; 100% charge lasts about 12 hours
      * amending the DSDT manually to remove the conditional that masks out S3 results in `echo mem > /sys/power/state` making the laptop power up as if power cycled.  Probably works better with [`acpi_rev_override` (`_REV=2`)](https://mjg59.dreamwidth.org/34542.html) and `acpi_os_name="Windows 2012"` (or earlier)
- * [Caps Lock key light](https://patchwork.kernel.org/patch/7844371/) - 'fixed' by running `sudo kbd_mode -u`
- * `i915` driver under kernel 4.4/4.5 stalls with rc6 enabled
-     * [Bug 94002 - [drm] GPU HANG: ecode 9:0:0x85dfbfff, in firefox [881], reason: Ring hung, action: reset](https://bugs.freedesktop.org/show_bug.cgi?id=94002)
-     * [NUC6i5SYH GPU HANG: ecode 9:0:0x86dfbff9](https://communities.intel.com/thread/98226?start=0&tstart=0)
  * Wireless
-     * [power saving needs to be turned off](./root/etc/network/interfaces.d/mlan0) otherwise after about a minute of idling, you start seeing 100ms+ first up latencies
+     * [power saving needs to be turned off](./root/etc/network/interfaces.d/mlan0) otherwise after about a minute of idling, you start seeing 100ms+ first hop latencies
      * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup; you need to reset the card inbeteen the unload/load with `echo 1 > /sys/bus/pci/devices/0000\:02\:00.0/reset`
      * on kernel 4.5.x (and I guess 4.6.x too) the [driver is pretty flakey](https://github.com/jimdigriz/debian-mssp4/issues/4) though there is a patch on the linked bugzilla
  * the GRUB with SecureBoot needs some more work, the fonts are bust, plus I need to find the problematic module so we can just load the lot in making the process simpler
  * `gparted` lockup investigation
  * move to using [`triggerhappy`](https://github.com/wertarbyte/triggerhappy) rather than `xbindkeys` so that the [multimedia keys can still work with the screen locked](https://github.com/i3/i3lock/issues/52)
- * reading sensors (such as the ALS) occasionally takes a long time, [which might be related to bad timings](https://github.com/torvalds/linux/commit/56d4b8a24cef5d66f0d10ac778a520d3c2c68a48), would not be surprising as I am [hacking them about already](patches/003_i2c.patch):
+ * reading sensors (such as the ALS) occasionally takes a long time, [which might be related to bad timings](https://github.com/torvalds/linux/commit/56d4b8a24cef5d66f0d10ac778a520d3c2c68a48):
 
         [10805.080581] i2c_hid i2c-MSHW0030:00: failed to change power setting.
         [10805.080969] i2c_hid i2c-MSHW0030:00: failed to retrieve report from device.
@@ -76,6 +72,8 @@ The instructions assume you are not new to Debian, though you may have no experi
  * wishing for a matte screen, I got the [iLLumiShield](http://www.amazon.co.uk/gp/product/B0169CKLBK) and find it does the job great
  * patches based on
       * [[PATCH 1/2] HID: Use multitouch driver for Type Covers](http://lkml.iu.edu/hypermail/linux/kernel/1512.1/05130.html)
+      * [[1/2] HID: input: rework HID_QUIRK_MULTI_INPUT](https://patchwork.kernel.org/patch/9081731/)
+      * [[2/2] HID: multitouch: enable the Surface 3 Type Cover to report multitouch data](https://patchwork.kernel.org/patch/9081761/)
  * [iio-sensor-proxy](https://github.com/hadess/iio-sensor-proxy) - `systemctl enable iio-sensor-proxy.service`
  * Hibernation
       * [Ubuntu Hibernation](https://help.ubuntu.com/community/PowerManagement/Hibernate)
@@ -220,11 +218,11 @@ Also, so that your keyboard works before the root filesystem is mounted, edit yo
 Run the following to get your system ready to compile a kernel:
 
     sudo apt-get install build-essential fakeroot kernel-package
-    sudo apt-get install linux-source-4.5 firmware-libertas/jessie-backports firmware-misc-nonfree intel-microcode
-    tar -C /usr/src -xf /usr/src/linux-source-4.5.tar.xz
-    cd /usr/src/linux-source-4.5
+    sudo apt-get install linux-source-4.6 firmware-libertas/jessie-backports firmware-misc-nonfree intel-microcode
+    tar -C /usr/src -xf /usr/src/linux-source-4.6.tar.xz
+    cd /usr/src/linux-source-4.6
     find /usr/src/debian-mssp4/patches -type f | sort | xargs -t -I{} sh -c "cat {} | patch -p1"
-    xzcat ../linux-config-4.5/config.amd64_none_amd64.xz > .config
+    xzcat ../linux-config-4.6/config.amd64_none_amd64.xz > .config
     
     cat <<'EOF' >> .config
     CONFIG_BLK_DEV_NVME=y
@@ -240,7 +238,7 @@ Time to compile the kernel (this will take about 40 minutes):
 
 Once compiled, you should install your new kernel:
 
-    sudo dpkg -i /usr/src/linux-image-4.5.1-mssp4_4.5.1-mssp4-10.00.Custom_amd64.deb
+    sudo dpkg -i /usr/src/linux-image-4.6.1-mssp4_4.6.1-mssp4-10.00.Custom_amd64.deb
 
 Now reboot into your new kernel.
 
@@ -273,8 +271,6 @@ A number of [PowerTOP](https://01.org/powertop/) suggestions are applied with:
  * [`/etc/udev/rules.d/90-local.rules`](root/etc/udev/rules.d/90-local.rules)
 
 ## Graphics
-
-Copy [`/etc/modprobe/i915.conf`](root/etc/modprobe.d/i915.conf) into place to prevent GPU lockups.
 
 ### Console
 
