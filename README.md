@@ -39,6 +39,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * there is no [S3 'suspend to RAM'](http://acpi.sourceforge.net/documentation/sleep.html) available as since the Surface Pro 3, [connected standby](https://lwn.net/Articles/580451/) (ACPI state [S0ix](http://www.anandtech.com/show/6355/intels-haswell-architecture/3)) replaces it; [although supported by Linux fundamentally by Linux, some practical work is still needed](http://mjg59.dreamwidth.org/34542.html?thread=1378798#cmt1378798)
      * this means that S3 'suspend to RAM' (`echo mem > /sys/power/state`) is replaced with S1 'power on suspend' (`echo freeze > /sys/power/state`) which uses a lot more juice; 100% charge lasts about 12 hours
      * amending the DSDT manually to remove the conditional that masks out S3 results in `echo mem > /sys/power/state` making the laptop power up as if power cycled.  Probably works better with [`acpi_rev_override` (`_REV=2`)](https://mjg59.dreamwidth.org/34542.html) and `acpi_os_name="Windows 2012"` (or earlier)
+ * [Caps Lock key light](https://patchwork.kernel.org/patch/7844371/) - 'fixed' by running `sudo kbd_mode -u`
  * Wireless
      * [power saving needs to be turned off](./root/etc/network/interfaces.d/mlan0) otherwise after about a minute of idling, you start seeing 100ms+ first hop latencies
      * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup; you need to reset the card inbeteen the unload/load with `echo 1 > /sys/bus/pci/devices/0000\:02\:00.0/reset`
