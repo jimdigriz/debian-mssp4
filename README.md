@@ -71,6 +71,7 @@ The instructions assume you are not new to Debian, though you may have no experi
 
  * because of the high resolution screen it is worth reading through some [HiDPI related materials](https://wiki.archlinux.org/index.php/HiDPI) otherwise you will very quickly go short sighted
  * wishing for a matte screen, I got the [iLLumiShield](http://www.amazon.co.uk/gp/product/B0169CKLBK) and find it does the job great
+ * for a nice cheap case, I got the blue map motif [MoKo Ultra Slim Lightweight Smart-shell Stand Cover Case (Map F)](https://www.amazon.co.uk/Microsoft-Surface-Pro-Case-Lightweight/dp/B014P2NOLU/)
  * patches based on
       * [[PATCH 1/2] HID: Use multitouch driver for Type Covers](http://lkml.iu.edu/hypermail/linux/kernel/1512.1/05130.html)
       * [[1/2] HID: input: rework HID_QUIRK_MULTI_INPUT](https://patchwork.kernel.org/patch/9081731/)
