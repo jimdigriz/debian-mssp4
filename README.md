@@ -380,11 +380,13 @@ Now install the [h264ify](https://chrome.google.com/webstore/detail/h264ify/alea
 
 ##### Vivaldi
 
-**N.B.** does not work as [Hardware-accelerated video decode](vivaldi://flags#disable-accelerated-video-decode) is 'Sorry, this experiment is not available on your platform.'
-
 Similar to the Chromium/Opera instructions (override the software rendering list and install h264ify), you will also need to fetch [vivaldi-snapshot](https://vivaldi.net/en-US/teamblog/132-snapshot-1-3-537-5-improved-proprietary-media-support-on-linux) from the [Vivaldi website](https://vivaldi.com) (it will auto-update afterwards).  Now go and fetch [chromium-codecs-ffmpeg-extra](http://packages.ubuntu.com/wily-updates/chromium-codecs-ffmpeg-extra) from Ubuntu and install it.
 
     sudo dpkg -i chromium-codecs-ffmpeg-extra_51.0.2704.79-0ubuntu0.15.10.1.1232_amd64.deb
+
+Now run vivaldi with:
+
+    VDPAU_DRIVER=va_gl vivaldi
 
 ##### Firefox
 
