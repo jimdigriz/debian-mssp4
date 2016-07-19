@@ -378,6 +378,14 @@ Open a tab to [chrome://gpu](chrome://gpu) and should see [hardware acceleration
 
 Now install the [h264ify](https://chrome.google.com/webstore/detail/h264ify/aleakchihdccplidncghkekgioiakgal) extension and then test by watching [COSTA RICA IN 4K 60fps (ULTRA HD) w/ Freefly Movi](https://youtu.be/iNJdPyoqt8U) and cranking it up to 2160p.  Under the menu option 'stats for nerds' you should see pretty much zero frame drops and your CPU only going to 100%ish, rather than the 250%+ without and the stuttering that goes with software rendering at this resolution.
 
+##### Vivaldi
+
+**N.B.** does not work as [Hardware-accelerated video decode](vivaldi://flags#disable-accelerated-video-decode) is 'Sorry, this experiment is not available on your platform.'
+
+Similar to the Chromium/Opera instructions (override the software rendering list and install h264ify), you will also need to fetch [vivaldi-snapshot](https://vivaldi.net/en-US/teamblog/132-snapshot-1-3-537-5-improved-proprietary-media-support-on-linux) from the [Vivaldi website](https://vivaldi.com) (it will auto-update afterwards).  Now go and fetch [chromium-codecs-ffmpeg-extra](http://packages.ubuntu.com/wily-updates/chromium-codecs-ffmpeg-extra) from Ubuntu and install it.
+
+    sudo dpkg -i chromium-codecs-ffmpeg-extra_51.0.2704.79-0ubuntu0.15.10.1.1232_amd64.deb
+
 ##### Firefox
 
 For Firefox, [which does not support any HTML5 video hardware decoding](https://bugzilla.mozilla.org/show_bug.cgi?id=563206), you can persuade the ([non-pepper](https://wiki.debian.org/PepperFlashPlayer)) `flashplugin-nonfree` package to use [hardware acceleration](http://www.webupd8.org/2013/09/adobe-flash-player-hardware.html):
