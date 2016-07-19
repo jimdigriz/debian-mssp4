@@ -384,6 +384,10 @@ Similar to the Chromium/Opera instructions (override the software rendering list
 
     sudo dpkg -i chromium-codecs-ffmpeg-extra_51.0.2704.79-0ubuntu0.15.10.1.1232_amd64.deb
 
+Now install:
+
+    sudo apt-get install libvdpau-va-gl1 vdpauinfo
+
 Now run vivaldi with:
 
     VDPAU_DRIVER=va_gl vivaldi
