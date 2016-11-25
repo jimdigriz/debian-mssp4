@@ -1,744 +1,790 @@
--- Logs begin at Sun 2016-04-24 15:37:36 BST, end at Sun 2016-04-24 15:38:12 BST. --
-Apr 24 15:37:36 quatermain kernel: Linux version 4.5.1-mssp4 (root@quatermain) (gcc version 4.9.2 (Debian 4.9.2-10) ) #2 SMP Sun Apr 24 15:30:51 BST 2016
-Apr 24 15:37:36 quatermain kernel: Command line: BOOT_IMAGE=/vmlinuz-4.5.1-mssp4 root=/dev/mapper/lvm--quatermain-root ro resume=/dev/mapper/lvm--quatermain-swap quiet
-Apr 24 15:37:36 quatermain kernel: x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
-Apr 24 15:37:36 quatermain kernel: x86/fpu: xstate_offset[3]:  960, xstate_sizes[3]:   64
-Apr 24 15:37:36 quatermain kernel: x86/fpu: xstate_offset[4]: 1024, xstate_sizes[4]:   64
-Apr 24 15:37:36 quatermain kernel: x86/fpu: Supporting XSAVE feature 0x01: 'x87 floating point registers'
-Apr 24 15:37:36 quatermain kernel: x86/fpu: Supporting XSAVE feature 0x02: 'SSE registers'
-Apr 24 15:37:36 quatermain kernel: x86/fpu: Supporting XSAVE feature 0x04: 'AVX registers'
-Apr 24 15:37:36 quatermain kernel: x86/fpu: Supporting XSAVE feature 0x08: 'MPX bounds registers'
-Apr 24 15:37:36 quatermain kernel: x86/fpu: Supporting XSAVE feature 0x10: 'MPX CSR'
-Apr 24 15:37:36 quatermain kernel: x86/fpu: Enabled xstate features 0x1f, context size is 1088 bytes, using 'standard' format.
-Apr 24 15:37:36 quatermain kernel: x86/fpu: Using 'eager' FPU context switches.
-Apr 24 15:37:36 quatermain kernel: e820: BIOS-provided physical RAM map:
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x0000000000000000-0x0000000000057fff] usable
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x0000000000058000-0x0000000000058fff] reserved
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x0000000000059000-0x000000000009dfff] usable
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x000000000009e000-0x00000000000fffff] reserved
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x0000000000100000-0x0000000086017fff] usable
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x0000000086018000-0x0000000086018fff] ACPI NVS
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x0000000086019000-0x0000000086042fff] reserved
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x0000000086043000-0x000000008bc86fff] usable
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x000000008bc87000-0x000000008bcabfff] type 20
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x000000008bcac000-0x000000008bf92fff] reserved
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x000000008bf93000-0x000000008bfc4fff] ACPI NVS
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x000000008bfc5000-0x000000008bffefff] ACPI data
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x000000008bfff000-0x000000008bffffff] usable
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x000000008c000000-0x000000008f7fffff] reserved
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x00000000e00fa000-0x00000000e00fafff] reserved
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x00000000e00fd000-0x00000000e00fdfff] reserved
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x00000000fe000000-0x00000000fe010fff] reserved
-Apr 24 15:37:36 quatermain kernel: BIOS-e820: [mem 0x0000000100000000-0x000000026f7fffff] usable
-Apr 24 15:37:36 quatermain kernel: NX (Execute Disable) protection: active
-Apr 24 15:37:36 quatermain kernel: efi: EFI v2.40 by MSFT
-Apr 24 15:37:36 quatermain kernel: efi:  ACPI=0x8bffe000  ACPI 2.0=0x8bffe014  SMBIOS=0x8bcc8000  ESRT=0x8bcc5c18 
-Apr 24 15:37:36 quatermain kernel: esrt: Reserving ESRT space from 0x000000008bcc5c18 to 0x000000008bcc5cf0.
-Apr 24 15:37:36 quatermain kernel: SMBIOS 3.0 present.
-Apr 24 15:37:36 quatermain kernel: DMI: Microsoft Corporation Surface Pro 4/Surface Pro 4, BIOS 104.1085.768 01/29/2016
-Apr 24 15:37:36 quatermain kernel: e820: update [mem 0x00000000-0x00000fff] usable ==> reserved
-Apr 24 15:37:36 quatermain kernel: e820: remove [mem 0x000a0000-0x000fffff] usable
-Apr 24 15:37:36 quatermain kernel: e820: last_pfn = 0x26f800 max_arch_pfn = 0x400000000
-Apr 24 15:37:36 quatermain kernel: MTRR default type: write-back
-Apr 24 15:37:36 quatermain kernel: MTRR fixed ranges enabled:
-Apr 24 15:37:36 quatermain kernel:   00000-9FFFF write-back
-Apr 24 15:37:36 quatermain kernel:   A0000-BFFFF uncachable
-Apr 24 15:37:36 quatermain kernel:   C0000-FFFFF write-protect
-Apr 24 15:37:36 quatermain kernel: MTRR variable ranges enabled:
-Apr 24 15:37:36 quatermain kernel:   0 base 00C0000000 mask 7FC0000000 uncachable
-Apr 24 15:37:36 quatermain kernel:   1 base 00A0000000 mask 7FE0000000 uncachable
-Apr 24 15:37:36 quatermain kernel:   2 base 0090000000 mask 7FF0000000 uncachable
-Apr 24 15:37:36 quatermain kernel:   3 base 008E000000 mask 7FFE000000 uncachable
-Apr 24 15:37:36 quatermain kernel:   4 base 008D000000 mask 7FFF000000 uncachable
-Apr 24 15:37:36 quatermain kernel:   5 disabled
-Apr 24 15:37:36 quatermain kernel:   6 disabled
-Apr 24 15:37:36 quatermain kernel:   7 disabled
-Apr 24 15:37:36 quatermain kernel:   8 disabled
-Apr 24 15:37:36 quatermain kernel:   9 disabled
-Apr 24 15:37:36 quatermain kernel: x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WC  UC- WT  
-Apr 24 15:37:36 quatermain kernel: e820: last_pfn = 0x8c000 max_arch_pfn = 0x400000000
-Apr 24 15:37:36 quatermain kernel: Base memory trampoline at [ffff880000098000] 98000 size 24576
-Apr 24 15:37:36 quatermain kernel: Using GB pages for direct mapping
-Apr 24 15:37:36 quatermain kernel: BRK [0x0214a000, 0x0214afff] PGTABLE
-Apr 24 15:37:36 quatermain kernel: BRK [0x0214b000, 0x0214bfff] PGTABLE
-Apr 24 15:37:36 quatermain kernel: BRK [0x0214c000, 0x0214cfff] PGTABLE
-Apr 24 15:37:36 quatermain kernel: BRK [0x0214d000, 0x0214dfff] PGTABLE
-Apr 24 15:37:36 quatermain kernel: BRK [0x0214e000, 0x0214efff] PGTABLE
-Apr 24 15:37:36 quatermain kernel: BRK [0x0214f000, 0x0214ffff] PGTABLE
-Apr 24 15:37:36 quatermain kernel: RAMDISK: [mem 0x35c30000-0x36e0ffff]
-Apr 24 15:37:36 quatermain kernel: ACPI: Early table checksum verification disabled
-Apr 24 15:37:36 quatermain kernel: ACPI: RSDP 0x000000008BFFE014 000024 (v02 MSFT  )
-Apr 24 15:37:36 quatermain kernel: ACPI: XSDT 0x000000008BFFD0E8 0000C4 (v01 MSFT   MSFT     00000000 MSFT 0000005F)
-Apr 24 15:37:36 quatermain kernel: ACPI: FACP 0x000000008BFF3000 0000F4 (v05 MSFT   MSFT     00000000 MSFT 0000005F)
-Apr 24 15:37:36 quatermain kernel: ACPI: DSDT 0x000000008BFDB000 013BD9 (v02 MSFT   MSFT     00000000 INTL 20141107)
-Apr 24 15:37:36 quatermain kernel: ACPI: FACS 0x000000008BF9D000 000040
-Apr 24 15:37:36 quatermain kernel: ACPI: TCPA 0x000000008BFFC000 000032 (v02 MSFT   MSFT     00000002 MSFT 0000005F)
-Apr 24 15:37:36 quatermain kernel: ACPI: SSDT 0x000000008BFFB000 0003A7 (v02 MSFT   Tpm2Tabl 00001000 INTL 20141107)
-Apr 24 15:37:36 quatermain kernel: ACPI: TPM2 0x000000008BFFA000 000034 (v03 MSFT   MSFT     00000002 MSFT 0000005F)
-Apr 24 15:37:36 quatermain kernel: ACPI: SSDT 0x000000008BFF4000 005329 (v02 SaSsdt SaSsdt   00003000 INTL 20141107)
-Apr 24 15:37:36 quatermain kernel: ACPI: HPET 0x000000008BFF2000 000038 (v01 MSFT   MSFT     00000001 MSFT 0000005F)
-Apr 24 15:37:36 quatermain kernel: ACPI: LPIT 0x000000008BFF1000 000094 (v01 MSFT   MSFT     00000000 MSFT 0000005F)
-Apr 24 15:37:36 quatermain kernel: ACPI: APIC 0x000000008BFF0000 0000BC (v03 MSFT   MSFT     00000001 MSFT 0000005F)
-Apr 24 15:37:36 quatermain kernel: ACPI: MCFG 0x000000008BFEF000 00003C (v01 MSFT   MSFT     00000001 MSFT 0000005F)
-Apr 24 15:37:36 quatermain kernel: ACPI: SSDT 0x000000008BFD9000 001A03 (v02 MSFT   RTD3APNV 00001000 INTL 20141107)
-Apr 24 15:37:36 quatermain kernel: ACPI: SSDT 0x000000008BFD8000 00019A (v02 MSFT   Sata0Ide 00001000 INTL 20141107)
-Apr 24 15:37:36 quatermain kernel: ACPI: DBGP 0x000000008BFD7000 000034 (v01 MSFT            00000000 MSFT 0000005F)
-Apr 24 15:37:36 quatermain kernel: ACPI: DBG2 0x000000008BFD6000 000061 (v00 MSFT            00000000 MSFT 0000005F)
-Apr 24 15:37:36 quatermain kernel: ACPI: SSDT 0x000000008BFD5000 0006BC (v02 MSFT   xh_ap000 00000000 INTL 20141107)
-Apr 24 15:37:36 quatermain kernel: ACPI: SSDT 0x000000008BFD4000 000E73 (v02 CpuRef CpuSsdt  00003000 INTL 20141107)
-Apr 24 15:37:36 quatermain kernel: ACPI: MSDM 0x000000008BFD3000 000055 (v01 MSFT            00000001 MSFT 00000001)
-Apr 24 15:37:36 quatermain kernel: ACPI: DMAR 0x000000008BFD2000 000138 (v01 MSFT   MSFT     00000001 INTL 00000001)
-Apr 24 15:37:36 quatermain kernel: ACPI: NHLT 0x000000008BFD1000 00002D (v00 MSFT   MSFT     00000002 MSFT 0000005F)
-Apr 24 15:37:36 quatermain kernel: ACPI: FPDT 0x000000008BFD0000 000034 (v01 MSFT   MSFT     00000002 MSFT 0000005F)
-Apr 24 15:37:36 quatermain kernel: ACPI: BGRT 0x000000008BFCF000 000038 (v01 MSFT   MSFT     00000002 MSFT 0000005F)
-Apr 24 15:37:36 quatermain kernel: ACPI: Local APIC address 0xfee00000
-Apr 24 15:37:36 quatermain kernel: No NUMA configuration found
-Apr 24 15:37:36 quatermain kernel: Faking a node at [mem 0x0000000000000000-0x000000026f7fffff]
-Apr 24 15:37:36 quatermain kernel: NODE_DATA(0) allocated [mem 0x26f7f9000-0x26f7fdfff]
-Apr 24 15:37:36 quatermain kernel: Zone ranges:
-Apr 24 15:37:36 quatermain kernel:   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
-Apr 24 15:37:36 quatermain kernel:   DMA32    [mem 0x0000000001000000-0x00000000ffffffff]
-Apr 24 15:37:36 quatermain kernel:   Normal   [mem 0x0000000100000000-0x000000026f7fffff]
-Apr 24 15:37:36 quatermain kernel:   Device   empty
-Apr 24 15:37:36 quatermain kernel: Movable zone start for each node
-Apr 24 15:37:36 quatermain kernel: Early memory node ranges
-Apr 24 15:37:36 quatermain kernel:   node   0: [mem 0x0000000000001000-0x0000000000057fff]
-Apr 24 15:37:36 quatermain kernel:   node   0: [mem 0x0000000000059000-0x000000000009dfff]
-Apr 24 15:37:36 quatermain kernel:   node   0: [mem 0x0000000000100000-0x0000000086017fff]
-Apr 24 15:37:36 quatermain kernel:   node   0: [mem 0x0000000086043000-0x000000008bc86fff]
-Apr 24 15:37:36 quatermain kernel:   node   0: [mem 0x000000008bfff000-0x000000008bffffff]
-Apr 24 15:37:36 quatermain kernel:   node   0: [mem 0x0000000100000000-0x000000026f7fffff]
-Apr 24 15:37:36 quatermain kernel: Initmem setup node 0 [mem 0x0000000000001000-0x000000026f7fffff]
-Apr 24 15:37:36 quatermain kernel: On node 0 totalpages: 2077689
-Apr 24 15:37:36 quatermain kernel:   DMA zone: 64 pages used for memmap
-Apr 24 15:37:36 quatermain kernel:   DMA zone: 22 pages reserved
-Apr 24 15:37:36 quatermain kernel:   DMA zone: 3996 pages, LIFO batch:0
-Apr 24 15:37:36 quatermain kernel:   DMA32 zone: 8882 pages used for memmap
-Apr 24 15:37:36 quatermain kernel:   DMA32 zone: 568413 pages, LIFO batch:31
-Apr 24 15:37:36 quatermain kernel:   Normal zone: 23520 pages used for memmap
-Apr 24 15:37:36 quatermain kernel:   Normal zone: 1505280 pages, LIFO batch:31
-Apr 24 15:37:36 quatermain kernel: Reserving Intel graphics stolen memory at 0x8d800000-0x8f7fffff
-Apr 24 15:37:36 quatermain kernel: ACPI: PM-Timer IO Port: 0x1808
-Apr 24 15:37:36 quatermain kernel: ACPI: Local APIC address 0xfee00000
-Apr 24 15:37:36 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x01] high edge lint[0x1])
-Apr 24 15:37:36 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x02] high edge lint[0x1])
-Apr 24 15:37:36 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x03] high edge lint[0x1])
-Apr 24 15:37:36 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x04] high edge lint[0x1])
-Apr 24 15:37:36 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x05] high edge lint[0x1])
-Apr 24 15:37:36 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x06] high edge lint[0x1])
-Apr 24 15:37:36 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x07] high edge lint[0x1])
-Apr 24 15:37:36 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x08] high edge lint[0x1])
-Apr 24 15:37:36 quatermain kernel: IOAPIC[0]: apic_id 2, version 32, address 0xfec00000, GSI 0-119
-Apr 24 15:37:36 quatermain kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
-Apr 24 15:37:36 quatermain kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
-Apr 24 15:37:36 quatermain kernel: ACPI: IRQ0 used by override.
-Apr 24 15:37:36 quatermain kernel: ACPI: IRQ9 used by override.
-Apr 24 15:37:36 quatermain kernel: Using ACPI (MADT) for SMP configuration information
-Apr 24 15:37:36 quatermain kernel: ACPI: HPET id: 0x8086a201 base: 0xfed00000
-Apr 24 15:37:36 quatermain kernel: smpboot: Allowing 8 CPUs, 4 hotplug CPUs
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0x00000000-0x00000fff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0x00058000-0x00058fff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0x0009e000-0x000fffff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0x86018000-0x86018fff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0x86019000-0x86042fff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0x8bc87000-0x8bcabfff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0x8bcac000-0x8bf92fff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0x8bf93000-0x8bfc4fff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0x8bfc5000-0x8bffefff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0x8c000000-0x8f7fffff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0x8f800000-0xe00f9fff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0xe00fa000-0xe00fafff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0xe00fb000-0xe00fcfff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0xe00fd000-0xe00fdfff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0xe00fe000-0xfdffffff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0xfe000000-0xfe010fff]
-Apr 24 15:37:36 quatermain kernel: PM: Registered nosave memory: [mem 0xfe011000-0xffffffff]
-Apr 24 15:37:36 quatermain kernel: e820: [mem 0x8f800000-0xe00f9fff] available for PCI devices
-Apr 24 15:37:36 quatermain kernel: Booting paravirtualized kernel on bare hardware
-Apr 24 15:37:36 quatermain kernel: clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645519600211568 ns
-Apr 24 15:37:36 quatermain kernel: setup_percpu: NR_CPUS:512 nr_cpumask_bits:512 nr_cpu_ids:8 nr_node_ids:1
-Apr 24 15:37:36 quatermain kernel: PERCPU: Embedded 33 pages/cpu @ffff88026f400000 s94296 r8192 d32680 u262144
-Apr 24 15:37:36 quatermain kernel: pcpu-alloc: s94296 r8192 d32680 u262144 alloc=1*2097152
-Apr 24 15:37:36 quatermain kernel: pcpu-alloc: [0] 0 1 2 3 4 5 6 7 
-Apr 24 15:37:36 quatermain kernel: Built 1 zonelists in Node order, mobility grouping on.  Total pages: 2045201
-Apr 24 15:37:36 quatermain kernel: Policy zone: Normal
-Apr 24 15:37:36 quatermain kernel: Kernel command line: BOOT_IMAGE=/vmlinuz-4.5.1-mssp4 root=/dev/mapper/lvm--quatermain-root ro resume=/dev/mapper/lvm--quatermain-swap quiet
-Apr 24 15:37:36 quatermain kernel: PID hash table entries: 4096 (order: 3, 32768 bytes)
-Apr 24 15:37:36 quatermain kernel: Calgary: detecting Calgary via BIOS EBDA area
-Apr 24 15:37:36 quatermain kernel: Calgary: Unable to locate Rio Grande table in EBDA - bailing!
-Apr 24 15:37:36 quatermain kernel: Memory: 8032060K/8310756K available (5903K kernel code, 1170K rwdata, 2920K rodata, 1328K init, 832K bss, 278696K reserved, 0K cma-reserved)
-Apr 24 15:37:36 quatermain kernel: Hierarchical RCU implementation.
-Apr 24 15:37:36 quatermain kernel:         Build-time adjustment of leaf fanout to 64.
-Apr 24 15:37:36 quatermain kernel:         RCU restricting CPUs from NR_CPUS=512 to nr_cpu_ids=8.
-Apr 24 15:37:36 quatermain kernel: RCU: Adjusting geometry for rcu_fanout_leaf=64, nr_cpu_ids=8
-Apr 24 15:37:36 quatermain kernel: Using NULL legacy PIC
-Apr 24 15:37:36 quatermain kernel: NR_IRQS:33024 nr_irqs:2048 0
-Apr 24 15:37:36 quatermain kernel: Console: colour dummy device 80x25
-Apr 24 15:37:36 quatermain kernel: console [tty0] enabled
-Apr 24 15:37:36 quatermain kernel: clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 79635855245 ns
-Apr 24 15:37:36 quatermain kernel: hpet clockevent registered
-Apr 24 15:37:36 quatermain kernel: tsc: Fast TSC calibration failed
-Apr 24 15:37:36 quatermain kernel: tsc: PIT calibration matches HPET. 1 loops
-Apr 24 15:37:36 quatermain kernel: tsc: Detected 2207.789 MHz processor
-Apr 24 15:37:36 quatermain kernel: Calibrating delay loop (skipped), value calculated using timer frequency.. 4415.57 BogoMIPS (lpj=8831156)
-Apr 24 15:37:36 quatermain kernel: pid_max: default: 32768 minimum: 301
-Apr 24 15:37:36 quatermain kernel: ACPI: Core revision 20160108
-Apr 24 15:37:36 quatermain kernel: ACPI: 7 ACPI AML tables successfully acquired and loaded
-Apr 24 15:37:36 quatermain kernel: 
-Apr 24 15:37:36 quatermain kernel: Security Framework initialized
-Apr 24 15:37:36 quatermain kernel: Yama: disabled by default; enable with sysctl kernel.yama.*
-Apr 24 15:37:36 quatermain kernel: AppArmor: AppArmor disabled by boot time parameter
-Apr 24 15:37:36 quatermain kernel: Dentry cache hash table entries: 1048576 (order: 11, 8388608 bytes)
-Apr 24 15:37:36 quatermain kernel: Inode-cache hash table entries: 524288 (order: 10, 4194304 bytes)
-Apr 24 15:37:36 quatermain kernel: Mount-cache hash table entries: 16384 (order: 5, 131072 bytes)
-Apr 24 15:37:36 quatermain kernel: Mountpoint-cache hash table entries: 16384 (order: 5, 131072 bytes)
-Apr 24 15:37:36 quatermain kernel: Disabling memory control group subsystem
-Apr 24 15:37:36 quatermain kernel: CPU: Physical Processor ID: 0
-Apr 24 15:37:36 quatermain kernel: CPU: Processor Core ID: 0
-Apr 24 15:37:36 quatermain kernel: ENERGY_PERF_BIAS: Set to 'normal', was 'performance'
-Apr 24 15:37:36 quatermain kernel: ENERGY_PERF_BIAS: View and update with x86_energy_perf_policy(8)
-Apr 24 15:37:36 quatermain kernel: mce: CPU supports 9 MCE banks
-Apr 24 15:37:36 quatermain kernel: CPU0: Thermal monitoring enabled (TM1)
-Apr 24 15:37:36 quatermain kernel: process: using mwait in idle threads
-Apr 24 15:37:36 quatermain kernel: Last level iTLB entries: 4KB 64, 2MB 8, 4MB 8
-Apr 24 15:37:36 quatermain kernel: Last level dTLB entries: 4KB 64, 2MB 0, 4MB 0, 1GB 4
-Apr 24 15:37:36 quatermain kernel: Freeing SMP alternatives memory: 24K (ffffffff81c72000 - ffffffff81c78000)
-Apr 24 15:37:36 quatermain kernel: ftrace: allocating 24222 entries in 95 pages
-Apr 24 15:37:36 quatermain kernel: DMAR: Host address width 39
-Apr 24 15:37:36 quatermain kernel: DMAR: DRHD base: 0x000000fed90000 flags: 0x0
-Apr 24 15:37:36 quatermain kernel: DMAR: dmar0: reg_base_addr fed90000 ver 1:0 cap 1c0000c40660462 ecap 7e3ff0505e
-Apr 24 15:37:36 quatermain kernel: DMAR: DRHD base: 0x000000fed91000 flags: 0x1
-Apr 24 15:37:36 quatermain kernel: DMAR: dmar1: reg_base_addr fed91000 ver 1:0 cap d2008c40660462 ecap f050da
-Apr 24 15:37:36 quatermain kernel: DMAR: RMRR base: 0x0000003e2e0000 end: 0x0000003e2fffff
-Apr 24 15:37:36 quatermain kernel: DMAR: RMRR base: 0x0000008d000000 end: 0x0000008f7fffff
-Apr 24 15:37:36 quatermain kernel: DMAR: ANDD device: 1 name: \_SB.PCI0.I2C0
-Apr 24 15:37:36 quatermain kernel: DMAR: ANDD device: 2 name: \_SB.PCI0.I2C1
-Apr 24 15:37:36 quatermain kernel: DMAR: ANDD device: 3 name: \_SB.PCI0.I2C2
-Apr 24 15:37:36 quatermain kernel: DMAR: ANDD device: 4 name: \_SB.PCI0.I2C3
-Apr 24 15:37:36 quatermain kernel: DMAR-IR: IOAPIC id 2 under DRHD base  0xfed91000 IOMMU 1
-Apr 24 15:37:36 quatermain kernel: DMAR-IR: HPET id 0 under DRHD base 0xfed91000
-Apr 24 15:37:36 quatermain kernel: DMAR-IR: x2apic is disabled because BIOS sets x2apic opt out bit.
-Apr 24 15:37:36 quatermain kernel: DMAR-IR: Use 'intremap=no_x2apic_optout' to override the BIOS setting.
-Apr 24 15:37:36 quatermain kernel: DMAR-IR: Enabled IRQ remapping in xapic mode
-Apr 24 15:37:36 quatermain kernel: x2apic: IRQ remapping doesn't support X2APIC mode
-Apr 24 15:37:36 quatermain kernel: TSC deadline timer enabled
-Apr 24 15:37:36 quatermain kernel: smpboot: CPU0: Intel(R) Core(TM) i7-6650U CPU @ 2.20GHz (family: 0x6, model: 0x4e, stepping: 0x3)
-Apr 24 15:37:36 quatermain kernel: Performance Events: PEBS fmt3+, 32-deep LBR, Skylake events, full-width counters, Intel PMU driver.
-Apr 24 15:37:36 quatermain kernel: ... version:                4
-Apr 24 15:37:36 quatermain kernel: ... bit width:              48
-Apr 24 15:37:36 quatermain kernel: ... generic registers:      4
-Apr 24 15:37:36 quatermain kernel: ... value mask:             0000ffffffffffff
-Apr 24 15:37:36 quatermain kernel: ... max period:             0000ffffffffffff
-Apr 24 15:37:36 quatermain kernel: ... fixed-purpose events:   3
-Apr 24 15:37:36 quatermain kernel: ... event mask:             000000070000000f
-Apr 24 15:37:36 quatermain kernel: x86: Booting SMP configuration:
-Apr 24 15:37:36 quatermain kernel: .... node  #0, CPUs:      #1
-Apr 24 15:37:36 quatermain kernel: NMI watchdog: enabled on all CPUs, permanently consumes one hw-PMU counter.
-Apr 24 15:37:36 quatermain kernel:  #2 #3
-Apr 24 15:37:36 quatermain kernel: x86: Booted up 1 node, 4 CPUs
-Apr 24 15:37:36 quatermain kernel: smpboot: Total of 4 processors activated (17662.31 BogoMIPS)
-Apr 24 15:37:36 quatermain kernel: devtmpfs: initialized
-Apr 24 15:37:36 quatermain kernel: PM: Registering ACPI NVS region [mem 0x86018000-0x86018fff] (4096 bytes)
-Apr 24 15:37:36 quatermain kernel: PM: Registering ACPI NVS region [mem 0x8bf93000-0x8bfc4fff] (204800 bytes)
-Apr 24 15:37:36 quatermain kernel: clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
-Apr 24 15:37:36 quatermain kernel: pinctrl core: initialized pinctrl subsystem
-Apr 24 15:37:36 quatermain kernel: NET: Registered protocol family 16
-Apr 24 15:37:36 quatermain kernel: cpuidle: using governor ladder
-Apr 24 15:37:36 quatermain kernel: cpuidle: using governor menu
-Apr 24 15:37:36 quatermain kernel: ACPI: bus type PCI registered
-Apr 24 15:37:36 quatermain kernel: acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
-Apr 24 15:37:36 quatermain kernel: PCI: MMCONFIG for domain 0000 [bus 00-ff] at [mem 0xe0000000-0xefffffff] (base 0xe0000000)
-Apr 24 15:37:36 quatermain kernel: PCI: not using MMCONFIG
-Apr 24 15:37:36 quatermain kernel: PCI: Using configuration type 1 for base access
-Apr 24 15:37:36 quatermain kernel: HugeTLB registered 1 GB page size, pre-allocated 0 pages
-Apr 24 15:37:36 quatermain kernel: HugeTLB registered 2 MB page size, pre-allocated 0 pages
-Apr 24 15:37:36 quatermain kernel: ACPI: Added _OSI(Module Device)
-Apr 24 15:37:36 quatermain kernel: ACPI: Added _OSI(Processor Device)
-Apr 24 15:37:36 quatermain kernel: ACPI: Added _OSI(3.0 _SCP Extensions)
-Apr 24 15:37:36 quatermain kernel: ACPI: Added _OSI(Processor Aggregator Device)
-Apr 24 15:37:36 quatermain kernel: ACPI: Executed 18 blocks of module-level executable AML code
-Apr 24 15:37:36 quatermain kernel: [Firmware Bug]: ACPI: BIOS _OSI(Linux) query ignored
-Apr 24 15:37:36 quatermain kernel: ACPI: Dynamic OEM Table Load:
-Apr 24 15:37:36 quatermain kernel: ACPI: SSDT 0xFFFF88026689F800 0005DC (v02 PmRef  Cpu0Ist  00003000 INTL 20141107)
-Apr 24 15:37:36 quatermain kernel: ACPI: \_PR_.CPU0: _OSC native thermal LVT Acked
-Apr 24 15:37:36 quatermain kernel: ACPI: Dynamic OEM Table Load:
-Apr 24 15:37:36 quatermain kernel: ACPI: SSDT 0xFFFF8802657C7C00 00037F (v02 PmRef  Cpu0Cst  00003001 INTL 20141107)
-Apr 24 15:37:36 quatermain kernel: ACPI: Dynamic OEM Table Load:
-Apr 24 15:37:36 quatermain kernel: ACPI: SSDT 0xFFFF8802657C9800 0005AA (v02 PmRef  ApIst    00003000 INTL 20141107)
-Apr 24 15:37:36 quatermain kernel: ACPI: Dynamic OEM Table Load:
-Apr 24 15:37:36 quatermain kernel: ACPI: SSDT 0xFFFF8802657CBE00 000119 (v02 PmRef  ApCst    00003000 INTL 20141107)
-Apr 24 15:37:36 quatermain kernel: ACPI : EC: EC started
-Apr 24 15:37:36 quatermain kernel: ACPI: Interpreter enabled
-Apr 24 15:37:36 quatermain kernel: ACPI: (supports S0 S4 S5)
-Apr 24 15:37:36 quatermain kernel: ACPI: Using IOAPIC for interrupt routing
-Apr 24 15:37:36 quatermain kernel: PCI: MMCONFIG for domain 0000 [bus 00-ff] at [mem 0xe0000000-0xefffffff] (base 0xe0000000)
-Apr 24 15:37:36 quatermain kernel: PCI: MMCONFIG at [mem 0xe0000000-0xefffffff] reserved in ACPI motherboard resources
-Apr 24 15:37:36 quatermain kernel: PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [PG00] (on)
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [PG01] (on)
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [PG02] (on)
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [PX01] (on)
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [PX02] (on)
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [PX03] (on)
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [PX04] (on)
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [PX05] (on)
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [PX06] (on)
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [PX07] (on)
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [USBC] (on)
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [PAUD] (on)
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [PXP] (off)
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [PXP] (off)
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [PRWF] (on)
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Resource [CAMP] (on)
-Apr 24 15:37:36 quatermain kernel: ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-fe])
-Apr 24 15:37:36 quatermain kernel: acpi PNP0A08:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI]
-Apr 24 15:37:36 quatermain kernel: acpi PNP0A08:00: _OSC: OS now controls [PCIeHotplug PME AER PCIeCapability]
-Apr 24 15:37:36 quatermain kernel: PCI host bridge to bus 0000:00
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000c0000-0x000c3fff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000c4000-0x000c7fff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000c8000-0x000cbfff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000cc000-0x000cffff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000d0000-0x000d3fff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000d4000-0x000d7fff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000d8000-0x000dbfff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000dc000-0x000dffff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000e0000-0x000e3fff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000e4000-0x000e7fff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000e8000-0x000ebfff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000ec000-0x000effff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000f0000-0x000fffff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x8f800000-0xdfffffff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0xfd000000-0xfe7fffff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: root bus resource [bus 00-fe]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:00.0: [8086:1904] type 00 class 0x060000
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:02.0: [8086:1926] type 00 class 0x030000
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:02.0: reg 0x10: [mem 0xa0000000-0xa0ffffff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:02.0: reg 0x18: [mem 0x90000000-0x9fffffff 64bit pref]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:02.0: reg 0x20: [io  0x4000-0x403f]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:05.0: [8086:1919] type 00 class 0x048000
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:05.0: reg 0x10: [mem 0xa1000000-0xa13fffff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:08.0: [8086:1911] type 00 class 0x088000
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:08.0: reg 0x10: [mem 0xa1738000-0xa1738fff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:14.0: [8086:9d2f] type 00 class 0x0c0330
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:14.0: reg 0x10: [mem 0xa1700000-0xa170ffff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:14.0: PME# supported from D3hot D3cold
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:14.0: System wakeup disabled by ACPI
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:14.2: [8086:9d31] type 00 class 0x118000
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:14.2: reg 0x10: [mem 0xa1739000-0xa1739fff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:14.3: [8086:9d32] type 00 class 0x048000
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:14.3: reg 0x10: [mem 0xa1710000-0xa171ffff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:15.0: [8086:9d60] type 00 class 0x118000
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:15.0: reg 0x10: [mem 0xa173a000-0xa173afff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:15.1: [8086:9d61] type 00 class 0x118000
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:15.1: reg 0x10: [mem 0xa173b000-0xa173bfff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:15.2: [8086:9d62] type 00 class 0x118000
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:15.2: reg 0x10: [mem 0xa173c000-0xa173cfff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:15.3: [8086:9d63] type 00 class 0x118000
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:15.3: reg 0x10: [mem 0xa173d000-0xa173dfff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:16.0: [8086:9d3a] type 00 class 0x078000
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:16.0: reg 0x10: [mem 0xa173e000-0xa173efff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:16.0: PME# supported from D3hot
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:16.4: [8086:9d3e] type 00 class 0x078000
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:16.4: reg 0x10: [mem 0xa173f000-0xa173ffff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:16.4: PME# supported from D3hot
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1c.0: [8086:9d14] type 01 class 0x060400
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1c.0: PME# supported from D0 D3hot D3cold
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1c.0: System wakeup disabled by ACPI
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1d.0: [8086:9d18] type 01 class 0x060400
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1d.0: PME# supported from D0 D3hot D3cold
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1d.0: System wakeup disabled by ACPI
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1f.0: [8086:9d48] type 00 class 0x060100
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1f.2: [8086:9d21] type 00 class 0x058000
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1f.2: reg 0x10: [mem 0xa1734000-0xa1737fff]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1f.3: [8086:9d70] type 00 class 0x040380
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1f.3: reg 0x10: [mem 0xa1730000-0xa1733fff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1f.3: reg 0x20: [mem 0xa1720000-0xa172ffff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1f.3: PME# supported from D3hot D3cold
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1f.3: System wakeup disabled by ACPI
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1f.4: [8086:9d23] type 00 class 0x0c0500
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1f.4: reg 0x10: [mem 0xa1741000-0xa17410ff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1f.4: reg 0x20: [io  0xefa0-0xefbf]
-Apr 24 15:37:36 quatermain kernel: pci 0000:01:00.0: [144d:a802] type 00 class 0x010802
-Apr 24 15:37:36 quatermain kernel: pci 0000:01:00.0: reg 0x10: [mem 0xa1600000-0xa1603fff 64bit]
-Apr 24 15:37:36 quatermain kernel: pci 0000:01:00.0: reg 0x18: [io  0x3000-0x30ff]
-Apr 24 15:37:36 quatermain kernel: pci 0000:01:00.0: System wakeup disabled by ACPI
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1c.0: PCI bridge to [bus 01]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1c.0:   bridge window [io  0x3000-0x3fff]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1c.0:   bridge window [mem 0xa1600000-0xa16fffff]
-Apr 24 15:37:36 quatermain kernel: pci 0000:02:00.0: [11ab:2b38] type 00 class 0x020000
-Apr 24 15:37:36 quatermain kernel: pci 0000:02:00.0: reg 0x10: [mem 0xa1500000-0xa15fffff 64bit pref]
-Apr 24 15:37:36 quatermain kernel: pci 0000:02:00.0: reg 0x18: [mem 0xa1400000-0xa14fffff 64bit pref]
-Apr 24 15:37:36 quatermain kernel: pci 0000:02:00.0: supports D1 D2
-Apr 24 15:37:36 quatermain kernel: pci 0000:02:00.0: PME# supported from D0 D1 D3hot D3cold
-Apr 24 15:37:36 quatermain kernel: pci 0000:02:00.0: System wakeup disabled by ACPI
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1d.0: PCI bridge to [bus 02]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1d.0:   bridge window [mem 0xa1400000-0xa15fffff 64bit pref]
-Apr 24 15:37:36 quatermain kernel: ACPI: PCI Interrupt Link [LNKA] (IRQs 3 4 5 6 10 *11 12 14 15)
-Apr 24 15:37:36 quatermain kernel: ACPI: PCI Interrupt Link [LNKB] (IRQs 3 4 5 6 *10 11 12 14 15)
-Apr 24 15:37:36 quatermain kernel: ACPI: PCI Interrupt Link [LNKC] (IRQs 3 4 5 6 10 *11 12 14 15)
-Apr 24 15:37:36 quatermain kernel: ACPI: PCI Interrupt Link [LNKD] (IRQs 3 4 5 6 10 *11 12 14 15)
-Apr 24 15:37:36 quatermain kernel: ACPI: PCI Interrupt Link [LNKE] (IRQs 3 4 5 6 10 *11 12 14 15)
-Apr 24 15:37:36 quatermain kernel: ACPI: PCI Interrupt Link [LNKF] (IRQs 3 4 5 6 10 *11 12 14 15)
-Apr 24 15:37:36 quatermain kernel: ACPI: PCI Interrupt Link [LNKG] (IRQs 3 4 5 6 10 *11 12 14 15)
-Apr 24 15:37:36 quatermain kernel: ACPI: PCI Interrupt Link [LNKH] (IRQs 3 4 5 6 10 *11 12 14 15)
-Apr 24 15:37:36 quatermain kernel: ACPI: Enabled 9 GPEs in block 00 to 7F
-Apr 24 15:37:36 quatermain kernel: ACPI : EC: GPE = 0x50, I/O: command/status = 0x66, data = 0x62
-Apr 24 15:37:36 quatermain kernel: vgaarb: setting as boot device: PCI:0000:00:02.0
-Apr 24 15:37:36 quatermain kernel: vgaarb: device added: PCI:0000:00:02.0,decodes=io+mem,owns=io+mem,locks=none
-Apr 24 15:37:36 quatermain kernel: vgaarb: loaded
-Apr 24 15:37:36 quatermain kernel: vgaarb: bridge control possible 0000:00:02.0
-Apr 24 15:37:36 quatermain kernel: PCI: Using ACPI for IRQ routing
-Apr 24 15:37:36 quatermain kernel: PCI: pci_cache_line_size set to 64 bytes
-Apr 24 15:37:36 quatermain kernel: e820: reserve RAM buffer [mem 0x00058000-0x0005ffff]
-Apr 24 15:37:36 quatermain kernel: e820: reserve RAM buffer [mem 0x0009e000-0x0009ffff]
-Apr 24 15:37:36 quatermain kernel: e820: reserve RAM buffer [mem 0x86018000-0x87ffffff]
-Apr 24 15:37:36 quatermain kernel: e820: reserve RAM buffer [mem 0x8bc87000-0x8bffffff]
-Apr 24 15:37:36 quatermain kernel: e820: reserve RAM buffer [mem 0x26f800000-0x26fffffff]
-Apr 24 15:37:36 quatermain kernel: hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0, 0, 0, 0, 0, 0
-Apr 24 15:37:36 quatermain kernel: hpet0: 8 comparators, 64-bit 24.000000 MHz counter
-Apr 24 15:37:36 quatermain kernel: clocksource: Switched to clocksource hpet
-Apr 24 15:37:36 quatermain kernel: VFS: Disk quotas dquot_6.6.0
-Apr 24 15:37:36 quatermain kernel: VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
-Apr 24 15:37:36 quatermain kernel: pnp: PnP ACPI init
-Apr 24 15:37:36 quatermain kernel: system 00:00: [mem 0xfd000000-0xfdabffff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:00: [mem 0xfdad0000-0xfdadffff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:00: [mem 0xfdb00000-0xfdffffff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:00: [mem 0xfe000000-0xfe01ffff] could not be reserved
-Apr 24 15:37:36 quatermain kernel: system 00:00: [mem 0xfe036000-0xfe03bfff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:00: [mem 0xfe03d000-0xfe3fffff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:00: [mem 0xfe410000-0xfe7fffff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:00: Plug and Play ACPI device, IDs PNP0c02 (active)
-Apr 24 15:37:36 quatermain kernel: system 00:01: [io  0x2000-0x20fe] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:01: Plug and Play ACPI device, IDs PNP0c02 (active)
-Apr 24 15:37:36 quatermain kernel: system 00:02: [io  0x0680-0x069f] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:02: [io  0xffff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:02: [io  0xffff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:02: [io  0xffff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:02: [io  0x1800-0x18fe] could not be reserved
-Apr 24 15:37:36 quatermain kernel: system 00:02: [io  0x164e-0x164f] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:02: Plug and Play ACPI device, IDs PNP0c02 (active)
-Apr 24 15:37:36 quatermain kernel: pnp 00:03: Plug and Play ACPI device, IDs PNP0b00 (active)
-Apr 24 15:37:36 quatermain kernel: system 00:04: [io  0x1854-0x1857] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:04: Plug and Play ACPI device, IDs INT3f0d PNP0c02 (active)
-Apr 24 15:37:36 quatermain kernel: system 00:05: Plug and Play ACPI device, IDs PNP0c02 (active)
-Apr 24 15:37:36 quatermain kernel: system 00:06: [mem 0xfed10000-0xfed17fff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:06: [mem 0xfed18000-0xfed18fff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:06: [mem 0xfed19000-0xfed19fff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:06: [mem 0xe0000000-0xefffffff] could not be reserved
-Apr 24 15:37:36 quatermain kernel: system 00:06: [mem 0xfed20000-0xfed3ffff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:06: [mem 0xfed90000-0xfed93fff] could not be reserved
-Apr 24 15:37:36 quatermain kernel: system 00:06: [mem 0xfed45000-0xfed8ffff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:06: [mem 0xff000000-0xffffffff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:06: [mem 0xfee00000-0xfeefffff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:06: [mem 0x8f800000-0x8f81ffff] has been reserved
-Apr 24 15:37:36 quatermain kernel: system 00:06: Plug and Play ACPI device, IDs PNP0c02 (active)
-Apr 24 15:37:36 quatermain kernel: pnp: PnP ACPI: found 7 devices
-Apr 24 15:37:36 quatermain kernel: clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1c.0: PCI bridge to [bus 01]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1c.0:   bridge window [io  0x3000-0x3fff]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1c.0:   bridge window [mem 0xa1600000-0xa16fffff]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1d.0: PCI bridge to [bus 02]
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:1d.0:   bridge window [mem 0xa1400000-0xa15fffff 64bit pref]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 7 [mem 0x000c0000-0x000c3fff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 8 [mem 0x000c4000-0x000c7fff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 9 [mem 0x000c8000-0x000cbfff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 10 [mem 0x000cc000-0x000cffff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 11 [mem 0x000d0000-0x000d3fff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 12 [mem 0x000d4000-0x000d7fff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 13 [mem 0x000d8000-0x000dbfff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 14 [mem 0x000dc000-0x000dffff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 15 [mem 0x000e0000-0x000e3fff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 16 [mem 0x000e4000-0x000e7fff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 17 [mem 0x000e8000-0x000ebfff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 18 [mem 0x000ec000-0x000effff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 19 [mem 0x000f0000-0x000fffff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 20 [mem 0x8f800000-0xdfffffff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:00: resource 21 [mem 0xfd000000-0xfe7fffff window]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:01: resource 0 [io  0x3000-0x3fff]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:01: resource 1 [mem 0xa1600000-0xa16fffff]
-Apr 24 15:37:36 quatermain kernel: pci_bus 0000:02: resource 2 [mem 0xa1400000-0xa15fffff 64bit pref]
-Apr 24 15:37:36 quatermain kernel: NET: Registered protocol family 2
-Apr 24 15:37:36 quatermain kernel: TCP established hash table entries: 65536 (order: 7, 524288 bytes)
-Apr 24 15:37:36 quatermain kernel: TCP bind hash table entries: 65536 (order: 8, 1048576 bytes)
-Apr 24 15:37:36 quatermain kernel: TCP: Hash tables configured (established 65536 bind 65536)
-Apr 24 15:37:36 quatermain kernel: UDP hash table entries: 4096 (order: 5, 131072 bytes)
-Apr 24 15:37:36 quatermain kernel: UDP-Lite hash table entries: 4096 (order: 5, 131072 bytes)
-Apr 24 15:37:36 quatermain kernel: NET: Registered protocol family 1
-Apr 24 15:37:36 quatermain kernel: pci 0000:00:02.0: Video device with shadowed ROM
-Apr 24 15:37:36 quatermain kernel: PCI: CLS 0 bytes, default 64
-Apr 24 15:37:36 quatermain kernel: Unpacking initramfs...
-Apr 24 15:37:36 quatermain kernel: Freeing initrd memory: 18304K (ffff880035c30000 - ffff880036e10000)
-Apr 24 15:37:36 quatermain kernel: DMAR: ACPI device "device:6c" under DMAR at fed91000 as 00:15.0
-Apr 24 15:37:36 quatermain kernel: DMAR: ACPI device "device:6d" under DMAR at fed91000 as 00:15.1
-Apr 24 15:37:36 quatermain kernel: DMAR: ACPI device "device:6e" under DMAR at fed91000 as 00:15.2
-Apr 24 15:37:36 quatermain kernel: DMAR: ACPI device "device:6f" under DMAR at fed91000 as 00:15.3
-Apr 24 15:37:36 quatermain kernel: PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
-Apr 24 15:37:36 quatermain kernel: software IO TLB [mem 0x7ff80000-0x83f80000] (64MB) mapped at [ffff88007ff80000-ffff880083f7ffff]
-Apr 24 15:37:36 quatermain kernel: simple-framebuffer simple-framebuffer.0: framebuffer at 0x90000000, 0x130a000 bytes, mapped to 0xffffc90002000000
-Apr 24 15:37:36 quatermain kernel: simple-framebuffer simple-framebuffer.0: format=a8r8g8b8, mode=2736x1824x32, linelength=10944
-Apr 24 15:37:36 quatermain kernel: Console: switching to colour frame buffer device 342x114
-Apr 24 15:37:36 quatermain kernel: simple-framebuffer simple-framebuffer.0: fb0: simplefb registered!
-Apr 24 15:37:36 quatermain kernel: futex hash table entries: 2048 (order: 5, 131072 bytes)
-Apr 24 15:37:36 quatermain kernel: audit: initializing netlink subsys (disabled)
-Apr 24 15:37:36 quatermain kernel: audit: type=2000 audit(1461512249.840:1): initialized
-Apr 24 15:37:36 quatermain kernel: zbud: loaded
-Apr 24 15:37:36 quatermain kernel: Key type asymmetric registered
-Apr 24 15:37:36 quatermain kernel: Asymmetric key parser 'x509' registered
-Apr 24 15:37:36 quatermain kernel: Block layer SCSI generic (bsg) driver version 0.4 loaded (major 252)
-Apr 24 15:37:36 quatermain kernel: io scheduler noop registered
-Apr 24 15:37:36 quatermain kernel: io scheduler deadline registered
-Apr 24 15:37:36 quatermain kernel: io scheduler cfq registered (default)
-Apr 24 15:37:36 quatermain kernel: pcieport 0000:00:1c.0: Signaling PME through PCIe PME interrupt
-Apr 24 15:37:36 quatermain kernel: pci 0000:01:00.0: Signaling PME through PCIe PME interrupt
-Apr 24 15:37:36 quatermain kernel: pcie_pme 0000:00:1c.0:pcie01: service driver pcie_pme loaded
-Apr 24 15:37:36 quatermain kernel: pcieport 0000:00:1d.0: Signaling PME through PCIe PME interrupt
-Apr 24 15:37:36 quatermain kernel: pci 0000:02:00.0: Signaling PME through PCIe PME interrupt
-Apr 24 15:37:36 quatermain kernel: pcie_pme 0000:00:1d.0:pcie01: service driver pcie_pme loaded
-Apr 24 15:37:36 quatermain kernel: pci_hotplug: PCI Hot Plug PCI Core version: 0.5
-Apr 24 15:37:36 quatermain kernel: pciehp: PCI Express Hot Plug Controller Driver version: 0.4
-Apr 24 15:37:36 quatermain kernel: intel_idle: MWAIT substates: 0x11142120
-Apr 24 15:37:36 quatermain kernel: intel_idle: v0.4.1 model 0x4E
-Apr 24 15:37:36 quatermain kernel: intel_idle: lapic_timer_reliable_states 0xffffffff
-Apr 24 15:37:36 quatermain kernel: GHES: HEST is not enabled!
-Apr 24 15:37:36 quatermain kernel: Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
-Apr 24 15:37:36 quatermain kernel: Linux agpgart interface v0.103
-Apr 24 15:37:36 quatermain kernel: AMD IOMMUv2 driver by Joerg Roedel <jroedel@suse.de>
-Apr 24 15:37:36 quatermain kernel: AMD IOMMUv2 functionality not available on this system
-Apr 24 15:37:36 quatermain kernel: i8042: PNP: No PS/2 controller found. Probing ports directly.
-Apr 24 15:37:36 quatermain kernel: tsc: Refined TSC clocksource calibration: 2207.996 MHz
-Apr 24 15:37:36 quatermain kernel: clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x1fd3b426a0c, max_idle_ns: 440795203300 ns
-Apr 24 15:37:36 quatermain kernel: i8042: No controller found
-Apr 24 15:37:36 quatermain kernel: mousedev: PS/2 mouse device common for all mice
-Apr 24 15:37:36 quatermain kernel: rtc_cmos 00:03: RTC can wake from S4
-Apr 24 15:37:36 quatermain kernel: rtc_cmos 00:03: rtc core: registered rtc_cmos as rtc0
-Apr 24 15:37:36 quatermain kernel: rtc_cmos 00:03: alarms up to one month, y3k, 242 bytes nvram, hpet irqs
-Apr 24 15:37:36 quatermain kernel: Intel P-state driver initializing.
-Apr 24 15:37:36 quatermain kernel: intel_pstate: HWP enabled
-Apr 24 15:37:36 quatermain kernel: ledtrig-cpu: registered to indicate activity on CPUs
-Apr 24 15:37:36 quatermain kernel: NET: Registered protocol family 10
-Apr 24 15:37:36 quatermain kernel: mip6: Mobile IPv6
-Apr 24 15:37:36 quatermain kernel: NET: Registered protocol family 17
-Apr 24 15:37:36 quatermain kernel: mpls_gso: MPLS GSO support
-Apr 24 15:37:36 quatermain kernel: microcode: CPU0 sig=0x406e3, pf=0x40, revision=0x7a
-Apr 24 15:37:36 quatermain kernel: microcode: CPU1 sig=0x406e3, pf=0x40, revision=0x7a
-Apr 24 15:37:36 quatermain kernel: microcode: CPU2 sig=0x406e3, pf=0x40, revision=0x7a
-Apr 24 15:37:36 quatermain kernel: microcode: CPU3 sig=0x406e3, pf=0x40, revision=0x7a
-Apr 24 15:37:36 quatermain kernel: microcode: Microcode Update Driver: v2.01 <tigran@aivazian.fsnet.co.uk>, Peter Oruba
-Apr 24 15:37:36 quatermain kernel: registered taskstats version 1
-Apr 24 15:37:36 quatermain kernel: zswap: loaded using pool lzo/zbud
-Apr 24 15:37:36 quatermain kernel: rtc_cmos 00:03: setting system clock to 2016-04-24 15:37:31 UTC (1461512251)
-Apr 24 15:37:36 quatermain kernel:  nvme0n1: p1 p2 p3 p4 p5 p6
-Apr 24 15:37:36 quatermain kernel: PM: Checking hibernation image partition /dev/mapper/lvm--quatermain-swap
-Apr 24 15:37:36 quatermain kernel: PM: Hibernation image not present or could not be loaded.
-Apr 24 15:37:36 quatermain kernel: Freeing unused kernel memory: 1328K (ffffffff81b26000 - ffffffff81c72000)
-Apr 24 15:37:36 quatermain kernel: Write protecting the kernel read-only data: 10240k
-Apr 24 15:37:36 quatermain kernel: Freeing unused kernel memory: 228K (ffff8800019c7000 - ffff880001a00000)
-Apr 24 15:37:36 quatermain kernel: Freeing unused kernel memory: 1176K (ffff880001cda000 - ffff880001e00000)
-Apr 24 15:37:36 quatermain kernel: x86/mm: Checked W+X mappings: passed, no W+X pages found.
-Apr 24 15:37:36 quatermain systemd-udevd[82]: starting version 215
-Apr 24 15:37:36 quatermain kernel: random: systemd-udevd urandom read with 12 bits of entropy available
-Apr 24 15:37:36 quatermain kernel: FUJITSU Extended Socket Network Device Driver - version 1.0 - Copyright (c) 2015 FUJITSU LIMITED
-Apr 24 15:37:36 quatermain kernel: hidraw: raw HID events driver (C) Jiri Kosina
-Apr 24 15:37:36 quatermain kernel: thermal LNXTHERM:00: registered as thermal_zone0
-Apr 24 15:37:36 quatermain kernel: ACPI: Thermal Zone [TZ00] (51 C)
-Apr 24 15:37:36 quatermain kernel: ACPI: bus type USB registered
-Apr 24 15:37:36 quatermain kernel: usbcore: registered new interface driver usbfs
-Apr 24 15:37:36 quatermain kernel: usbcore: registered new interface driver hub
-Apr 24 15:37:36 quatermain kernel: usbcore: registered new device driver usb
-Apr 24 15:37:36 quatermain kernel: xhci_hcd 0000:00:14.0: xHCI Host Controller
-Apr 24 15:37:36 quatermain kernel: xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 1
-Apr 24 15:37:36 quatermain kernel: xhci_hcd 0000:00:14.0: hcc params 0x200077c1 hci version 0x100 quirks 0x00109810
-Apr 24 15:37:36 quatermain kernel: xhci_hcd 0000:00:14.0: cache line size of 64 is not supported
-Apr 24 15:37:36 quatermain kernel: usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
-Apr 24 15:37:36 quatermain kernel: usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
-Apr 24 15:37:36 quatermain kernel: usb usb1: Product: xHCI Host Controller
-Apr 24 15:37:36 quatermain kernel: usb usb1: Manufacturer: Linux 4.5.1-mssp4 xhci-hcd
-Apr 24 15:37:36 quatermain kernel: usb usb1: SerialNumber: 0000:00:14.0
-Apr 24 15:37:36 quatermain kernel: hub 1-0:1.0: USB hub found
-Apr 24 15:37:36 quatermain kernel: hub 1-0:1.0: 12 ports detected
-Apr 24 15:37:36 quatermain kernel: thermal LNXTHERM:01: registered as thermal_zone1
-Apr 24 15:37:36 quatermain kernel: ACPI: Thermal Zone [TZ01] (0 C)
-Apr 24 15:37:36 quatermain kernel: AVX2 version of gcm_enc/dec engaged.
-Apr 24 15:37:36 quatermain kernel: AES CTR mode by8 optimization enabled
-Apr 24 15:37:36 quatermain kernel: thermal LNXTHERM:02: registered as thermal_zone2
-Apr 24 15:37:36 quatermain kernel: ACPI: Thermal Zone [TZ02] (40 C)
-Apr 24 15:37:36 quatermain kernel: thermal LNXTHERM:03: registered as thermal_zone3
-Apr 24 15:37:36 quatermain kernel: ACPI: Thermal Zone [TZ03] (45 C)
-Apr 24 15:37:36 quatermain kernel: xhci_hcd 0000:00:14.0: xHCI Host Controller
-Apr 24 15:37:36 quatermain kernel: xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 2
-Apr 24 15:37:36 quatermain kernel: usb usb2: New USB device found, idVendor=1d6b, idProduct=0003
-Apr 24 15:37:36 quatermain kernel: usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
-Apr 24 15:37:36 quatermain kernel: usb usb2: Product: xHCI Host Controller
-Apr 24 15:37:36 quatermain kernel: usb usb2: Manufacturer: Linux 4.5.1-mssp4 xhci-hcd
-Apr 24 15:37:36 quatermain kernel: usb usb2: SerialNumber: 0000:00:14.0
-Apr 24 15:37:36 quatermain kernel: hub 2-0:1.0: USB hub found
-Apr 24 15:37:36 quatermain kernel: hub 2-0:1.0: 6 ports detected
-Apr 24 15:37:36 quatermain kernel: device-mapper: uevent: version 1.0.3
-Apr 24 15:37:36 quatermain kernel: device-mapper: ioctl: 4.34.0-ioctl (2015-10-28) initialised: dm-devel@redhat.com
-Apr 24 15:37:36 quatermain kernel: usb 1-7: new full-speed USB device number 2 using xhci_hcd
-Apr 24 15:37:36 quatermain kernel: usb 1-7: New USB device found, idVendor=045e, idProduct=07e8
-Apr 24 15:37:36 quatermain kernel: usb 1-7: New USB device strings: Mfr=1, Product=2, SerialNumber=0
-Apr 24 15:37:36 quatermain kernel: usb 1-7: Product: Surface Type Cover
-Apr 24 15:37:36 quatermain kernel: usb 1-7: Manufacturer: Microsoft
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover Keyboard as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input0
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover Mouse as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input1
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover Consumer Control as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input2
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input3
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover Touchpad as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input4
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input5
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input6
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input7
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input8
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input9
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input10
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input11
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input12
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input13
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input14
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input15
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input16
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input17
-Apr 24 15:37:36 quatermain kernel: input: Microsoft Surface Type Cover Keyboard as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input18
-Apr 24 15:37:36 quatermain kernel: hid-multitouch 0003:045E:07E8.0001: input,hiddev0,hidraw0: USB HID v1.11 Keyboard [Microsoft Surface Type Cover] on usb-0000:00:14.0-7/input0
-Apr 24 15:37:36 quatermain kernel: usbcore: registered new interface driver usbhid
-Apr 24 15:37:36 quatermain kernel: usbhid: USB HID core driver
-Apr 24 15:37:36 quatermain kernel: clocksource: Switched to clocksource tsc
-Apr 24 15:37:36 quatermain kernel: random: nonblocking pool is initialized
-Apr 24 15:37:36 quatermain kernel: NET: Registered protocol family 38
-Apr 24 15:37:36 quatermain kernel: PM: Starting manual resume from disk
-Apr 24 15:37:36 quatermain kernel: PM: Hibernation image partition 253:4 present
-Apr 24 15:37:36 quatermain kernel: PM: Looking for hibernation image.
-Apr 24 15:37:36 quatermain kernel: PM: Image not found (code -22)
-Apr 24 15:37:36 quatermain kernel: PM: Hibernation image not present or could not be loaded.
-Apr 24 15:37:36 quatermain kernel: EXT4-fs (dm-1): mounted filesystem with ordered data mode. Opts: (null)
-Apr 24 15:37:36 quatermain systemd[1]: RTC configured in localtime, applying delta of 60 minutes to system time.
-Apr 24 15:37:36 quatermain kernel: fuse init (API version 7.24)
-Apr 24 15:37:36 quatermain systemd-udevd[402]: starting version 215
-Apr 24 15:37:36 quatermain kernel: input: Sleep Button as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0E:00/input/input20
-Apr 24 15:37:36 quatermain kernel: ACPI: Sleep Button [SLPB]
-Apr 24 15:37:36 quatermain kernel: input: Lid Switch as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0D:00/input/input21
-Apr 24 15:37:36 quatermain kernel: ACPI: Lid Switch [LID0]
-Apr 24 15:37:36 quatermain kernel: input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input22
-Apr 24 15:37:36 quatermain kernel: ACPI: Power Button [PWRF]
-Apr 24 15:37:36 quatermain kernel: EXT4-fs (dm-1): re-mounted. Opts: discard,lazytime,errors=remount-ro
-Apr 24 15:37:36 quatermain kernel: [drm] Initialized drm 1.1.0 20060810
-Apr 24 15:37:36 quatermain kernel: ACPI: AC Adapter [ADP1] (on-line)
-Apr 24 15:37:36 quatermain kernel: input: Surface Pro 3/4 Buttons as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:18/PNP0C09:00/MSHW0040:00/input/input23
-Apr 24 15:37:36 quatermain kernel: surface_pro3_button MSHW0040:00: Surface Pro 3/4 Buttons [VGBI]
-Apr 24 15:37:36 quatermain kernel: Setting dangerous option enable_rc6 - tainting kernel
-Apr 24 15:37:36 quatermain kernel: [drm] Found 128MB of eLLC
-Apr 24 15:37:36 quatermain kernel: [drm] Memory usable by graphics device = 4096M
-Apr 24 15:37:36 quatermain kernel: checking generic (90000000 130a000) vs hw (90000000 10000000)
-Apr 24 15:37:36 quatermain kernel: fb: switching to inteldrmfb from simple
-Apr 24 15:37:36 quatermain kernel: Console: switching to colour dummy device 80x25
-Apr 24 15:37:36 quatermain kernel: [drm] Replacing VGA console driver
-Apr 24 15:37:36 quatermain kernel: [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
-Apr 24 15:37:36 quatermain kernel: [drm] Driver supports precise vblank timestamp query.
-Apr 24 15:37:36 quatermain kernel: vgaarb: device changed decodes: PCI:0000:00:02.0,olddecodes=io+mem,decodes=io+mem:owns=io+mem
-Apr 24 15:37:36 quatermain kernel: i915 0000:00:02.0: firmware: direct-loading firmware i915/skl_dmc_ver1.bin
-Apr 24 15:37:36 quatermain kernel: [drm:csr_load_work_fn [i915]] *ERROR* Unknown stepping info, firmware loading failed
-Apr 24 15:37:36 quatermain kernel: [drm:csr_load_work_fn [i915]] *ERROR* Failed to load DMC firmware, disabling rpm
-Apr 24 15:37:36 quatermain kernel: [drm] RC6 disabled, disabling runtime PM support
-Apr 24 15:37:36 quatermain kernel: tpm_tis MSFT0101:00: 2.0 TPM (device-id 0x1A, rev-id 16)
-Apr 24 15:37:36 quatermain kernel: ACPI: Battery Slot [BAT1] (battery present)
-Apr 24 15:37:36 quatermain kernel: ACPI: Video Device [GFX0] (multi-head: yes  rom: no  post: no)
-Apr 24 15:37:36 quatermain kernel: input: Video Bus as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/LNXVIDEO:00/input/input24
-Apr 24 15:37:36 quatermain kernel: [drm] Initialized i915 1.6.0 20151218 for 0000:00:02.0 on minor 0
-Apr 24 15:37:36 quatermain kernel: intel-lpss 0000:00:15.0: enabling device (0000 -> 0002)
-Apr 24 15:37:36 quatermain kernel: idma64 idma64.0: Found Intel integrated DMA 64-bit
-Apr 24 15:37:36 quatermain kernel: intel-lpss 0000:00:15.1: enabling device (0000 -> 0002)
-Apr 24 15:37:36 quatermain kernel: idma64 idma64.1: Found Intel integrated DMA 64-bit
-Apr 24 15:37:36 quatermain kernel: intel-lpss 0000:00:15.2: enabling device (0000 -> 0002)
-Apr 24 15:37:36 quatermain kernel: idma64 idma64.2: Found Intel integrated DMA 64-bit
-Apr 24 15:37:36 quatermain kernel: intel-lpss 0000:00:15.3: enabling device (0000 -> 0002)
-Apr 24 15:37:36 quatermain kernel: idma64 idma64.3: Found Intel integrated DMA 64-bit
-Apr 24 15:37:36 quatermain kernel: mei_me 0000:00:16.0: enabling device (0000 -> 0002)
-Apr 24 15:37:36 quatermain kernel: shpchp: Standard Hot Plug PCI Controller Driver version: 0.4
-Apr 24 15:37:36 quatermain kernel: i801_smbus 0000:00:1f.4: enabling device (0000 -> 0003)
-Apr 24 15:37:36 quatermain kernel: ACPI Warning: SystemIO range 0x000000000000EFA0-0x000000000000EFBF conflicts with OpRegion 0x000000000000EFA0-0x000000000000EFAF (\_SB.PCI0.SBUS.SMBI) (20160108/utaddress-255)
-Apr 24 15:37:36 quatermain kernel: ACPI: If an ACPI driver is available for this device, you should use it instead of the native driver
-Apr 24 15:37:36 quatermain kernel: snd_hda_intel 0000:00:1f.3: enabling device (0000 -> 0002)
-Apr 24 15:37:36 quatermain kernel: EFI Variables Facility v0.08 2004-May-17
-Apr 24 15:37:36 quatermain kernel: input: PC Speaker as /devices/platform/pcspkr/input/input25
-Apr 24 15:37:36 quatermain kernel: pstore: Registered efi as persistent store backend
-Apr 24 15:37:36 quatermain kernel: mwifiex_pcie 0000:02:00.0: enabling device (0000 -> 0002)
-Apr 24 15:37:36 quatermain kernel: mwifiex_pcie: try set_consistent_dma_mask(32)
-Apr 24 15:37:36 quatermain kernel: mwifiex_pcie: PCI memory map Virt0: ffffc90001000000 PCI memory map Virt2: ffffc90001200000
-Apr 24 15:37:36 quatermain kernel: mwifiex: rx work enabled, cpus 8
-Apr 24 15:37:36 quatermain kernel: mwifiex_pcie 0000:02:00.0: firmware: direct-loading firmware mrvl/pcie8897_uapsta.bin
-Apr 24 15:37:36 quatermain kernel: intel_rapl: Found RAPL domain package
-Apr 24 15:37:36 quatermain kernel: intel_rapl: Found RAPL domain core
-Apr 24 15:37:36 quatermain kernel: intel_rapl: Found RAPL domain uncore
-Apr 24 15:37:36 quatermain kernel: intel_rapl: Found RAPL domain dram
-Apr 24 15:37:36 quatermain kernel: EXT4-fs (nvme0n1p6): mounted filesystem with ordered data mode. Opts: discard,lazytime
-Apr 24 15:37:36 quatermain kernel: FAT-fs (nvme0n1p1): utf8 is not a recommended IO charset for FAT filesystems, filesystem will be case sensitive!
-Apr 24 15:37:36 quatermain kernel: Adding 12582908k swap on /dev/mapper/lvm--quatermain-swap.  Priority:-1 extents:1 across:12582908k SSDscFS
-Apr 24 15:37:36 quatermain kernel: EXT4-fs (dm-10): mounted filesystem with ordered data mode. Opts: discard,lazytime
-Apr 24 15:37:36 quatermain kernel: EXT4-fs (dm-2): mounted filesystem with ordered data mode. Opts: discard,lazytime
-Apr 24 15:37:36 quatermain kernel: EXT4-fs (dm-12): mounted filesystem with ordered data mode. Opts: discard,lazytime
-Apr 24 15:37:36 quatermain kernel: fbcon: inteldrmfb (fb0) is primary device
-Apr 24 15:37:38 quatermain kernel: EXT4-fs (dm-3): mounted filesystem with ordered data mode. Opts: discard,lazytime
-Apr 24 15:37:38 quatermain kernel: EXT4-fs (dm-5): mounted filesystem with ordered data mode. Opts: discard,lazytime
-Apr 24 15:37:38 quatermain kernel: EXT4-fs (dm-7): mounted filesystem with ordered data mode. Opts: discard,lazytime
-Apr 24 15:37:38 quatermain kernel: EXT4-fs (dm-8): mounted filesystem with ordered data mode. Opts: discard,lazytime
-Apr 24 15:37:38 quatermain kernel: EXT4-fs (dm-9): mounted filesystem with ordered data mode. Opts: discard,lazytime
-Apr 24 15:37:38 quatermain kernel: EXT4-fs (dm-6): mounted filesystem with ordered data mode. Opts: discard,lazytime
-Apr 24 15:37:38 quatermain kernel: mwifiex_pcie 0000:02:00.0: info: FW download over, size 803884 bytes
-Apr 24 15:37:38 quatermain kernel: [drm] RC6 off
-Apr 24 15:37:38 quatermain kernel: Console: switching to colour frame buffer device 342x114
-Apr 24 15:37:38 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:63 / ret_size:0
-Apr 24 15:37:38 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:63 / ret_size:0
-Apr 24 15:37:38 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:19 / ret_size:63
-Apr 24 15:37:38 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:19 / ret_size:0
-Apr 24 15:37:38 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:19 / ret_size:12
-Apr 24 15:37:38 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:19 / ret_size:0
-Apr 24 15:37:38 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:19 / ret_size:0
-Apr 24 15:37:38 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:19 / ret_size:4
-Apr 24 15:37:38 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:19 / ret_size:0
-Apr 24 15:37:38 quatermain kernel: usb 1-5: new high-speed USB device number 3 using xhci_hcd
-Apr 24 15:37:38 quatermain kernel: snd_hda_intel 0000:00:1f.3: bound 0000:00:02.0 (ops i915_audio_component_bind_ops [i915])
-Apr 24 15:37:38 quatermain kernel: i915 0000:00:02.0: fb0: inteldrmfb frame buffer device
-Apr 24 15:37:38 quatermain kernel: snd_hda_codec_realtek hdaudioC0D0: autoconfig for ALC298: line_outs=1 (0x14/0x0/0x0/0x0/0x0) type:speaker
-Apr 24 15:37:38 quatermain kernel: snd_hda_codec_realtek hdaudioC0D0:    speaker_outs=0 (0x0/0x0/0x0/0x0/0x0)
-Apr 24 15:37:38 quatermain kernel: snd_hda_codec_realtek hdaudioC0D0:    hp_outs=1 (0x21/0x0/0x0/0x0/0x0)
-Apr 24 15:37:38 quatermain kernel: snd_hda_codec_realtek hdaudioC0D0:    mono: mono_out=0x0
-Apr 24 15:37:38 quatermain kernel: snd_hda_codec_realtek hdaudioC0D0:    inputs:
-Apr 24 15:37:38 quatermain kernel: snd_hda_codec_realtek hdaudioC0D0:      Mic=0x18
-Apr 24 15:37:38 quatermain kernel: snd_hda_codec_realtek hdaudioC0D0:      Internal Mic=0x12
-Apr 24 15:37:38 quatermain kernel: input: HDA Intel PCH Mic as /devices/pci0000:00/0000:00:1f.3/sound/card0/input26
-Apr 24 15:37:38 quatermain kernel: input: HDA Intel PCH Headphone as /devices/pci0000:00/0000:00:1f.3/sound/card0/input27
-Apr 24 15:37:38 quatermain kernel: input: HDA Intel PCH HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:1f.3/sound/card0/input28
-Apr 24 15:37:38 quatermain kernel: input: HDA Intel PCH HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:1f.3/sound/card0/input29
-Apr 24 15:37:38 quatermain kernel: input: HDA Intel PCH HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:1f.3/sound/card0/input30
-Apr 24 15:37:38 quatermain kernel: mwifiex_pcie 0000:02:00.0: WLAN FW is active
-Apr 24 15:37:38 quatermain kernel: usb 1-5: New USB device found, idVendor=1286, idProduct=204c
-Apr 24 15:37:38 quatermain kernel: usb 1-5: New USB device strings: Mfr=1, Product=2, SerialNumber=3
-Apr 24 15:37:38 quatermain kernel: usb 1-5: Product: Bluetooth and Wireless LAN Composite Device
-Apr 24 15:37:38 quatermain kernel: usb 1-5: Manufacturer: Marvell
-Apr 24 15:37:38 quatermain kernel: usb 1-5: SerialNumber: 0000000000000000
-Apr 24 15:37:38 quatermain kernel: Bluetooth: Core ver 2.21
-Apr 24 15:37:38 quatermain kernel: NET: Registered protocol family 31
-Apr 24 15:37:38 quatermain kernel: Bluetooth: HCI device and connection manager initialized
-Apr 24 15:37:38 quatermain kernel: Bluetooth: HCI socket layer initialized
-Apr 24 15:37:38 quatermain kernel: Bluetooth: L2CAP socket layer initialized
-Apr 24 15:37:38 quatermain kernel: Bluetooth: SCO socket layer initialized
-Apr 24 15:37:38 quatermain kernel: usbcore: registered new interface driver btusb
-Apr 24 15:37:38 quatermain kernel: mwifiex_pcie 0000:02:00.0: info: MWIFIEX VERSION: mwifiex 1.0 (15.68.7.p53) 
-Apr 24 15:37:38 quatermain kernel: mwifiex_pcie 0000:02:00.0: driver_version = mwifiex 1.0 (15.68.7.p53) 
-Apr 24 15:37:38 quatermain kernel: IPv6: ADDRCONF(NETDEV_UP): mlan0: link is not ready
-Apr 24 15:37:38 quatermain kernel: RPC: Registered named UNIX socket transport module.
-Apr 24 15:37:38 quatermain kernel: RPC: Registered udp transport module.
-Apr 24 15:37:38 quatermain kernel: RPC: Registered tcp transport module.
-Apr 24 15:37:38 quatermain kernel: RPC: Registered tcp NFSv4.1 backchannel transport module.
-Apr 24 15:37:38 quatermain kernel: FS-Cache: Loaded
-Apr 24 15:37:38 quatermain kernel: FS-Cache: Netfs 'nfs' registered for caching
-Apr 24 15:37:38 quatermain kernel: Installing knfsd (copyright (C) 1996 okir@monad.swb.de).
-Apr 24 15:37:38 quatermain kernel: Bluetooth: BNEP (Ethernet Emulation) ver 1.3
-Apr 24 15:37:38 quatermain kernel: Bluetooth: BNEP filters: protocol multicast
-Apr 24 15:37:38 quatermain kernel: Bluetooth: BNEP socket layer initialized
+-- Logs begin at Fri 2016-11-25 21:15:17 GMT, end at Fri 2016-11-25 22:02:00 GMT. --
+Nov 25 21:15:17 quatermain kernel: Linux version 4.9.0-rc6-mssp4+ (root@quatermain) (gcc version 4.9.2 (Debian 4.9.2-10) ) #1 SMP Fri Nov 25 14:42:17 GMT 2016
+Nov 25 21:15:17 quatermain kernel: Command line: BOOT_IMAGE=/vmlinuz-4.9.0-rc6-mssp4+ root=/dev/mapper/lvm--quatermain-root ro resume=/dev/mapper/lvm--quatermain-swap quiet
+Nov 25 21:15:17 quatermain kernel: x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+Nov 25 21:15:17 quatermain kernel: x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+Nov 25 21:15:17 quatermain kernel: x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+Nov 25 21:15:17 quatermain kernel: x86/fpu: Supporting XSAVE feature 0x008: 'MPX bounds registers'
+Nov 25 21:15:17 quatermain kernel: x86/fpu: Supporting XSAVE feature 0x010: 'MPX CSR'
+Nov 25 21:15:17 quatermain kernel: x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+Nov 25 21:15:17 quatermain kernel: x86/fpu: xstate_offset[3]:  832, xstate_sizes[3]:   64
+Nov 25 21:15:17 quatermain kernel: x86/fpu: xstate_offset[4]:  896, xstate_sizes[4]:   64
+Nov 25 21:15:17 quatermain kernel: x86/fpu: Enabled xstate features 0x1f, context size is 960 bytes, using 'compacted' format.
+Nov 25 21:15:17 quatermain kernel: x86/fpu: Using 'eager' FPU context switches.
+Nov 25 21:15:17 quatermain kernel: e820: BIOS-provided physical RAM map:
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x0000000000000000-0x0000000000057fff] usable
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x0000000000058000-0x0000000000058fff] reserved
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x0000000000059000-0x000000000009dfff] usable
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x000000000009e000-0x00000000000fffff] reserved
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x0000000000100000-0x000000008950bfff] usable
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x000000008950c000-0x000000008950cfff] ACPI NVS
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x000000008950d000-0x0000000089536fff] reserved
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x0000000089537000-0x000000008beb1fff] usable
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x000000008beb2000-0x000000008bf2bfff] type 20
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x000000008bf2c000-0x000000008bf9efff] reserved
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x000000008bf9f000-0x000000008bfc4fff] ACPI NVS
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x000000008bfc5000-0x000000008bffefff] ACPI data
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x000000008bfff000-0x000000008bffffff] usable
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x000000008c000000-0x000000008f7fffff] reserved
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x00000000e00fa000-0x00000000e00fafff] reserved
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x00000000e00fd000-0x00000000e00fdfff] reserved
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x00000000fe000000-0x00000000fe010fff] reserved
+Nov 25 21:15:17 quatermain kernel: BIOS-e820: [mem 0x0000000100000000-0x000000026f7fffff] usable
+Nov 25 21:15:17 quatermain kernel: NX (Execute Disable) protection: active
+Nov 25 21:15:17 quatermain kernel: efi: EFI v2.50 by MSFT
+Nov 25 21:15:17 quatermain kernel: efi:  ACPI=0x8bffe000  ACPI 2.0=0x8bffe014  SMBIOS=0x8bf36000  SMBIOS 3.0=0x8bf34000  MEMATTR=0x8b2df018  ESRT=0x8bf37918 
+Nov 25 21:15:17 quatermain kernel: SMBIOS 3.0.0 present.
+Nov 25 21:15:17 quatermain kernel: e820: update [mem 0x00000000-0x00000fff] usable ==> reserved
+Nov 25 21:15:17 quatermain kernel: e820: remove [mem 0x000a0000-0x000fffff] usable
+Nov 25 21:15:17 quatermain kernel: e820: last_pfn = 0x26f800 max_arch_pfn = 0x400000000
+Nov 25 21:15:17 quatermain kernel: MTRR default type: write-back
+Nov 25 21:15:17 quatermain kernel: MTRR fixed ranges enabled:
+Nov 25 21:15:17 quatermain kernel:   00000-9FFFF write-back
+Nov 25 21:15:17 quatermain kernel:   A0000-BFFFF uncachable
+Nov 25 21:15:17 quatermain kernel:   C0000-FFFFF write-protect
+Nov 25 21:15:17 quatermain kernel: MTRR variable ranges enabled:
+Nov 25 21:15:17 quatermain kernel:   0 base 00C0000000 mask 7FC0000000 uncachable
+Nov 25 21:15:17 quatermain kernel:   1 base 00A0000000 mask 7FE0000000 uncachable
+Nov 25 21:15:17 quatermain kernel:   2 base 0090000000 mask 7FF0000000 uncachable
+Nov 25 21:15:17 quatermain kernel:   3 base 008E000000 mask 7FFE000000 uncachable
+Nov 25 21:15:17 quatermain kernel:   4 base 008D000000 mask 7FFF000000 uncachable
+Nov 25 21:15:17 quatermain kernel:   5 disabled
+Nov 25 21:15:17 quatermain kernel:   6 disabled
+Nov 25 21:15:17 quatermain kernel:   7 disabled
+Nov 25 21:15:17 quatermain kernel:   8 disabled
+Nov 25 21:15:17 quatermain kernel:   9 disabled
+Nov 25 21:15:17 quatermain kernel: x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WC  UC- WT  
+Nov 25 21:15:17 quatermain kernel: e820: last_pfn = 0x8c000 max_arch_pfn = 0x400000000
+Nov 25 21:15:17 quatermain kernel: esrt: Reserving ESRT space from 0x000000008bf37918 to 0x000000008bf379f0.
+Nov 25 21:15:17 quatermain kernel: Base memory trampoline at [ffff8bbb80097000] 97000 size 24576
+Nov 25 21:15:17 quatermain kernel: Using GB pages for direct mapping
+Nov 25 21:15:17 quatermain kernel: BRK [0x204b6b000, 0x204b6bfff] PGTABLE
+Nov 25 21:15:17 quatermain kernel: BRK [0x204b6c000, 0x204b6cfff] PGTABLE
+Nov 25 21:15:17 quatermain kernel: BRK [0x204b6d000, 0x204b6dfff] PGTABLE
+Nov 25 21:15:17 quatermain kernel: BRK [0x204b6e000, 0x204b6efff] PGTABLE
+Nov 25 21:15:17 quatermain kernel: BRK [0x204b6f000, 0x204b6ffff] PGTABLE
+Nov 25 21:15:17 quatermain kernel: BRK [0x204b70000, 0x204b70fff] PGTABLE
+Nov 25 21:15:17 quatermain kernel: BRK [0x204b71000, 0x204b71fff] PGTABLE
+Nov 25 21:15:17 quatermain kernel: BRK [0x204b72000, 0x204b72fff] PGTABLE
+Nov 25 21:15:17 quatermain kernel: RAMDISK: [mem 0x35aec000-0x36d6dfff]
+Nov 25 21:15:17 quatermain kernel: ACPI: Early table checksum verification disabled
+Nov 25 21:15:17 quatermain kernel: ACPI: RSDP 0x000000008BFFE014 000024 (v02 MSFT  )
+Nov 25 21:15:17 quatermain kernel: ACPI: XSDT 0x000000008BFFD0E8 0000BC (v01 MSFT   MSFT     00000000 MSFT 0000005F)
+Nov 25 21:15:17 quatermain kernel: ACPI: FACP 0x000000008BFF4000 0000F4 (v05 MSFT   MSFT     00000000 MSFT 0000005F)
+Nov 25 21:15:17 quatermain kernel: ACPI: DSDT 0x000000008BFDB000 0143DD (v02 MSFT   MSFT     00000000 INTL 20141107)
+Nov 25 21:15:17 quatermain kernel: ACPI: FACS 0x000000008BFA6000 000040
+Nov 25 21:15:17 quatermain kernel: ACPI: SSDT 0x000000008BFFC000 0003C6 (v02 MSFT   Tpm2Tabl 00001000 INTL 20141107)
+Nov 25 21:15:17 quatermain kernel: ACPI: TPM2 0x000000008BFFB000 000034 (v03 MSFT   MSFT     00000002 MSFT 0000005F)
+Nov 25 21:15:17 quatermain kernel: ACPI: SSDT 0x000000008BFF5000 005329 (v02 SaSsdt SaSsdt   00003000 INTL 20141107)
+Nov 25 21:15:17 quatermain kernel: ACPI: HPET 0x000000008BFF3000 000038 (v01 MSFT   MSFT     00000001 MSFT 0000005F)
+Nov 25 21:15:17 quatermain kernel: ACPI: LPIT 0x000000008BFF2000 000094 (v01 MSFT   MSFT     00000000 MSFT 0000005F)
+Nov 25 21:15:17 quatermain kernel: ACPI: APIC 0x000000008BFF1000 0000BC (v03 MSFT   MSFT     00000001 MSFT 0000005F)
+Nov 25 21:15:17 quatermain kernel: ACPI: MCFG 0x000000008BFF0000 00003C (v01 MSFT   MSFT     00000001 MSFT 0000005F)
+Nov 25 21:15:17 quatermain kernel: ACPI: SSDT 0x000000008BFD9000 001A03 (v02 MSFT   RTD3APNV 00001000 INTL 20141107)
+Nov 25 21:15:17 quatermain kernel: ACPI: SSDT 0x000000008BFD8000 00019A (v02 MSFT   Sata0Ide 00001000 INTL 20141107)
+Nov 25 21:15:17 quatermain kernel: ACPI: DBG2 0x000000008BFD7000 000061 (v00 MSFT            00000000 MSFT 0000005F)
+Nov 25 21:15:17 quatermain kernel: ACPI: SSDT 0x000000008BFD6000 0006BC (v02 MSFT   xh_ap000 00000000 INTL 20141107)
+Nov 25 21:15:17 quatermain kernel: ACPI: SSDT 0x000000008BFD5000 000E73 (v02 CpuRef CpuSsdt  00003000 INTL 20141107)
+Nov 25 21:15:17 quatermain kernel: ACPI: MSDM 0x000000008BFD4000 000055 (v01 MSFT            00000001 MSFT 00000001)
+Nov 25 21:15:17 quatermain kernel: ACPI: DMAR 0x000000008BFD3000 000138 (v01 MSFT   MSFT     00000001 INTL 00000001)
+Nov 25 21:15:17 quatermain kernel: ACPI: NHLT 0x000000008BFD2000 00002D (v00 MSFT   MSFT     00000002 MSFT 0000005F)
+Nov 25 21:15:17 quatermain kernel: ACPI: FPDT 0x000000008BFD1000 000034 (v01 MSFT   MSFT     00000002 MSFT 0000005F)
+Nov 25 21:15:17 quatermain kernel: ACPI: BGRT 0x000000008BFD0000 000038 (v01 MSFT   MSFT     00000002 MSFT 0000005F)
+Nov 25 21:15:17 quatermain kernel: ACPI: WSMT 0x000000008BFCF000 000028 (v01 MSFT   MSFT     00000002 MSFT 0000005F)
+Nov 25 21:15:17 quatermain kernel: ACPI: Local APIC address 0xfee00000
+Nov 25 21:15:17 quatermain kernel: No NUMA configuration found
+Nov 25 21:15:17 quatermain kernel: Faking a node at [mem 0x0000000000000000-0x000000026f7fffff]
+Nov 25 21:15:17 quatermain kernel: NODE_DATA(0) allocated [mem 0x26f7fb000-0x26f7fffff]
+Nov 25 21:15:17 quatermain kernel: Zone ranges:
+Nov 25 21:15:17 quatermain kernel:   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+Nov 25 21:15:17 quatermain kernel:   DMA32    [mem 0x0000000001000000-0x00000000ffffffff]
+Nov 25 21:15:17 quatermain kernel:   Normal   [mem 0x0000000100000000-0x000000026f7fffff]
+Nov 25 21:15:17 quatermain kernel:   Device   empty
+Nov 25 21:15:17 quatermain kernel: Movable zone start for each node
+Nov 25 21:15:17 quatermain kernel: Early memory node ranges
+Nov 25 21:15:17 quatermain kernel:   node   0: [mem 0x0000000000001000-0x0000000000057fff]
+Nov 25 21:15:17 quatermain kernel:   node   0: [mem 0x0000000000059000-0x000000000009dfff]
+Nov 25 21:15:17 quatermain kernel:   node   0: [mem 0x0000000000100000-0x000000008950bfff]
+Nov 25 21:15:17 quatermain kernel:   node   0: [mem 0x0000000089537000-0x000000008beb1fff]
+Nov 25 21:15:17 quatermain kernel:   node   0: [mem 0x000000008bfff000-0x000000008bffffff]
+Nov 25 21:15:17 quatermain kernel:   node   0: [mem 0x0000000100000000-0x000000026f7fffff]
+Nov 25 21:15:17 quatermain kernel: Initmem setup node 0 [mem 0x0000000000001000-0x000000026f7fffff]
+Nov 25 21:15:17 quatermain kernel: On node 0 totalpages: 2078244
+Nov 25 21:15:17 quatermain kernel:   DMA zone: 64 pages used for memmap
+Nov 25 21:15:17 quatermain kernel:   DMA zone: 23 pages reserved
+Nov 25 21:15:17 quatermain kernel:   DMA zone: 3996 pages, LIFO batch:0
+Nov 25 21:15:17 quatermain kernel:   DMA32 zone: 8891 pages used for memmap
+Nov 25 21:15:17 quatermain kernel:   DMA32 zone: 568968 pages, LIFO batch:31
+Nov 25 21:15:17 quatermain kernel:   Normal zone: 23520 pages used for memmap
+Nov 25 21:15:17 quatermain kernel:   Normal zone: 1505280 pages, LIFO batch:31
+Nov 25 21:15:17 quatermain kernel: Reserving Intel graphics memory at 0x000000008d800000-0x000000008f7fffff
+Nov 25 21:15:17 quatermain kernel: ACPI: PM-Timer IO Port: 0x1808
+Nov 25 21:15:17 quatermain kernel: ACPI: Local APIC address 0xfee00000
+Nov 25 21:15:17 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x01] high edge lint[0x1])
+Nov 25 21:15:17 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x02] high edge lint[0x1])
+Nov 25 21:15:17 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x03] high edge lint[0x1])
+Nov 25 21:15:17 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x04] high edge lint[0x1])
+Nov 25 21:15:17 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x05] high edge lint[0x1])
+Nov 25 21:15:17 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x06] high edge lint[0x1])
+Nov 25 21:15:17 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x07] high edge lint[0x1])
+Nov 25 21:15:17 quatermain kernel: ACPI: LAPIC_NMI (acpi_id[0x08] high edge lint[0x1])
+Nov 25 21:15:17 quatermain kernel: IOAPIC[0]: apic_id 2, version 32, address 0xfec00000, GSI 0-119
+Nov 25 21:15:17 quatermain kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+Nov 25 21:15:17 quatermain kernel: ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+Nov 25 21:15:17 quatermain kernel: ACPI: IRQ0 used by override.
+Nov 25 21:15:17 quatermain kernel: ACPI: IRQ9 used by override.
+Nov 25 21:15:17 quatermain kernel: Using ACPI (MADT) for SMP configuration information
+Nov 25 21:15:17 quatermain kernel: ACPI: HPET id: 0x8086a201 base: 0xfed00000
+Nov 25 21:15:17 quatermain kernel: smpboot: Allowing 4 CPUs, 0 hotplug CPUs
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0x00000000-0x00000fff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0x00058000-0x00058fff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0x0009e000-0x000fffff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0x8950c000-0x8950cfff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0x8950d000-0x89536fff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0x8beb2000-0x8bf2bfff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0x8bf2c000-0x8bf9efff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0x8bf9f000-0x8bfc4fff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0x8bfc5000-0x8bffefff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0x8c000000-0x8f7fffff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0x8f800000-0xe00f9fff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0xe00fa000-0xe00fafff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0xe00fb000-0xe00fcfff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0xe00fd000-0xe00fdfff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0xe00fe000-0xfdffffff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0xfe000000-0xfe010fff]
+Nov 25 21:15:17 quatermain kernel: PM: Registered nosave memory: [mem 0xfe011000-0xffffffff]
+Nov 25 21:15:17 quatermain kernel: e820: [mem 0x8f800000-0xe00f9fff] available for PCI devices
+Nov 25 21:15:17 quatermain kernel: Booting paravirtualized kernel on bare hardware
+Nov 25 21:15:17 quatermain kernel: clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645519600211568 ns
+Nov 25 21:15:17 quatermain kernel: setup_percpu: NR_CPUS:512 nr_cpumask_bits:512 nr_cpu_ids:4 nr_node_ids:1
+Nov 25 21:15:17 quatermain kernel: percpu: Embedded 35 pages/cpu @ffff8bbdef400000 s104856 r8192 d30312 u524288
+Nov 25 21:15:17 quatermain kernel: pcpu-alloc: s104856 r8192 d30312 u524288 alloc=1*2097152
+Nov 25 21:15:17 quatermain kernel: pcpu-alloc: [0] 0 1 2 3 
+Nov 25 21:15:17 quatermain kernel: Built 1 zonelists in Node order, mobility grouping on.  Total pages: 2045746
+Nov 25 21:15:17 quatermain kernel: Policy zone: Normal
+Nov 25 21:15:17 quatermain kernel: Kernel command line: BOOT_IMAGE=/vmlinuz-4.9.0-rc6-mssp4+ root=/dev/mapper/lvm--quatermain-root ro resume=/dev/mapper/lvm--quatermain-swap quiet
+Nov 25 21:15:17 quatermain kernel: PID hash table entries: 4096 (order: 3, 32768 bytes)
+Nov 25 21:15:17 quatermain kernel: Calgary: detecting Calgary via BIOS EBDA area
+Nov 25 21:15:17 quatermain kernel: Calgary: Unable to locate Rio Grande table in EBDA - bailing!
+Nov 25 21:15:17 quatermain kernel: Memory: 8030696K/8312976K available (6186K kernel code, 1252K rwdata, 2852K rodata, 1404K init, 804K bss, 282280K reserved, 0K cma-reserved)
+Nov 25 21:15:17 quatermain kernel: Hierarchical RCU implementation.
+Nov 25 21:15:17 quatermain kernel:         Build-time adjustment of leaf fanout to 64.
+Nov 25 21:15:17 quatermain kernel:         RCU restricting CPUs from NR_CPUS=512 to nr_cpu_ids=4.
+Nov 25 21:15:17 quatermain kernel: RCU: Adjusting geometry for rcu_fanout_leaf=64, nr_cpu_ids=4
+Nov 25 21:15:17 quatermain kernel: Using NULL legacy PIC
+Nov 25 21:15:17 quatermain kernel: NR_IRQS:33024 nr_irqs:1024 0
+Nov 25 21:15:17 quatermain kernel: Console: colour dummy device 80x25
+Nov 25 21:15:17 quatermain kernel: console [tty0] enabled
+Nov 25 21:15:17 quatermain kernel: clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 79635855245 ns
+Nov 25 21:15:17 quatermain kernel: hpet clockevent registered
+Nov 25 21:15:17 quatermain kernel: tsc: Detected 2200.000 MHz processor
+Nov 25 21:15:17 quatermain kernel: Calibrating delay loop (skipped), value calculated using timer frequency.. 4416.00 BogoMIPS (lpj=8832000)
+Nov 25 21:15:17 quatermain kernel: pid_max: default: 32768 minimum: 301
+Nov 25 21:15:17 quatermain kernel: ACPI: Core revision 20160831
+Nov 25 21:15:17 quatermain kernel: ACPI: 7 ACPI AML tables successfully acquired and loaded
+Nov 25 21:15:17 quatermain kernel: Security Framework initialized
+Nov 25 21:15:17 quatermain kernel: Yama: becoming mindful.
+Nov 25 21:15:17 quatermain kernel: AppArmor: AppArmor disabled by boot time parameter
+Nov 25 21:15:17 quatermain kernel: Dentry cache hash table entries: 1048576 (order: 11, 8388608 bytes)
+Nov 25 21:15:17 quatermain kernel: Inode-cache hash table entries: 524288 (order: 10, 4194304 bytes)
+Nov 25 21:15:17 quatermain kernel: Mount-cache hash table entries: 16384 (order: 5, 131072 bytes)
+Nov 25 21:15:17 quatermain kernel: Mountpoint-cache hash table entries: 16384 (order: 5, 131072 bytes)
+Nov 25 21:15:17 quatermain kernel: CPU: Physical Processor ID: 0
+Nov 25 21:15:17 quatermain kernel: CPU: Processor Core ID: 0
+Nov 25 21:15:17 quatermain kernel: ENERGY_PERF_BIAS: Set to 'normal', was 'performance'
+Nov 25 21:15:17 quatermain kernel: ENERGY_PERF_BIAS: View and update with x86_energy_perf_policy(8)
+Nov 25 21:15:17 quatermain kernel: mce: CPU supports 9 MCE banks
+Nov 25 21:15:17 quatermain kernel: CPU0: Thermal monitoring enabled (TM1)
+Nov 25 21:15:17 quatermain kernel: process: using mwait in idle threads
+Nov 25 21:15:17 quatermain kernel: Last level iTLB entries: 4KB 64, 2MB 8, 4MB 8
+Nov 25 21:15:17 quatermain kernel: Last level dTLB entries: 4KB 64, 2MB 0, 4MB 0, 1GB 4
+Nov 25 21:15:17 quatermain kernel: Freeing SMP alternatives memory: 24K (ffffffffbd29a000 - ffffffffbd2a0000)
+Nov 25 21:15:17 quatermain kernel: ftrace: allocating 25437 entries in 100 pages
+Nov 25 21:15:17 quatermain kernel: smpboot: APIC(0) Converting physical 0 to logical package 0
+Nov 25 21:15:17 quatermain kernel: smpboot: Max logical packages: 2
+Nov 25 21:15:17 quatermain kernel: DMAR: Host address width 39
+Nov 25 21:15:17 quatermain kernel: DMAR: DRHD base: 0x000000fed90000 flags: 0x0
+Nov 25 21:15:17 quatermain kernel: DMAR: dmar0: reg_base_addr fed90000 ver 1:0 cap 1c0000c40660462 ecap 7e3ff0505e
+Nov 25 21:15:17 quatermain kernel: DMAR: DRHD base: 0x000000fed91000 flags: 0x1
+Nov 25 21:15:17 quatermain kernel: DMAR: dmar1: reg_base_addr fed91000 ver 1:0 cap d2008c40660462 ecap f050da
+Nov 25 21:15:17 quatermain kernel: DMAR: RMRR base: 0x0000003e2e0000 end: 0x0000003e2fffff
+Nov 25 21:15:17 quatermain kernel: DMAR: RMRR base: 0x0000008d000000 end: 0x0000008f7fffff
+Nov 25 21:15:17 quatermain kernel: DMAR: ANDD device: 1 name: \_SB.PCI0.I2C0
+Nov 25 21:15:17 quatermain kernel: DMAR: ANDD device: 2 name: \_SB.PCI0.I2C1
+Nov 25 21:15:17 quatermain kernel: DMAR: ANDD device: 3 name: \_SB.PCI0.I2C2
+Nov 25 21:15:17 quatermain kernel: DMAR: ANDD device: 4 name: \_SB.PCI0.I2C3
+Nov 25 21:15:17 quatermain kernel: DMAR-IR: IOAPIC id 2 under DRHD base  0xfed91000 IOMMU 1
+Nov 25 21:15:17 quatermain kernel: DMAR-IR: HPET id 0 under DRHD base 0xfed91000
+Nov 25 21:15:17 quatermain kernel: DMAR-IR: Queued invalidation will be enabled to support x2apic and Intr-remapping.
+Nov 25 21:15:17 quatermain kernel: DMAR-IR: Enabled IRQ remapping in x2apic mode
+Nov 25 21:15:17 quatermain kernel: x2apic enabled
+Nov 25 21:15:17 quatermain kernel: Switched APIC routing to cluster x2apic.
+Nov 25 21:15:17 quatermain kernel: TSC deadline timer enabled
+Nov 25 21:15:17 quatermain kernel: smpboot: CPU0: Intel(R) Core(TM) i7-6650U CPU @ 2.20GHz (family: 0x6, model: 0x4e, stepping: 0x3)
+Nov 25 21:15:17 quatermain kernel: Performance Events: PEBS fmt3+, Skylake events, 32-deep LBR, full-width counters, Intel PMU driver.
+Nov 25 21:15:17 quatermain kernel: ... version:                4
+Nov 25 21:15:17 quatermain kernel: ... bit width:              48
+Nov 25 21:15:17 quatermain kernel: ... generic registers:      4
+Nov 25 21:15:17 quatermain kernel: ... value mask:             0000ffffffffffff
+Nov 25 21:15:17 quatermain kernel: ... max period:             0000ffffffffffff
+Nov 25 21:15:17 quatermain kernel: ... fixed-purpose events:   3
+Nov 25 21:15:17 quatermain kernel: ... event mask:             000000070000000f
+Nov 25 21:15:17 quatermain kernel: NMI watchdog: enabled on all CPUs, permanently consumes one hw-PMU counter.
+Nov 25 21:15:17 quatermain kernel: x86: Booting SMP configuration:
+Nov 25 21:15:17 quatermain kernel: .... node  #0, CPUs:      #1 #2 #3
+Nov 25 21:15:17 quatermain kernel: x86: Booted up 1 node, 4 CPUs
+Nov 25 21:15:17 quatermain kernel: smpboot: Total of 4 processors activated (17667.33 BogoMIPS)
+Nov 25 21:15:17 quatermain kernel: devtmpfs: initialized
+Nov 25 21:15:17 quatermain kernel: x86/mm: Memory block size: 128MB
+Nov 25 21:15:17 quatermain kernel: PM: Registering ACPI NVS region [mem 0x8950c000-0x8950cfff] (4096 bytes)
+Nov 25 21:15:17 quatermain kernel: PM: Registering ACPI NVS region [mem 0x8bf9f000-0x8bfc4fff] (155648 bytes)
+Nov 25 21:15:17 quatermain kernel: clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+Nov 25 21:15:17 quatermain kernel: pinctrl core: initialized pinctrl subsystem
+Nov 25 21:15:17 quatermain kernel: NET: Registered protocol family 16
+Nov 25 21:15:17 quatermain kernel: cpuidle: using governor ladder
+Nov 25 21:15:17 quatermain kernel: cpuidle: using governor menu
+Nov 25 21:15:17 quatermain kernel: ACPI: bus type PCI registered
+Nov 25 21:15:17 quatermain kernel: acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
+Nov 25 21:15:17 quatermain kernel: PCI: MMCONFIG for domain 0000 [bus 00-ff] at [mem 0xe0000000-0xefffffff] (base 0xe0000000)
+Nov 25 21:15:17 quatermain kernel: PCI: not using MMCONFIG
+Nov 25 21:15:17 quatermain kernel: PCI: Using configuration type 1 for base access
+Nov 25 21:15:17 quatermain kernel: HugeTLB registered 1 GB page size, pre-allocated 0 pages
+Nov 25 21:15:17 quatermain kernel: HugeTLB registered 2 MB page size, pre-allocated 0 pages
+Nov 25 21:15:17 quatermain kernel: ACPI: Added _OSI(Module Device)
+Nov 25 21:15:17 quatermain kernel: ACPI: Added _OSI(Processor Device)
+Nov 25 21:15:17 quatermain kernel: ACPI: Added _OSI(3.0 _SCP Extensions)
+Nov 25 21:15:17 quatermain kernel: ACPI: Added _OSI(Processor Aggregator Device)
+Nov 25 21:15:17 quatermain kernel: ACPI: Executed 18 blocks of module-level executable AML code
+Nov 25 21:15:17 quatermain kernel: ACPI: [Firmware Bug]: BIOS _OSI(Linux) query ignored
+Nov 25 21:15:17 quatermain kernel: ACPI: Dynamic OEM Table Load:
+Nov 25 21:15:17 quatermain kernel: ACPI: SSDT 0xFFFF8BBDE507B000 0005DC (v02 PmRef  Cpu0Ist  00003000 INTL 20141107)
+Nov 25 21:15:17 quatermain kernel: ACPI: \_PR_.CPU0: _OSC native thermal LVT Acked
+Nov 25 21:15:17 quatermain kernel: ACPI: Dynamic OEM Table Load:
+Nov 25 21:15:17 quatermain kernel: ACPI: SSDT 0xFFFF8BBDE5096400 00037F (v02 PmRef  Cpu0Cst  00003001 INTL 20141107)
+Nov 25 21:15:17 quatermain kernel: ACPI: Dynamic OEM Table Load:
+Nov 25 21:15:17 quatermain kernel: ACPI: SSDT 0xFFFF8BBDE507B800 0005AA (v02 PmRef  ApIst    00003000 INTL 20141107)
+Nov 25 21:15:17 quatermain kernel: ACPI: Dynamic OEM Table Load:
+Nov 25 21:15:17 quatermain kernel: ACPI: SSDT 0xFFFF8BBDE68A5800 000119 (v02 PmRef  ApCst    00003000 INTL 20141107)
+Nov 25 21:15:17 quatermain kernel: ACPI : EC: EC started
+Nov 25 21:15:17 quatermain kernel: ACPI: \_SB_.PCI0.LPCB.EC0_: Used as first EC
+Nov 25 21:15:17 quatermain kernel: ACPI: \_SB_.PCI0.LPCB.EC0_: GPE=0x50, EC_CMD/EC_SC=0x66, EC_DATA=0x62
+Nov 25 21:15:17 quatermain kernel: ACPI: \_SB_.PCI0.LPCB.EC0_: Used as boot DSDT EC to handle transactions
+Nov 25 21:15:17 quatermain kernel: ACPI: Interpreter enabled
+Nov 25 21:15:17 quatermain kernel: ACPI: (supports S0 S4 S5)
+Nov 25 21:15:17 quatermain kernel: ACPI: Using IOAPIC for interrupt routing
+Nov 25 21:15:17 quatermain kernel: PCI: MMCONFIG for domain 0000 [bus 00-ff] at [mem 0xe0000000-0xefffffff] (base 0xe0000000)
+Nov 25 21:15:17 quatermain kernel: PCI: MMCONFIG at [mem 0xe0000000-0xefffffff] reserved in ACPI motherboard resources
+Nov 25 21:15:17 quatermain kernel: PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [PG00] (on)
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [PG01] (on)
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [PG02] (on)
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [PX01] (on)
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [PX02] (on)
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [PX03] (on)
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [PX04] (on)
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [PX05] (on)
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [PX06] (on)
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [PX07] (on)
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [USBC] (on)
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [PAUD] (on)
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [PXP] (off)
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [PXP] (off)
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [PRWF] (on)
+Nov 25 21:15:17 quatermain kernel: ACPI: Power Resource [CAMP] (on)
+Nov 25 21:15:17 quatermain kernel: ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-fe])
+Nov 25 21:15:17 quatermain kernel: acpi PNP0A08:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI]
+Nov 25 21:15:17 quatermain kernel: acpi PNP0A08:00: _OSC: OS now controls [PCIeHotplug PME AER PCIeCapability]
+Nov 25 21:15:17 quatermain kernel: PCI host bridge to bus 0000:00
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000c0000-0x000c3fff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000c4000-0x000c7fff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000c8000-0x000cbfff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000cc000-0x000cffff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000d0000-0x000d3fff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000d4000-0x000d7fff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000d8000-0x000dbfff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000dc000-0x000dffff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000e0000-0x000e3fff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000e4000-0x000e7fff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000e8000-0x000ebfff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000ec000-0x000effff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x000f0000-0x000fffff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0x8f800000-0xdfffffff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [mem 0xfd000000-0xfe7fffff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: root bus resource [bus 00-fe]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:00.0: [8086:1904] type 00 class 0x060000
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:02.0: [8086:1926] type 00 class 0x030000
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:02.0: reg 0x10: [mem 0xa0000000-0xa0ffffff 64bit]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:02.0: reg 0x18: [mem 0x90000000-0x9fffffff 64bit pref]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:02.0: reg 0x20: [io  0x4000-0x403f]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:05.0: [8086:1919] type 00 class 0x048000
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:05.0: reg 0x10: [mem 0xa1000000-0xa13fffff 64bit]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:08.0: [8086:1911] type 00 class 0x088000
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:08.0: reg 0x10: [mem 0xa1738000-0xa1738fff 64bit]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:14.0: [8086:9d2f] type 00 class 0x0c0330
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:14.0: reg 0x10: [mem 0xa1700000-0xa170ffff 64bit]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:14.0: PME# supported from D3hot D3cold
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:14.0: System wakeup disabled by ACPI
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:14.2: [8086:9d31] type 00 class 0x118000
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:14.2: reg 0x10: [mem 0xa1739000-0xa1739fff 64bit]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:14.3: [8086:9d32] type 00 class 0x048000
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:14.3: reg 0x10: [mem 0xa1710000-0xa171ffff 64bit]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:15.0: [8086:9d60] type 00 class 0x118000
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:15.0: reg 0x10: [mem 0xa173a000-0xa173afff 64bit]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:15.1: [8086:9d61] type 00 class 0x118000
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:15.1: reg 0x10: [mem 0xa173b000-0xa173bfff 64bit]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:15.2: [8086:9d62] type 00 class 0x118000
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:15.2: reg 0x10: [mem 0xa173c000-0xa173cfff 64bit]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:15.3: [8086:9d63] type 00 class 0x118000
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:15.3: reg 0x10: [mem 0xa173d000-0xa173dfff 64bit]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:16.0: [8086:9d3a] type 00 class 0x078000
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:16.0: reg 0x10: [mem 0xa173e000-0xa173efff 64bit]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:16.0: PME# supported from D3hot
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:16.4: [8086:9d3e] type 00 class 0x078000
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:16.4: reg 0x10: [mem 0xa173f000-0xa173ffff 64bit]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:16.4: PME# supported from D3hot
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1c.0: [8086:9d14] type 01 class 0x060400
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1c.0: PME# supported from D0 D3hot D3cold
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1c.0: System wakeup disabled by ACPI
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1d.0: [8086:9d18] type 01 class 0x060400
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1d.0: PME# supported from D0 D3hot D3cold
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1d.0: System wakeup disabled by ACPI
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1f.0: [8086:9d48] type 00 class 0x060100
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1f.2: [8086:9d21] type 00 class 0x058000
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1f.2: reg 0x10: [mem 0xa1734000-0xa1737fff]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1f.3: [8086:9d70] type 00 class 0x040380
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1f.3: reg 0x10: [mem 0xa1730000-0xa1733fff 64bit]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1f.3: reg 0x20: [mem 0xa1720000-0xa172ffff 64bit]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1f.3: PME# supported from D3hot D3cold
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1f.3: System wakeup disabled by ACPI
+Nov 25 21:15:17 quatermain kernel: pci 0000:01:00.0: [144d:a802] type 00 class 0x010802
+Nov 25 21:15:17 quatermain kernel: pci 0000:01:00.0: reg 0x10: [mem 0xa1600000-0xa1603fff 64bit]
+Nov 25 21:15:17 quatermain kernel: pci 0000:01:00.0: reg 0x18: [io  0x3000-0x30ff]
+Nov 25 21:15:17 quatermain kernel: pci 0000:01:00.0: System wakeup disabled by ACPI
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1c.0: PCI bridge to [bus 01]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1c.0:   bridge window [io  0x3000-0x3fff]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1c.0:   bridge window [mem 0xa1600000-0xa16fffff]
+Nov 25 21:15:17 quatermain kernel: pci 0000:02:00.0: [11ab:2b38] type 00 class 0x020000
+Nov 25 21:15:17 quatermain kernel: pci 0000:02:00.0: reg 0x10: [mem 0xa1500000-0xa15fffff 64bit pref]
+Nov 25 21:15:17 quatermain kernel: pci 0000:02:00.0: reg 0x18: [mem 0xa1400000-0xa14fffff 64bit pref]
+Nov 25 21:15:17 quatermain kernel: pci 0000:02:00.0: supports D1 D2
+Nov 25 21:15:17 quatermain kernel: pci 0000:02:00.0: PME# supported from D0 D1 D3hot D3cold
+Nov 25 21:15:17 quatermain kernel: pci 0000:02:00.0: System wakeup disabled by ACPI
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1d.0: PCI bridge to [bus 02]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1d.0:   bridge window [mem 0xa1400000-0xa15fffff 64bit pref]
+Nov 25 21:15:17 quatermain kernel: ACPI: PCI Interrupt Link [LNKA] (IRQs 3 4 5 6 10 *11 12 14 15)
+Nov 25 21:15:17 quatermain kernel: ACPI: PCI Interrupt Link [LNKB] (IRQs 3 4 5 6 *10 11 12 14 15)
+Nov 25 21:15:17 quatermain kernel: ACPI: PCI Interrupt Link [LNKC] (IRQs 3 4 5 6 10 *11 12 14 15)
+Nov 25 21:15:17 quatermain kernel: ACPI: PCI Interrupt Link [LNKD] (IRQs 3 4 5 6 10 *11 12 14 15)
+Nov 25 21:15:17 quatermain kernel: ACPI: PCI Interrupt Link [LNKE] (IRQs 3 4 5 6 10 *11 12 14 15)
+Nov 25 21:15:17 quatermain kernel: ACPI: PCI Interrupt Link [LNKF] (IRQs 3 4 5 6 10 *11 12 14 15)
+Nov 25 21:15:17 quatermain kernel: ACPI: PCI Interrupt Link [LNKG] (IRQs 3 4 5 6 10 *11 12 14 15)
+Nov 25 21:15:17 quatermain kernel: ACPI: PCI Interrupt Link [LNKH] (IRQs 3 4 5 6 10 *11 12 14 15)
+Nov 25 21:15:17 quatermain kernel: ACPI: Enabled 10 GPEs in block 00 to 7F
+Nov 25 21:15:17 quatermain kernel: ACPI Warning: GPE type mismatch (level/edge) (20160831/evxface-826)
+Nov 25 21:15:17 quatermain kernel: ACPI : EC: event unblocked
+Nov 25 21:15:17 quatermain kernel: ACPI: \_SB_.PCI0.LPCB.EC0_: GPE=0x50, EC_CMD/EC_SC=0x66, EC_DATA=0x62
+Nov 25 21:15:17 quatermain kernel: ACPI: \_SB_.PCI0.LPCB.EC0_: Used as boot DSDT EC to handle transactions and events
+Nov 25 21:15:17 quatermain kernel: vgaarb: setting as boot device: PCI:0000:00:02.0
+Nov 25 21:15:17 quatermain kernel: vgaarb: device added: PCI:0000:00:02.0,decodes=io+mem,owns=io+mem,locks=none
+Nov 25 21:15:17 quatermain kernel: vgaarb: loaded
+Nov 25 21:15:17 quatermain kernel: vgaarb: bridge control possible 0000:00:02.0
+Nov 25 21:15:17 quatermain kernel: Registered efivars operations
+Nov 25 21:15:17 quatermain kernel: PCI: Using ACPI for IRQ routing
+Nov 25 21:15:17 quatermain kernel: PCI: pci_cache_line_size set to 64 bytes
+Nov 25 21:15:17 quatermain kernel: e820: reserve RAM buffer [mem 0x00058000-0x0005ffff]
+Nov 25 21:15:17 quatermain kernel: e820: reserve RAM buffer [mem 0x0009e000-0x0009ffff]
+Nov 25 21:15:17 quatermain kernel: e820: reserve RAM buffer [mem 0x8950c000-0x8bffffff]
+Nov 25 21:15:17 quatermain kernel: e820: reserve RAM buffer [mem 0x8beb2000-0x8bffffff]
+Nov 25 21:15:17 quatermain kernel: e820: reserve RAM buffer [mem 0x26f800000-0x26fffffff]
+Nov 25 21:15:17 quatermain kernel: hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0, 0, 0, 0, 0, 0
+Nov 25 21:15:17 quatermain kernel: hpet0: 8 comparators, 64-bit 24.000000 MHz counter
+Nov 25 21:15:17 quatermain kernel: clocksource: Switched to clocksource hpet
+Nov 25 21:15:17 quatermain kernel: VFS: Disk quotas dquot_6.6.0
+Nov 25 21:15:17 quatermain kernel: VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+Nov 25 21:15:17 quatermain kernel: pnp: PnP ACPI init
+Nov 25 21:15:17 quatermain kernel: system 00:00: [mem 0xfd000000-0xfdabffff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:00: [mem 0xfdad0000-0xfdadffff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:00: [mem 0xfdb00000-0xfdffffff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:00: [mem 0xfe000000-0xfe01ffff] could not be reserved
+Nov 25 21:15:17 quatermain kernel: system 00:00: [mem 0xfe036000-0xfe03bfff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:00: [mem 0xfe03d000-0xfe3fffff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:00: [mem 0xfe410000-0xfe7fffff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:00: Plug and Play ACPI device, IDs PNP0c02 (active)
+Nov 25 21:15:17 quatermain kernel: system 00:01: [io  0x2000-0x20fe] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:01: Plug and Play ACPI device, IDs PNP0c02 (active)
+Nov 25 21:15:17 quatermain kernel: system 00:02: [io  0x0680-0x069f] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:02: [io  0xffff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:02: [io  0xffff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:02: [io  0xffff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:02: [io  0x1800-0x18fe] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:02: [io  0x164e-0x164f] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:02: Plug and Play ACPI device, IDs PNP0c02 (active)
+Nov 25 21:15:17 quatermain kernel: pnp 00:03: Plug and Play ACPI device, IDs PNP0b00 (active)
+Nov 25 21:15:17 quatermain kernel: system 00:04: [io  0x1854-0x1857] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:04: Plug and Play ACPI device, IDs INT3f0d PNP0c02 (active)
+Nov 25 21:15:17 quatermain kernel: system 00:05: Plug and Play ACPI device, IDs PNP0c02 (active)
+Nov 25 21:15:17 quatermain kernel: system 00:06: [mem 0xfed10000-0xfed17fff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:06: [mem 0xfed18000-0xfed18fff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:06: [mem 0xfed19000-0xfed19fff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:06: [mem 0xe0000000-0xefffffff] could not be reserved
+Nov 25 21:15:17 quatermain kernel: system 00:06: [mem 0xfed20000-0xfed3ffff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:06: [mem 0xfed90000-0xfed93fff] could not be reserved
+Nov 25 21:15:17 quatermain kernel: system 00:06: [mem 0xfed45000-0xfed8ffff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:06: [mem 0xff000000-0xffffffff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:06: [mem 0xfee00000-0xfeefffff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:06: [mem 0x8f800000-0x8f81ffff] has been reserved
+Nov 25 21:15:17 quatermain kernel: system 00:06: Plug and Play ACPI device, IDs PNP0c02 (active)
+Nov 25 21:15:17 quatermain kernel: pnp: PnP ACPI: found 7 devices
+Nov 25 21:15:17 quatermain kernel: clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1c.0: PCI bridge to [bus 01]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1c.0:   bridge window [io  0x3000-0x3fff]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1c.0:   bridge window [mem 0xa1600000-0xa16fffff]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1d.0: PCI bridge to [bus 02]
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:1d.0:   bridge window [mem 0xa1400000-0xa15fffff 64bit pref]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 7 [mem 0x000c0000-0x000c3fff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 8 [mem 0x000c4000-0x000c7fff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 9 [mem 0x000c8000-0x000cbfff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 10 [mem 0x000cc000-0x000cffff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 11 [mem 0x000d0000-0x000d3fff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 12 [mem 0x000d4000-0x000d7fff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 13 [mem 0x000d8000-0x000dbfff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 14 [mem 0x000dc000-0x000dffff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 15 [mem 0x000e0000-0x000e3fff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 16 [mem 0x000e4000-0x000e7fff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 17 [mem 0x000e8000-0x000ebfff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 18 [mem 0x000ec000-0x000effff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 19 [mem 0x000f0000-0x000fffff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 20 [mem 0x8f800000-0xdfffffff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:00: resource 21 [mem 0xfd000000-0xfe7fffff window]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:01: resource 0 [io  0x3000-0x3fff]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:01: resource 1 [mem 0xa1600000-0xa16fffff]
+Nov 25 21:15:17 quatermain kernel: pci_bus 0000:02: resource 2 [mem 0xa1400000-0xa15fffff 64bit pref]
+Nov 25 21:15:17 quatermain kernel: NET: Registered protocol family 2
+Nov 25 21:15:17 quatermain kernel: TCP established hash table entries: 65536 (order: 7, 524288 bytes)
+Nov 25 21:15:17 quatermain kernel: TCP bind hash table entries: 65536 (order: 8, 1048576 bytes)
+Nov 25 21:15:17 quatermain kernel: TCP: Hash tables configured (established 65536 bind 65536)
+Nov 25 21:15:17 quatermain kernel: UDP hash table entries: 4096 (order: 5, 131072 bytes)
+Nov 25 21:15:17 quatermain kernel: UDP-Lite hash table entries: 4096 (order: 5, 131072 bytes)
+Nov 25 21:15:17 quatermain kernel: NET: Registered protocol family 1
+Nov 25 21:15:17 quatermain kernel: pci 0000:00:02.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+Nov 25 21:15:17 quatermain kernel: PCI: CLS 0 bytes, default 64
+Nov 25 21:15:17 quatermain kernel: Unpacking initramfs...
+Nov 25 21:15:17 quatermain kernel: Freeing initrd memory: 18952K (ffff8bbbb5aec000 - ffff8bbbb6d6e000)
+Nov 25 21:15:17 quatermain kernel: DMAR: ACPI device "device:6f" under DMAR at fed91000 as 00:15.0
+Nov 25 21:15:17 quatermain kernel: DMAR: ACPI device "device:70" under DMAR at fed91000 as 00:15.1
+Nov 25 21:15:17 quatermain kernel: DMAR: ACPI device "device:71" under DMAR at fed91000 as 00:15.2
+Nov 25 21:15:17 quatermain kernel: DMAR: ACPI device "device:72" under DMAR at fed91000 as 00:15.3
+Nov 25 21:15:17 quatermain kernel: PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+Nov 25 21:15:17 quatermain kernel: software IO TLB [mem 0x8335d000-0x8735d000] (64MB) mapped at [ffff8bbc0335d000-ffff8bbc0735cfff]
+Nov 25 21:15:17 quatermain kernel: RAPL PMU: API unit is 2^-32 Joules, 5 fixed counters, 655360 ms ovfl timer
+Nov 25 21:15:17 quatermain kernel: RAPL PMU: hw unit of domain pp0-core 2^-14 Joules
+Nov 25 21:15:17 quatermain kernel: RAPL PMU: hw unit of domain package 2^-14 Joules
+Nov 25 21:15:17 quatermain kernel: RAPL PMU: hw unit of domain dram 2^-14 Joules
+Nov 25 21:15:17 quatermain kernel: RAPL PMU: hw unit of domain pp1-gpu 2^-14 Joules
+Nov 25 21:15:17 quatermain kernel: RAPL PMU: hw unit of domain psys 2^-14 Joules
+Nov 25 21:15:17 quatermain kernel: simple-framebuffer simple-framebuffer.0: framebuffer at 0x90000000, 0x130a000 bytes, mapped to 0xffffb90a02000000
+Nov 25 21:15:17 quatermain kernel: simple-framebuffer simple-framebuffer.0: format=a8r8g8b8, mode=2736x1824x32, linelength=10944
+Nov 25 21:15:17 quatermain kernel: Console: switching to colour frame buffer device 342x114
+Nov 25 21:15:17 quatermain kernel: simple-framebuffer simple-framebuffer.0: fb0: simplefb registered!
+Nov 25 21:15:17 quatermain kernel: futex hash table entries: 1024 (order: 4, 65536 bytes)
+Nov 25 21:15:17 quatermain kernel: audit: initializing netlink subsys (disabled)
+Nov 25 21:15:17 quatermain kernel: audit: type=2000 audit(1480108510.284:1): initialized
+Nov 25 21:15:17 quatermain kernel: workingset: timestamp_bits=40 max_order=21 bucket_order=0
+Nov 25 21:15:17 quatermain kernel: zbud: loaded
+Nov 25 21:15:17 quatermain kernel: Key type asymmetric registered
+Nov 25 21:15:17 quatermain kernel: Asymmetric key parser 'x509' registered
+Nov 25 21:15:17 quatermain kernel: Block layer SCSI generic (bsg) driver version 0.4 loaded (major 251)
+Nov 25 21:15:17 quatermain kernel: io scheduler noop registered
+Nov 25 21:15:17 quatermain kernel: io scheduler deadline registered
+Nov 25 21:15:17 quatermain kernel: io scheduler cfq registered (default)
+Nov 25 21:15:17 quatermain kernel: pcieport 0000:00:1c.0: Signaling PME through PCIe PME interrupt
+Nov 25 21:15:17 quatermain kernel: pci 0000:01:00.0: Signaling PME through PCIe PME interrupt
+Nov 25 21:15:17 quatermain kernel: pcie_pme 0000:00:1c.0:pcie001: service driver pcie_pme loaded
+Nov 25 21:15:17 quatermain kernel: pcieport 0000:00:1d.0: Signaling PME through PCIe PME interrupt
+Nov 25 21:15:17 quatermain kernel: pci 0000:02:00.0: Signaling PME through PCIe PME interrupt
+Nov 25 21:15:17 quatermain kernel: pcie_pme 0000:00:1d.0:pcie001: service driver pcie_pme loaded
+Nov 25 21:15:17 quatermain kernel: pci_hotplug: PCI Hot Plug PCI Core version: 0.5
+Nov 25 21:15:17 quatermain kernel: pciehp: PCI Express Hot Plug Controller Driver version: 0.4
+Nov 25 21:15:17 quatermain kernel: intel_idle: MWAIT substates: 0x11142120
+Nov 25 21:15:17 quatermain kernel: intel_idle: v0.4.1 model 0x4E
+Nov 25 21:15:17 quatermain kernel: intel_idle: lapic_timer_reliable_states 0xffffffff
+Nov 25 21:15:17 quatermain kernel: GHES: HEST is not enabled!
+Nov 25 21:15:17 quatermain kernel: Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+Nov 25 21:15:17 quatermain kernel: Linux agpgart interface v0.103
+Nov 25 21:15:17 quatermain kernel: AMD IOMMUv2 driver by Joerg Roedel <jroedel@suse.de>
+Nov 25 21:15:17 quatermain kernel: AMD IOMMUv2 functionality not available on this system
+Nov 25 21:15:17 quatermain kernel: nvme nvme0: pci function 0000:01:00.0
+Nov 25 21:15:17 quatermain kernel: i8042: PNP: No PS/2 controller found. Probing ports directly.
+Nov 25 21:15:17 quatermain kernel:  nvme0n1: p1 p2 p3 p4 p5 p6 p7
+Nov 25 21:15:17 quatermain kernel: i8042: No controller found
+Nov 25 21:15:17 quatermain kernel: mousedev: PS/2 mouse device common for all mice
+Nov 25 21:15:17 quatermain kernel: rtc_cmos 00:03: RTC can wake from S4
+Nov 25 21:15:17 quatermain kernel: rtc_cmos 00:03: rtc core: registered rtc_cmos as rtc0
+Nov 25 21:15:17 quatermain kernel: rtc_cmos 00:03: alarms up to one month, y3k, 242 bytes nvram, hpet irqs
+Nov 25 21:15:17 quatermain kernel: intel_pstate: Intel P-state driver initializing
+Nov 25 21:15:17 quatermain kernel: intel_pstate: HWP enabled
+Nov 25 21:15:17 quatermain kernel: ledtrig-cpu: registered to indicate activity on CPUs
+Nov 25 21:15:17 quatermain kernel: NET: Registered protocol family 10
+Nov 25 21:15:17 quatermain kernel: mip6: Mobile IPv6
+Nov 25 21:15:17 quatermain kernel: NET: Registered protocol family 17
+Nov 25 21:15:17 quatermain kernel: mpls_gso: MPLS GSO support
+Nov 25 21:15:17 quatermain kernel: microcode: sig=0x406e3, pf=0x40, revision=0x9e
+Nov 25 21:15:17 quatermain kernel: microcode: Microcode Update Driver: v2.01 <tigran@aivazian.fsnet.co.uk>, Peter Oruba
+Nov 25 21:15:17 quatermain kernel: registered taskstats version 1
+Nov 25 21:15:17 quatermain kernel: zswap: loaded using pool lzo/zbud
+Nov 25 21:15:17 quatermain kernel: tsc: Refined TSC clocksource calibration: 2208.004 MHz
+Nov 25 21:15:17 quatermain kernel: clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x1fd3bc108c2, max_idle_ns: 440795311349 ns
+Nov 25 21:15:17 quatermain kernel: rtc_cmos 00:03: setting system clock to 2016-11-25 21:15:12 UTC (1480108512)
+Nov 25 21:15:17 quatermain kernel: PM: Checking hibernation image partition /dev/mapper/lvm--quatermain-swap
+Nov 25 21:15:17 quatermain kernel: PM: Hibernation image not present or could not be loaded.
+Nov 25 21:15:17 quatermain kernel: Freeing unused kernel memory: 1404K (ffffffffbd13b000 - ffffffffbd29a000)
+Nov 25 21:15:17 quatermain kernel: Write protecting the kernel read-only data: 12288k
+Nov 25 21:15:17 quatermain kernel: Freeing unused kernel memory: 1988K (ffff8bbd8420f000 - ffff8bbd84400000)
+Nov 25 21:15:17 quatermain kernel: Freeing unused kernel memory: 1244K (ffff8bbd846c9000 - ffff8bbd84800000)
+Nov 25 21:15:17 quatermain kernel: x86/mm: Checked W+X mappings: passed, no W+X pages found.
+Nov 25 21:15:17 quatermain systemd-udevd[89]: starting version 215
+Nov 25 21:15:17 quatermain kernel: random: systemd-udevd: uninitialized urandom read (16 bytes read)
+Nov 25 21:15:17 quatermain kernel: FUJITSU Extended Socket Network Device Driver - version 1.1 - Copyright (c) 2015 FUJITSU LIMITED
+Nov 25 21:15:17 quatermain kernel: hidraw: raw HID events driver (C) Jiri Kosina
+Nov 25 21:15:17 quatermain kernel: ACPI: bus type USB registered
+Nov 25 21:15:17 quatermain kernel: usbcore: registered new interface driver usbfs
+Nov 25 21:15:17 quatermain kernel: usbcore: registered new interface driver hub
+Nov 25 21:15:17 quatermain kernel: usbcore: registered new device driver usb
+Nov 25 21:15:17 quatermain kernel: xhci_hcd 0000:00:14.0: xHCI Host Controller
+Nov 25 21:15:17 quatermain kernel: xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 1
+Nov 25 21:15:17 quatermain kernel: thermal LNXTHERM:00: registered as thermal_zone0
+Nov 25 21:15:17 quatermain kernel: ACPI: Thermal Zone [TZ00] (44 C)
+Nov 25 21:15:17 quatermain kernel: xhci_hcd 0000:00:14.0: hcc params 0x200077c1 hci version 0x100 quirks 0x00109810
+Nov 25 21:15:17 quatermain kernel: xhci_hcd 0000:00:14.0: cache line size of 64 is not supported
+Nov 25 21:15:17 quatermain kernel: usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+Nov 25 21:15:17 quatermain kernel: usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Nov 25 21:15:17 quatermain kernel: usb usb1: Product: xHCI Host Controller
+Nov 25 21:15:17 quatermain kernel: usb usb1: Manufacturer: Linux 4.9.0-rc6-mssp4+ xhci-hcd
+Nov 25 21:15:17 quatermain kernel: usb usb1: SerialNumber: 0000:00:14.0
+Nov 25 21:15:17 quatermain kernel: hub 1-0:1.0: USB hub found
+Nov 25 21:15:17 quatermain kernel: hub 1-0:1.0: 12 ports detected
+Nov 25 21:15:17 quatermain kernel: AVX2 version of gcm_enc/dec engaged.
+Nov 25 21:15:17 quatermain kernel: AES CTR mode by8 optimization enabled
+Nov 25 21:15:17 quatermain kernel: thermal LNXTHERM:01: registered as thermal_zone1
+Nov 25 21:15:17 quatermain kernel: ACPI: Thermal Zone [TZ01] (0 C)
+Nov 25 21:15:17 quatermain kernel: thermal LNXTHERM:02: registered as thermal_zone2
+Nov 25 21:15:17 quatermain kernel: ACPI: Thermal Zone [TZ02] (33 C)
+Nov 25 21:15:17 quatermain kernel: random: fast init done
+Nov 25 21:15:17 quatermain kernel: thermal LNXTHERM:03: registered as thermal_zone3
+Nov 25 21:15:17 quatermain kernel: ACPI: Thermal Zone [TZ03] (40 C)
+Nov 25 21:15:17 quatermain kernel: xhci_hcd 0000:00:14.0: xHCI Host Controller
+Nov 25 21:15:17 quatermain kernel: xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 2
+Nov 25 21:15:17 quatermain kernel: usb usb2: New USB device found, idVendor=1d6b, idProduct=0003
+Nov 25 21:15:17 quatermain kernel: usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Nov 25 21:15:17 quatermain kernel: usb usb2: Product: xHCI Host Controller
+Nov 25 21:15:17 quatermain kernel: usb usb2: Manufacturer: Linux 4.9.0-rc6-mssp4+ xhci-hcd
+Nov 25 21:15:17 quatermain kernel: usb usb2: SerialNumber: 0000:00:14.0
+Nov 25 21:15:17 quatermain kernel: hub 2-0:1.0: USB hub found
+Nov 25 21:15:17 quatermain kernel: hub 2-0:1.0: 6 ports detected
+Nov 25 21:15:17 quatermain kernel: device-mapper: uevent: version 1.0.3
+Nov 25 21:15:17 quatermain kernel: device-mapper: ioctl: 4.35.0-ioctl (2016-06-23) initialised: dm-devel@redhat.com
+Nov 25 21:15:17 quatermain kernel: usb 1-7: new full-speed USB device number 2 using xhci_hcd
+Nov 25 21:15:17 quatermain kernel: usb 1-7: New USB device found, idVendor=045e, idProduct=07e8
+Nov 25 21:15:17 quatermain kernel: usb 1-7: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+Nov 25 21:15:17 quatermain kernel: usb 1-7: Product: Surface Type Cover
+Nov 25 21:15:17 quatermain kernel: usb 1-7: Manufacturer: Microsoft
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover Keyboard as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input0
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover Mouse as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input1
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover Consumer Control as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input2
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input3
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover Touchpad as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input4
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input5
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input6
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input7
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input8
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input9
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input10
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input11
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input12
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input13
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input14
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input15
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input16
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover UNKNOWN as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input17
+Nov 25 21:15:17 quatermain kernel: input: Microsoft Surface Type Cover Keyboard as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/0003:045E:07E8.0001/input/input18
+Nov 25 21:15:17 quatermain kernel: hid-multitouch 0003:045E:07E8.0001: input,hiddev0,hidraw0: USB HID v1.11 Keyboard [Microsoft Surface Type Cover] on usb-0000:00:14.0-7/input0
+Nov 25 21:15:17 quatermain kernel: usbcore: registered new interface driver usbhid
+Nov 25 21:15:17 quatermain kernel: usbhid: USB HID core driver
+Nov 25 21:15:17 quatermain kernel: clocksource: Switched to clocksource tsc
+Nov 25 21:15:17 quatermain kernel: NET: Registered protocol family 38
+Nov 25 21:15:17 quatermain kernel: random: crng init done
+Nov 25 21:15:17 quatermain kernel: PM: Starting manual resume from disk
+Nov 25 21:15:17 quatermain kernel: PM: Hibernation image partition 254:3 present
+Nov 25 21:15:17 quatermain kernel: PM: Looking for hibernation image.
+Nov 25 21:15:17 quatermain kernel: PM: Image not found (code -22)
+Nov 25 21:15:17 quatermain kernel: PM: Hibernation image not present or could not be loaded.
+Nov 25 21:15:17 quatermain kernel: EXT4-fs (dm-1): mounted filesystem with ordered data mode. Opts: (null)
+Nov 25 21:15:17 quatermain systemd[1]: RTC configured in localtime, applying delta of 0 minutes to system time.
+Nov 25 21:15:17 quatermain systemd[1]: systemd 215 running in system mode. (+PAM +AUDIT +SELINUX +IMA +SYSVINIT +LIBCRYPTSETUP +GCRYPT +ACL +XZ -SECCOMP -APPARMOR)
+Nov 25 21:15:17 quatermain systemd[1]: Detected architecture 'x86-64'.
+Nov 25 21:15:17 quatermain systemd[1]: Inserted module 'autofs4'
+Nov 25 21:15:17 quatermain systemd[1]: Set hostname to <quatermain>.
+Nov 25 21:15:17 quatermain systemd[1]: [/lib/systemd/system/docker.service:24] Unknown lvalue 'Delegate' in section 'Service'
+Nov 25 21:15:17 quatermain systemd[1]: Starting Forward Password Requests to Wall Directory Watch.
+Nov 25 21:15:17 quatermain systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+Nov 25 21:15:17 quatermain systemd[1]: Starting Remote File Systems (Pre).
+Nov 25 21:15:17 quatermain systemd[1]: Reached target Remote File Systems (Pre).
+Nov 25 21:15:17 quatermain systemd[1]: Expecting device dev-disk-by\x2duuid-e2e2eda3\x2dcab7\x2d47af\x2dba01\x2d7efb33602adf.device...
+Nov 25 21:15:17 quatermain kernel: lp: driver loaded but no devices found
+Nov 25 21:15:17 quatermain kernel: ppdev: user-space parallel port driver
+Nov 25 21:15:17 quatermain kernel: fuse init (API version 7.26)
+Nov 25 21:15:17 quatermain systemd-udevd[360]: starting version 215
+Nov 25 21:15:17 quatermain kernel: EXT4-fs (dm-1): re-mounted. Opts: discard,lazytime,errors=remount-ro
+Nov 25 21:15:17 quatermain kernel: ACPI: AC Adapter [ADP1] (on-line)
+Nov 25 21:15:17 quatermain kernel: input: Surface Pro 3/4 Buttons as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/device:18/PNP0C09:00/MSHW0040:00/input/input20
+Nov 25 21:15:17 quatermain kernel: surface_pro3_button MSHW0040:00: Surface Pro 3/4 Buttons [VGBI]
+Nov 25 21:15:17 quatermain kernel: [drm] Initialized
+Nov 25 21:15:17 quatermain kernel: intel-lpss 0000:00:15.0: enabling device (0000 -> 0002)
+Nov 25 21:15:17 quatermain kernel: idma64 idma64.0: Found Intel integrated DMA 64-bit
+Nov 25 21:15:17 quatermain kernel: intel-lpss 0000:00:15.1: enabling device (0000 -> 0002)
+Nov 25 21:15:17 quatermain kernel: idma64 idma64.1: Found Intel integrated DMA 64-bit
+Nov 25 21:15:17 quatermain kernel: intel-lpss 0000:00:15.2: enabling device (0000 -> 0002)
+Nov 25 21:15:17 quatermain kernel: idma64 idma64.2: Found Intel integrated DMA 64-bit
+Nov 25 21:15:17 quatermain kernel: intel-lpss 0000:00:15.3: enabling device (0000 -> 0002)
+Nov 25 21:15:17 quatermain kernel: idma64 idma64.3: Found Intel integrated DMA 64-bit
+Nov 25 21:15:17 quatermain kernel: shpchp: Standard Hot Plug PCI Controller Driver version: 0.4
+Nov 25 21:15:17 quatermain kernel: mei_me 0000:00:16.0: enabling device (0000 -> 0002)
+Nov 25 21:15:17 quatermain kernel: ACPI: Battery Slot [BAT1] (battery present)
+Nov 25 21:15:17 quatermain kernel: mei_me 0000:00:16.4: enabling device (0000 -> 0002)
+Nov 25 21:15:17 quatermain kernel: tpm_tis MSFT0101:00: 2.0 TPM (device-id 0x1A, rev-id 16)
+Nov 25 21:15:17 quatermain kernel: snd_hda_intel 0000:00:1f.3: enabling device (0000 -> 0002)
+Nov 25 21:15:17 quatermain kernel: EXT4-fs (nvme0n1p6): mounted filesystem with ordered data mode. Opts: discard,lazytime
+Nov 25 21:15:17 quatermain kernel: mwifiex_pcie 0000:02:00.0: enabling device (0000 -> 0002)
+Nov 25 21:15:17 quatermain kernel: mwifiex_pcie: try set_consistent_dma_mask(32)
+Nov 25 21:15:17 quatermain kernel: mwifiex_pcie: PCI memory map Virt0: ffffb90a01500000 PCI memory map Virt2: ffffb90a01700000
+Nov 25 21:15:17 quatermain kernel: mwifiex: rx work enabled, cpus 4
+Nov 25 21:15:17 quatermain kernel: EFI Variables Facility v0.08 2004-May-17
+Nov 25 21:15:17 quatermain kernel: pstore: using zlib compression
+Nov 25 21:15:17 quatermain kernel: pstore: Registered efi as persistent store backend
+Nov 25 21:15:17 quatermain kernel: input: PC Speaker as /devices/platform/pcspkr/input/input21
+Nov 25 21:15:17 quatermain kernel: Error: Driver 'pcspkr' is already registered, aborting...
+Nov 25 21:15:18 quatermain kernel: input: Lid Switch as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0D:00/input/input22
+Nov 25 21:15:18 quatermain kernel: ACPI: Lid Switch [LID0]
+Nov 25 21:15:18 quatermain kernel: [drm] Found 64MB of eDRAM
+Nov 25 21:15:18 quatermain kernel: [drm] Memory usable by graphics device = 4096M
+Nov 25 21:15:18 quatermain kernel: checking generic (90000000 130a000) vs hw (90000000 10000000)
+Nov 25 21:15:18 quatermain kernel: fb: switching to inteldrmfb from simple
+Nov 25 21:15:18 quatermain kernel: Console: switching to colour dummy device 80x25
+Nov 25 21:15:18 quatermain kernel: [drm] Replacing VGA console driver
+Nov 25 21:15:18 quatermain kernel: [drm] Supports vblank timestamp caching Rev 2 (21.10.2013).
+Nov 25 21:15:18 quatermain kernel: [drm] Driver supports precise vblank timestamp query.
+Nov 25 21:15:18 quatermain kernel: vgaarb: device changed decodes: PCI:0000:00:02.0,olddecodes=io+mem,decodes=io+mem:owns=io+mem
+Nov 25 21:15:18 quatermain kernel: [drm] Finished loading i915/skl_dmc_ver1_26.bin (v1.26)
+Nov 25 21:15:18 quatermain kernel: >> let init ipts
+Nov 25 21:15:18 quatermain kernel: Adding 12582908k swap on /dev/mapper/lvm--quatermain-swap.  Priority:-1 extents:1 across:12582908k SSDscFS
+Nov 25 21:15:18 quatermain kernel: EXT4-fs (dm-4): mounted filesystem with ordered data mode. Opts: discard,lazytime
+Nov 25 21:15:18 quatermain kernel: EXT4-fs (dm-2): mounted filesystem with ordered data mode. Opts: discard,lazytime
+Nov 25 21:15:18 quatermain kernel: EXT4-fs (dm-12): mounted filesystem with ordered data mode. Opts: discard,lazytime
+Nov 25 21:15:18 quatermain kernel: EXT4-fs (dm-9): mounted filesystem with ordered data mode. Opts: discard,lazytime
+Nov 25 21:15:18 quatermain kernel: EXT4-fs (dm-6): mounted filesystem with ordered data mode. Opts: discard,lazytime
+Nov 25 21:15:18 quatermain kernel: EXT4-fs (dm-7): mounted filesystem with ordered data mode. Opts: discard,lazytime
+Nov 25 21:15:18 quatermain kernel: EXT4-fs (dm-11): mounted filesystem with ordered data mode. Opts: discard,lazytime
+Nov 25 21:15:18 quatermain kernel: EXT4-fs (dm-13): mounted filesystem with ordered data mode. Opts: discard,lazytime
+Nov 25 21:15:18 quatermain kernel: EXT4-fs (dm-8): mounted filesystem with ordered data mode. Opts: discard,lazytime
+Nov 25 21:15:18 quatermain kernel: EXT4-fs (dm-5): mounted filesystem with ordered data mode. Opts: discard,lazytime
+Nov 25 21:15:18 quatermain kernel: mwifiex_pcie 0000:02:00.0: info: FW download over, size 803884 bytes
+Nov 25 21:15:18 quatermain kernel: intel_rapl: Found RAPL domain package
+Nov 25 21:15:18 quatermain kernel: intel_rapl: Found RAPL domain core
+Nov 25 21:15:18 quatermain kernel: intel_rapl: Found RAPL domain uncore
+Nov 25 21:15:18 quatermain kernel: intel_rapl: Found RAPL domain dram
+Nov 25 21:15:18 quatermain kernel: ACPI: Video Device [GFX0] (multi-head: yes  rom: no  post: no)
+Nov 25 21:15:18 quatermain kernel: input: Video Bus as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0A08:00/LNXVIDEO:00/input/input23
+Nov 25 21:15:18 quatermain kernel: snd_hda_intel 0000:00:1f.3: bound 0000:00:02.0 (ops i915_audio_component_bind_ops [i915])
+Nov 25 21:15:18 quatermain kernel: [drm] Initialized i915 1.6.0 20160919 for 0000:00:02.0 on minor 0
+Nov 25 21:15:18 quatermain kernel: IPTS ipts_mei_cl_init() is called
+Nov 25 21:15:20 quatermain kernel: fbcon: inteldrmfb (fb0) is primary device
+Nov 25 21:15:20 quatermain kernel: probing Intel Precise Touch & Stylus
+Nov 25 21:15:20 quatermain kernel: IPTS using DMA_BIT_MASK(64)
+Nov 25 21:15:20 quatermain kernel: input: ipts 1B96:006A SingleTouch as /devices/pci0000:00/0000:00:16.4/mei::3e8d0870-271a-4208-8eb5-9acb9402ae04:0A/0044:1B96:006A.0002/input/input24
+Nov 25 21:15:20 quatermain kernel: input: ipts 1B96:006A Pen as /devices/pci0000:00/0000:00:16.4/mei::3e8d0870-271a-4208-8eb5-9acb9402ae04:0A/0044:1B96:006A.0002/input/input25
+Nov 25 21:15:20 quatermain kernel: input: ipts 1B96:006A as /devices/pci0000:00/0000:00:16.4/mei::3e8d0870-271a-4208-8eb5-9acb9402ae04:0A/0044:1B96:006A.0002/input/input26
+Nov 25 21:15:20 quatermain kernel: input: ipts 1B96:006A Mouse as /devices/pci0000:00/0000:00:16.4/mei::3e8d0870-271a-4208-8eb5-9acb9402ae04:0A/0044:1B96:006A.0002/input/input27
+Nov 25 21:15:20 quatermain kernel: hid-multitouch 0044:1B96:006A.0002: input,hidraw1: <UNKNOWN> HID v13300.fa Mouse [ipts 1B96:006A] on heci3
+Nov 25 21:15:20 quatermain kernel: >> start debug thread
+Nov 25 21:15:20 quatermain kernel: state is not IPTS_STA_RAW_DATA_STARTED : 1
+Nov 25 21:15:20 quatermain kernel: ipts mei::3e8d0870-271a-4208-8eb5-9acb9402ae04:0A: touch enabled 4
+Nov 25 21:15:20 quatermain kernel: snd_hda_codec_realtek hdaudioC0D0: autoconfig for ALC298: line_outs=1 (0x14/0x0/0x0/0x0/0x0) type:speaker
+Nov 25 21:15:20 quatermain kernel: snd_hda_codec_realtek hdaudioC0D0:    speaker_outs=0 (0x0/0x0/0x0/0x0/0x0)
+Nov 25 21:15:20 quatermain kernel: snd_hda_codec_realtek hdaudioC0D0:    hp_outs=1 (0x21/0x0/0x0/0x0/0x0)
+Nov 25 21:15:20 quatermain kernel: snd_hda_codec_realtek hdaudioC0D0:    mono: mono_out=0x0
+Nov 25 21:15:20 quatermain kernel: snd_hda_codec_realtek hdaudioC0D0:    inputs:
+Nov 25 21:15:20 quatermain kernel: snd_hda_codec_realtek hdaudioC0D0:      Mic=0x18
+Nov 25 21:15:20 quatermain kernel: snd_hda_codec_realtek hdaudioC0D0:      Internal Mic=0x12
+Nov 25 21:15:20 quatermain kernel: input: HDA Intel PCH Mic as /devices/pci0000:00/0000:00:1f.3/sound/card0/input29
+Nov 25 21:15:20 quatermain kernel: input: HDA Intel PCH Headphone as /devices/pci0000:00/0000:00:1f.3/sound/card0/input30
+Nov 25 21:15:20 quatermain kernel: input: HDA Intel PCH HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:1f.3/sound/card0/input31
+Nov 25 21:15:20 quatermain kernel: input: HDA Intel PCH HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:1f.3/sound/card0/input32
+Nov 25 21:15:20 quatermain kernel: input: HDA Intel PCH HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:1f.3/sound/card0/input33
+Nov 25 21:15:20 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:63 / ret_size:0
+Nov 25 21:15:20 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:63 / ret_size:0
+Nov 25 21:15:20 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:19 / ret_size:63
+Nov 25 21:15:20 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:19 / ret_size:0
+Nov 25 21:15:20 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:19 / ret_size:12
+Nov 25 21:15:20 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:19 / ret_size:0
+Nov 25 21:15:20 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:19 / ret_size:0
+Nov 25 21:15:20 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:19 / ret_size:4
+Nov 25 21:15:20 quatermain kernel: i2c_hid i2c-MSHW0030:00: error in i2c_hid_init_report size:19 / ret_size:0
+Nov 25 21:15:20 quatermain kernel: [drm] RC6 on
+Nov 25 21:15:20 quatermain kernel: usb 1-5: new high-speed USB device number 3 using xhci_hcd
+Nov 25 21:15:20 quatermain kernel: usb 1-5: New USB device found, idVendor=1286, idProduct=204c
+Nov 25 21:15:20 quatermain kernel: usb 1-5: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 25 21:15:20 quatermain kernel: usb 1-5: Product: Bluetooth and Wireless LAN Composite Device
+Nov 25 21:15:20 quatermain kernel: usb 1-5: Manufacturer: Marvell
+Nov 25 21:15:20 quatermain kernel: usb 1-5: SerialNumber: 0000000000000000
+Nov 25 21:15:20 quatermain kernel: Bluetooth: Core ver 2.22
+Nov 25 21:15:20 quatermain kernel: NET: Registered protocol family 31
+Nov 25 21:15:20 quatermain kernel: Bluetooth: HCI device and connection manager initialized
+Nov 25 21:15:20 quatermain kernel: Bluetooth: HCI socket layer initialized
+Nov 25 21:15:20 quatermain kernel: Bluetooth: L2CAP socket layer initialized
+Nov 25 21:15:20 quatermain kernel: Bluetooth: SCO socket layer initialized
+Nov 25 21:15:20 quatermain kernel: usbcore: registered new interface driver btusb
+Nov 25 21:15:20 quatermain kernel: mwifiex_pcie 0000:02:00.0: WLAN FW is active
+Nov 25 21:15:20 quatermain kernel: mwifiex_pcie 0000:02:00.0: CMD_RESP: cmd 0x242 error, result=0x2
+Nov 25 21:15:20 quatermain kernel: mwifiex_pcie 0000:02:00.0: mwifiex_process_cmdresp: cmd 0x242 failed during        initialization
+Nov 25 21:15:20 quatermain kernel: mwifiex_pcie 0000:02:00.0: info: MWIFIEX VERSION: mwifiex 1.0 (15.68.7.p53) 
+Nov 25 21:15:20 quatermain kernel: mwifiex_pcie 0000:02:00.0: driver_version = mwifiex 1.0 (15.68.7.p53) 
+Nov 25 21:15:20 quatermain kernel: ipts mei::3e8d0870-271a-4208-8eb5-9acb9402ae04:0A: touch enabled 4
+Nov 25 21:15:20 quatermain kernel: Console: switching to colour frame buffer device 342x114
+Nov 25 21:15:20 quatermain kernel: i915 0000:00:02.0: fb0: inteldrmfb frame buffer device
+Nov 25 21:15:20 quatermain kernel: IPv6: ADDRCONF(NETDEV_UP): mlan0: link is not ready
+Nov 25 21:15:20 quatermain kernel: RPC: Registered named UNIX socket transport module.
+Nov 25 21:15:20 quatermain kernel: RPC: Registered udp transport module.
+Nov 25 21:15:20 quatermain kernel: RPC: Registered tcp transport module.
+Nov 25 21:15:20 quatermain kernel: RPC: Registered tcp NFSv4.1 backchannel transport module.
+Nov 25 21:15:20 quatermain kernel: FS-Cache: Loaded
+Nov 25 21:15:20 quatermain kernel: FS-Cache: Netfs 'nfs' registered for caching
+Nov 25 21:15:20 quatermain kernel: Installing knfsd (copyright (C) 1996 okir@monad.swb.de).
+Nov 25 21:15:20 quatermain kernel: Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+Nov 25 21:15:20 quatermain kernel: Bluetooth: BNEP filters: protocol multicast
+Nov 25 21:15:20 quatermain kernel: Bluetooth: BNEP socket layer initialized
+Nov 25 21:15:20 quatermain kernel: NET: Registered protocol family 15
+Nov 25 21:15:20 quatermain kernel: Initializing XFRM netlink socket
+Nov 25 21:15:20 quatermain kernel: IPv6: ADDRCONF(NETDEV_UP): mlan0: link is not ready
+Nov 25 21:15:21 quatermain kernel: loop: module loaded
+Nov 25 21:15:22 quatermain kernel: bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to load br_netfilter if you need this.
+Nov 25 21:15:22 quatermain kernel: Bridge firewalling registered
+Nov 25 21:15:22 quatermain kernel: nf_conntrack version 0.5.0 (65536 buckets, 262144 max)
+Nov 25 21:15:22 quatermain kernel: ip_tables: (C) 2000-2006 Netfilter Core Team
+Nov 25 21:15:22 quatermain kernel: IPv6: ADDRCONF(NETDEV_UP): docker0: link is not ready
+Nov 25 21:15:24 quatermain kernel: >> tdt : fw status : 8280505D 00000000 00000000 00000000 00000000 00000000
+Nov 25 21:15:24 quatermain kernel: >> == DB s:1, c:0 ==
+Nov 25 21:15:24 quatermain kernel: >> == WQ h:0, t:0 ==
+Nov 25 21:15:24 quatermain kernel: IPv6: ADDRCONF(NETDEV_UP): mlan0: link is not ready
+Nov 25 21:15:24 quatermain kernel: mwifiex_pcie 0000:02:00.0: info: trying to associate to '....' bssid ..:..:..:..:..:..
+Nov 25 21:15:24 quatermain kernel: mwifiex_pcie 0000:02:00.0: info: associated to bssid ..:..:..:..:..:.. successfully
+Nov 25 21:15:24 quatermain kernel: IPv6: ADDRCONF(NETDEV_CHANGE): mlan0: link becomes ready
+Nov 25 21:15:24 quatermain kernel: mwifiex_pcie 0000:02:00.0: CMD_RESP: cmd 0x10f error, result=0x2
+Nov 25 21:15:27 quatermain kernel: >> tdt : fw status : 8280505D 00000000 00000000 00000000 00000000 00000000
+Nov 25 21:15:27 quatermain kernel: >> == DB s:1, c:0 ==
+Nov 25 21:15:27 quatermain kernel: >> == WQ h:0, t:0 ==

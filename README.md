@@ -6,6 +6,7 @@ The instructions assume you are not new to Debian, though you may have no experi
 
  * dual booting
  * SecureBoot
+ * Touchscreen and Pen
  * typing cover keyboard
      * multitouch touchpad (two finger scrolling, etc)
      * special keys
@@ -17,7 +18,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * wireless (is a 88W8897, a wireless/bluetooth combo module)
      * bluetooth - this only appears once you use the wireless card firmware from [firmware-libertas (20151207-1~bpo8+1) [pcie8897_uapsta.bin version 15.68.4.p112]](https://packages.debian.org/jessie-backports/firmware-libertas)
  * microSD reader - presented as a USB reader appearing when you insert a card
- * suspend, hibernate and resume works
+ * suspend (rather freeze), hibernate and resume works
 
 ## Outstanding Issues
 
@@ -31,8 +32,6 @@ The instructions assume you are not new to Debian, though you may have no experi
  * [AC adaptor events](https://bugzilla.kernel.org/show_bug.cgi?id=109891)
      * [DSDT changes required to fix this](https://www.reddit.com/r/SurfaceLinux/comments/46o3mh/fix_udev_power_adapter_event_by_patching_acpi/)
      * once done, we can turn turbo boost off on battery via `/sys/devices/system/cpu/intel_pstate/no_turbo`
- * touchscreen - hides on the PCI bus at 8086:9d3e
-     * pen - though you can pair with it, you only get the eraser switch event
  * there is an ACPI `INT3420` entry for 'Intel Bluetooth RF Kill' which would be nice to have
  * enable the other I2C (`INT344[2-5]`) and SPI (`INT344[01]`) busses via `drivers/mfd/intel-lpss-acpi.c` maybe?
  * there are a number of hardware sensors via a MAX34407 on the I2C bus
@@ -40,6 +39,8 @@ The instructions assume you are not new to Debian, though you may have no experi
      * this means that S3 'suspend to RAM' (`echo mem > /sys/power/state`) is replaced with S1 'power on suspend' (`echo freeze > /sys/power/state`) which uses a lot more juice; 100% charge lasts about 12 hours
      * amending the DSDT manually to remove the conditional that masks out S3 results in `echo mem > /sys/power/state` making the laptop power up as if power cycled.  Probably works better with [`acpi_rev_override` (`_REV=2`)](https://mjg59.dreamwidth.org/34542.html) and `acpi_os_name="Windows 2012"` (or earlier)
  * [Caps Lock key light](https://patchwork.kernel.org/patch/7844371/) - 'fixed' by running `sudo kbd_mode -u`
+     * this is not a problem with the `hid-microsoft` driver which if you want to use make sure you are using `xserver-xorg-input-evdev >=2.10` as well as `Option "IgnoreAbsoluteAxes" "on"`
+     * we use the `hid-multitouch` driver as it presents separate keyboard and touchpad devices, which means the xorg `evdev` driver does not handle the touchpad and `mtrack` sees it as a touchpad and can handle it
  * Wireless
      * [power saving needs to be turned off](./root/etc/network/interfaces.d/mlan0) otherwise after about a minute of idling, you start seeing 100ms+ first hop latencies
      * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup; you need to reset the card inbeteen the unload/load with `echo 1 > /sys/bus/pci/devices/0000\:02\:00.0/reset`
@@ -73,6 +74,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * wishing for a matte screen, I got the [iLLumiShield](http://www.amazon.co.uk/gp/product/B0169CKLBK) and find it does the job great
  * for a nice cheap case, I got the blue map motif [MoKo Ultra Slim Lightweight Smart-shell Stand Cover Case (Map F)](https://www.amazon.co.uk/Microsoft-Surface-Pro-Case-Lightweight/dp/B014P2NOLU/)
  * patches based on
+      * [IPTS Linux](https://github.com/ipts-linux-org/ipts-linux-new/wiki) driver
       * [[PATCH 1/2] HID: Use multitouch driver for Type Covers](http://lkml.iu.edu/hypermail/linux/kernel/1512.1/05130.html)
       * [[1/2] HID: input: rework HID_QUIRK_MULTI_INPUT](https://patchwork.kernel.org/patch/9081731/)
       * [[2/2] HID: multitouch: enable the Surface 3 Type Cover to report multitouch data](https://patchwork.kernel.org/patch/9081761/)
@@ -219,28 +221,33 @@ Also, so that your keyboard works before the root filesystem is mounted, edit yo
 
 Run the following to get your system ready to compile a kernel:
 
-    sudo apt-get install build-essential fakeroot kernel-package
-    sudo apt-get install linux-source-4.6 firmware-libertas/jessie-backports firmware-misc-nonfree intel-microcode
-    tar -C /usr/src -xf /usr/src/linux-source-4.6.tar.xz
-    cd /usr/src/linux-source-4.6
-    find /usr/src/debian-mssp4/patches -type f | sort | xargs -t -I{} sh -c "cat {} | patch -p1"
-    xzcat ../linux-config-4.6/config.amd64_none_amd64.xz > .config
+    sudo apt-get install build-essential git fakeroot kernel-package
+    sudo apt-get install firmware-libertas/jessie-backports firmware-misc-nonfree intel-microcode
+    wget -P /usr/src http://http.debian.net/debian/pool/main/l/linux/linux-source-4.8_4.8.7-1_all.deb
+    
+    git clone https://gitlab.com/jimdigriz/linux.git /usr/src/linux
+    cd /usr/src/linux
+    git checkout mssp4
+    ar p /usr/src/linux-source-4.8_4.8.7-1_all.deb data.tar.gz | gunzip -c | tar xO ./usr/src/linux-config-4.8/config.amd64_none_amd64.xz | xzcat > .config
     
     cat <<'EOF' >> .config
+    CONFIG_INTEL_IPTS=m
     CONFIG_BLK_DEV_NVME=y
     CONFIG_MODULE_SIG=n
     CONFIG_SYSTEM_TRUSTED_KEYRING=n
     EOF
 
-Now run `make oldconfig` so our `.config` changes are incorporated (we make `nvme` built in so hibernation works).
+Now run `make oldconfig` (accept the defaults to all the prompting) so our `.config` changes are incorporated (we make `nvme` built in so hibernation works).
 
 Time to compile the kernel (this will take about 40 minutes):
 
-    CONCURRENCY_LEVEL=`getconf _NPROCESSORS_ONLN` fakeroot make-kpkg --initrd --append-to-version=-mssp4 kernel_image kernel_headers
+    CONCURRENCY_LEVEL=`getconf _NPROCESSORS_ONLN` fakeroot make-kpkg --initrd --append-to-version=-mssp4 kernel_image
 
-Once compiled, you should install your new kernel:
+**N.B.** you can append `kernel_headers` to also build the `linux-headers` package too
 
-    sudo dpkg -i /usr/src/linux-image-4.6.1-mssp4_4.6.1-mssp4-10.00.Custom_amd64.deb
+Once compiled (roughly 40 minutes), you now need to install your new kernel:
+
+    sudo dpkg -i /usr/src/linux-image-4.9.0-rc6-mssp4+_4.9.0-rc6-mssp4+-10.00.Custom_amd64.deb
 
 Now reboot into your new kernel.
 
@@ -408,6 +415,59 @@ You will now need to logout and back in to get the `VDPAU_DRIVER` environment va
 For me, I get about 20% CPU usage for Flash at 1080p, whilst with HTML5 I get 170%.  It is worth installing one of the many Firefox extensions that force YouTube (and other sites) to use the Flash player to lower battery (and fan!) usage.
 
 **N.B.** it seems that if you go above 1080p, the acceleration is no longer used and there is a significant uptick in CPU utilisation
+
+## Touchscreen and Pen
+
+The driver (`intel-ipts`) is already in the compiled kernel (from the above instructions) so after copying the various binaries described below into place, you should be able to reboot and start using your touchscreen and pen.
+
+**N.B.** you will of course need to pair your the (bluetooth) pen to your laptop
+
+### OpenCL
+
+You will need the OpenCL kernel binaries that are located in your Windows partition at `%WINDIR%\INF\PreciseTouch` and you need to copy the contents of it all to `/lib/firmware/intel/ipts` and add the following symbolic links:
+
+    sudo mkdir -p /lib/firmware/intel/ipts
+    mkdir windows
+    mount mount -o ro /dev/nvme0n1p3 windows
+    sudo cp windows/Windows/INF/PreciseTouch/Intel/SurfaceTouchServicingKernelSKLMSHW0078.bin /lib/firmware/intel/ipts
+    sudo cp windows/Windows/INF/PreciseTouch/Intel/SurfaceTouchServicingDescriptorSKLMSHW0078.bin /lib/firmware/intel/ipts
+    sudo cp windows/Windows/INF/PreciseTouch/Intel/SurfaceTouchServicingSFTConfigSKLMSHW0078.bin /lib/firmware/intel/ipts
+    umount windows
+    rmdir windows
+
+    sudo cp /usr/src/linux/firmware/intel/ipts/ipts_fw_config.bin /lib/firmware/intel/ipts
+    sudo ln -s iaPreciseTouchDescriptor.bin /lib/firmware/intel/ipts/intel_desc.bin
+    sudo ln -s SurfaceTouchServicingDescriptorMSHW0078.bin /lib/firmware/intel/ipts/vendor_desc.bin
+    sudo ln -s SurfaceTouchServicingKernelSKLMSHW0078.bin /lib/firmware/intel/ipts/vendor_kernel.bin
+    sudo ln -s SurfaceTouchServicingSFTConfigMSHW0078.bin /lib/firmware/intel/ipts/config.bin
+
+Once done, the directory structure should look like:
+
+    $ tree /lib/firmware/intel/ipts
+    /lib/firmware/intel/ipts
+    +-- config.bin -> SurfaceTouchServicingSFTConfigMSHW0078.bin
+    +-- iaPreciseTouchDescriptor.bin
+    +-- intel_desc.bin -> iaPreciseTouchDescriptor.bin
+    +-- ipts_fw_config.bin
+    +-- SurfaceTouchServicingDescriptorMSHW0078.bin
+    +-- SurfaceTouchServicingKernelSKLMSHW0078.bin
+    +-- SurfaceTouchServicingSFTConfigMSHW0078.bin
+    +-- vendor_desc.bin -> SurfaceTouchServicingDescriptorMSHW0078.bin
+    \-- vendor_kernel.bin -> SurfaceTouchServicingKernelSKLMSHW0078.bin
+
+### GuC Firmware
+
+Since kernel 4.7, the [GuC firmware version has been bumped from 4.3 to 6.1](https://git.kernel.org/cgit/linux/kernel/git/stable/linux-stable.git/commit/?id=ab65cce821cc46ccdc0b62f99bb79f75c1c7412c).  Debian jessie does not have this version so you need to [downlownload it](https://01.org/linuxgraphics/downloads/skylake-guc-6.1):
+
+    curl -s -f https://01.org/sites/default/files/downloads/intelr-graphics-linux/sklgucver61.tar.bz2 \
+        | tar jxO skl_guc_ver6_1/skl_guc_ver6_1.bin \
+        | sudo tee /lib/firmware/i915/skl_guc_ver6_1.bin >/dev/null
+    sudo ln -s -f -T skl_guc_ver6_1.bin /lib/firmware/i915/skl_guc_ver6.bin
+
+The MD5 checksum of `/lib/firmware/i915/skl_guc_ver6_1.bin` should be:
+
+    md5sum /lib/firmware/i915/skl_guc_ver6_1.bin
+    07fa52bd5b7401868cf17105db7dc3ab  /lib/firmware/i915/skl_guc_ver6_1.bin
 
 ## Sensors
 

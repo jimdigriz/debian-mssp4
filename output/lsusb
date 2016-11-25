@@ -1,103 +1,12 @@
 # lsusb -t
 /:  Bus 02.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/6p, 5000M
-    |__ Port 4: Dev 2, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
 /:  Bus 01.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/12p, 480M
-    |__ Port 5: Dev 3, If 0, Class=Wireless, Driver=btusb, 480M
     |__ Port 5: Dev 3, If 1, Class=Wireless, Driver=btusb, 480M
     |__ Port 5: Dev 3, If 2, Class=Vendor Specific Class, Driver=, 480M
-    |__ Port 7: Dev 4, If 0, Class=Human Interface Device, Driver=usbhid, 12M
+    |__ Port 5: Dev 3, If 0, Class=Wireless, Driver=btusb, 480M
+    |__ Port 7: Dev 2, If 0, Class=Human Interface Device, Driver=usbhid, 12M
 
 # lsusb -v
-Bus 002 Device 002: ID 045e:090c Microsoft Corp. 
-Device Descriptor:
-  bLength                18
-  bDescriptorType         1
-  bcdUSB               3.00
-  bDeviceClass            0 (Defined at Interface level)
-  bDeviceSubClass         0 
-  bDeviceProtocol         0 
-  bMaxPacketSize0         9
-  idVendor           0x045e Microsoft Corp.
-  idProduct          0x090c 
-  bcdDevice            1.18
-  iManufacturer           1 Realtek
-  iProduct                2 USB3.0 Card Reader
-  iSerial                 3 201509231639
-  bNumConfigurations      1
-  Configuration Descriptor:
-    bLength                 9
-    bDescriptorType         2
-    wTotalLength           44
-    bNumInterfaces          1
-    bConfigurationValue     1
-    iConfiguration          4 CARD READER
-    bmAttributes         0xa0
-      (Bus Powered)
-      Remote Wakeup
-    MaxPower              200mA
-    Interface Descriptor:
-      bLength                 9
-      bDescriptorType         4
-      bInterfaceNumber        0
-      bAlternateSetting       0
-      bNumEndpoints           2
-      bInterfaceClass         8 Mass Storage
-      bInterfaceSubClass      6 SCSI
-      bInterfaceProtocol     80 Bulk-Only
-      iInterface              5 Bulk-In, Bulk-Out, Interface
-      Endpoint Descriptor:
-        bLength                 7
-        bDescriptorType         5
-        bEndpointAddress     0x01  EP 1 OUT
-        bmAttributes            2
-          Transfer Type            Bulk
-          Synch Type               None
-          Usage Type               Data
-        wMaxPacketSize     0x0400  1x 1024 bytes
-        bInterval               0
-        bMaxBurst               7
-      Endpoint Descriptor:
-        bLength                 7
-        bDescriptorType         5
-        bEndpointAddress     0x82  EP 2 IN
-        bmAttributes            2
-          Transfer Type            Bulk
-          Synch Type               None
-          Usage Type               Data
-        wMaxPacketSize     0x0400  1x 1024 bytes
-        bInterval               0
-        bMaxBurst               7
-Binary Object Store Descriptor:
-  bLength                 5
-  bDescriptorType        15
-  wTotalLength           22
-  bNumDeviceCaps          2
-  USB 2.0 Extension Device Capability:
-    bLength                 7
-    bDescriptorType        16
-    bDevCapabilityType      2
-    bmAttributes   0x0000f41e
-      Link Power Management (LPM) Supported
-  SuperSpeed USB Device Capability:
-    bLength                10
-    bDescriptorType        16
-    bDevCapabilityType      3
-    bmAttributes         0x02
-      Latency Tolerance Messages (LTM) Supported
-    wSpeedsSupported   0x000e
-      Device can operate at Full Speed (12Mbps)
-      Device can operate at High Speed (480Mbps)
-      Device can operate at SuperSpeed (5Gbps)
-    bFunctionalitySupport   1
-      Lowest fully-functional device speed is Full Speed (12Mbps)
-    bU1DevExitLat          10 micro seconds
-    bU2DevExitLat        1023 micro seconds
-Device Status:     0x001c
-  (Bus Powered)
-  U1 Enabled
-  U2 Enabled
-  Latency Tolerance Messaging (LTM) Enabled
-
 Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Device Descriptor:
   bLength                18
@@ -109,8 +18,8 @@ Device Descriptor:
   bMaxPacketSize0         9
   idVendor           0x1d6b Linux Foundation
   idProduct          0x0003 3.0 root hub
-  bcdDevice            4.04
-  iManufacturer           3 Linux 4.4.2-mssp4 xhci-hcd
+  bcdDevice            4.09
+  iManufacturer           3 Linux 4.9.0-rc6-mssp4+ xhci-hcd
   iProduct                2 xHCI Host Controller
   iSerial                 1 0000:00:14.0
   bNumConfigurations      1
@@ -162,7 +71,7 @@ Hub Descriptor:
    Port 1: 0000.02a0 5Gbps power Rx.Detect
    Port 2: 0000.02a0 5Gbps power Rx.Detect
    Port 3: 0000.02a0 5Gbps power Rx.Detect
-   Port 4: 0000.0203 5Gbps power U0 enable connect
+   Port 4: 0000.02a0 5Gbps power Rx.Detect
    Port 5: 0000.02a0 5Gbps power Rx.Detect
    Port 6: 0000.02a0 5Gbps power Rx.Detect
 Binary Object Store Descriptor:
@@ -185,7 +94,7 @@ Binary Object Store Descriptor:
 Device Status:     0x0001
   Self Powered
 
-Bus 001 Device 004: ID 045e:07e8 Microsoft Corp. 
+Bus 001 Device 002: ID 045e:07e8 Microsoft Corp. 
 Device Descriptor:
   bLength                18
   bDescriptorType         1
@@ -562,8 +471,8 @@ Device Descriptor:
   bMaxPacketSize0        64
   idVendor           0x1d6b Linux Foundation
   idProduct          0x0002 2.0 root hub
-  bcdDevice            4.04
-  iManufacturer           3 Linux 4.4.2-mssp4 xhci-hcd
+  bcdDevice            4.09
+  iManufacturer           3 Linux 4.9.0-rc6-mssp4+ xhci-hcd
   iProduct                2 xHCI Host Controller
   iSerial                 1 0000:00:14.0
   bNumConfigurations      1
