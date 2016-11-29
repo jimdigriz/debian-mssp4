@@ -247,7 +247,7 @@ Time to compile the kernel (this will take about 40 minutes):
 
 Once compiled (roughly 40 minutes), you now need to install your new kernel:
 
-    sudo dpkg -i /usr/src/linux-image-4.9.0-rc6-mssp4+_4.9.0-rc6-mssp4+-10.00.Custom_amd64.deb
+    sudo dpkg -i /usr/src/linux-image-4.9.0-rc7-mssp4+_4.9.0-rc7-mssp4+-10.00.Custom_amd64.deb
 
 Now reboot into your new kernel.
 
