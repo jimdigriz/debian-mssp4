@@ -25,6 +25,7 @@ The instructions assume you are not new to Debian, though you may have no experi
  * camera
      * is on an I2C bus on accessible via the IPU 2500 (PCI slot `00:05.0` [`8086:1919`])
      * driver for the earlier model is `CONFIG_INTEL_ATOMISP`
+     * able to detect the camera, though not power it up, though again not completely convinced it has actually found it
      * from the ACPI DSDT you can get information on what the *three* cameras are
      * front camera (`CAMF`) is a [`OV5693 (INT33BE)`](http://www.ovt.com/products/sensor.php?id=185) ([mainline staging driver](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/staging/media/atomisp/i2c/ov5693))
      * rear camera (`CAMR`) is a [`OV8865 (INT347A)`](http://www.ovt.com/products/sensor.php?id=134), there is an [Android driver](https://github.com/lenovo-yt2-dev/android_kernel_lenovo_baytrail/blob/357b3bc165c76b9cf1f0d2c08e458576018164a3/drivers/external_drivers/camera/drivers/media/i2c/ov8865.c)
