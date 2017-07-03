@@ -23,9 +23,10 @@ The instructions assume you are not new to Debian, though you may have no experi
 ## Outstanding Issues
 
  * camera
-     * is on an I2C bus on accessible via the graphics card
+     * is on an I2C bus on accessible via the IPU 2500 (PCI slot `00:05.0` [`8086:1919`])
+     * driver for the earlier model is `CONFIG_INTEL_ATOMISP`
      * from the ACPI DSDT you can get information on what the *three* cameras are
-     * front camera (`CAMF`) is a [`OV5693 (INT33BE)`](http://www.ovt.com/products/sensor.php?id=185), there is an [Android driver](https://github.com/sayeed99/test/blob/eadd15672fd628eab9ad5bfcaf00d1b7fbafee3f/drivers/external_drivers/camera/drivers/media/i2c/ov5693/ov5693.c)
+     * front camera (`CAMF`) is a [`OV5693 (INT33BE)`](http://www.ovt.com/products/sensor.php?id=185) ([mainline staging driver](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/staging/media/atomisp/i2c/ov5693))
      * rear camera (`CAMR`) is a [`OV8865 (INT347A)`](http://www.ovt.com/products/sensor.php?id=134), there is an [Android driver](https://github.com/lenovo-yt2-dev/android_kernel_lenovo_baytrail/blob/357b3bc165c76b9cf1f0d2c08e458576018164a3/drivers/external_drivers/camera/drivers/media/i2c/ov8865.c)
      * third camera (`CAM3`) is an IR [`OV7251 (INT347E)`](http://www.ovt.com/products/sensor.php?id=146), there is an [Android driver](https://github.com/ADVANSEE/0066_linux/blob/ba2479578aa7f35be22f6749f7504ba3a68414dc/drivers/media/video/mxc/capture/ov7251_mipi.c)
  * opening the typing cover (or pressing keys) does not not automatically resume
@@ -45,6 +46,7 @@ The instructions assume you are not new to Debian, though you may have no experi
      * [power saving needs to be turned off](./root/etc/network/interfaces.d/mlan0) otherwise after about a minute of idling, you start seeing 100ms+ first hop latencies
      * `modprobe -r mwifiex_pcie; modprobe mwifiex_pcie` results in a lockup; you need to reset the card inbeteen the unload/load with `echo 1 > /sys/bus/pci/devices/0000\:02\:00.0/reset`
      * on kernel 4.5.x (and I guess 4.6.x too) the [driver is pretty flakey](https://github.com/jimdigriz/debian-mssp4/issues/4) though there is a patch on the linked bugzilla
+     * [`mrvl/pcie8997_wlan_v4.bin`](https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/mrvl/pcie8997_wlan_v4.bin?id=47afd9950fbcadeb7cefc093b21d6123bdc76f79)
  * the GRUB with SecureBoot needs some more work, the fonts are bust, plus I need to find the problematic module so we can just load the lot in making the process simpler
  * `gparted` lockup investigation
  * move to using [`triggerhappy`](https://github.com/wertarbyte/triggerhappy) rather than `xbindkeys` so that the [multimedia keys can still work with the screen locked](https://github.com/i3/i3lock/issues/52)
@@ -223,14 +225,17 @@ Run the following to get your system ready to compile a kernel:
 
     sudo apt-get install build-essential git fakeroot kernel-package
     sudo apt-get install firmware-libertas/jessie-backports firmware-misc-nonfree intel-microcode
-    wget -P /usr/src http://http.debian.net/debian/pool/main/l/linux/linux-source-4.8_4.8.7-1_all.deb
+    wget -P /usr/src http://http.debian.net/debian/pool/main/l/linux/linux-source-4.11_4.11.6-1_all.deb
     
     git clone https://gitlab.com/jimdigriz/linux.git /usr/src/linux
     cd /usr/src/linux
     git checkout mssp4
-    ar p /usr/src/linux-source-4.8_4.8.7-1_all.deb data.tar.gz | gunzip -c | tar xO ./usr/src/linux-config-4.8/config.amd64_none_amd64.xz | xzcat > .config
+    ar p /usr/src/linux-source-4.11_4.11.6-1_all.deb data.tar.gz | gunzip -c | tar xO ./usr/src/linux-config-4.11/config.amd64_none_amd64.xz | xzcat > .config
     
     cat <<'EOF' >> .config
+    CONFIG_INTEL_ATOMISP=y
+    CONFIG_VIDEO_ATOMISP=m
+    CONFIG_VIDEO_OV5693=m
     CONFIG_INTEL_IPTS=m
     CONFIG_BLK_DEV_NVME=y
     CONFIG_MODULE_SIG=n
@@ -241,13 +246,11 @@ Now run `make oldconfig` (accept the defaults to all the prompting) so our `.con
 
 Time to compile the kernel (this will take about 40 minutes):
 
-    CONCURRENCY_LEVEL=`getconf _NPROCESSORS_ONLN` fakeroot make-kpkg --initrd --append-to-version=-mssp4 kernel_image
-
-**N.B.** you can append `kernel_headers` to also build the `linux-headers` package too
+    fakeroot make -j$(getconf _NPROCESSORS_ONLN) bindeb-pkg LOCALVERSION=-mssp4 KDEB_PKGVERSION=1
 
 Once compiled (roughly 40 minutes), you now need to install your new kernel:
 
-    sudo dpkg -i /usr/src/linux-image-4.9.0-mssp4+_4.9.0-mssp4+-10.00.Custom_amd64.deb
+    sudo dpkg -i /usr/src/linux-headers-4.11.0-mssp4_1_amd64.deb /usr/src/linux-image-4.11.0-mssp4_1_amd64.deb
 
 Now reboot into your new kernel.
 
@@ -428,7 +431,7 @@ You will need the OpenCL kernel binaries that are located in your Windows partit
 
     sudo mkdir -p /lib/firmware/intel/ipts
     mkdir windows
-    mount mount -o ro /dev/nvme0n1p3 windows
+    mount -o ro /dev/nvme0n1p3 windows
     sudo cp windows/Windows/INF/PreciseTouch/Intel/SurfaceTouchServicingKernelSKLMSHW0078.bin /lib/firmware/intel/ipts
     sudo cp windows/Windows/INF/PreciseTouch/Intel/SurfaceTouchServicingDescriptorSKLMSHW0078.bin /lib/firmware/intel/ipts
     sudo cp windows/Windows/INF/PreciseTouch/Intel/SurfaceTouchServicingSFTConfigSKLMSHW0078.bin /lib/firmware/intel/ipts
@@ -468,6 +471,17 @@ The MD5 checksum of `/lib/firmware/i915/skl_guc_ver6_1.bin` should be:
 
     md5sum /lib/firmware/i915/skl_guc_ver6_1.bin
     07fa52bd5b7401868cf17105db7dc3ab  /lib/firmware/i915/skl_guc_ver6_1.bin
+
+Since kernel 4.11, you also may want to [install the HuC firmware](https://01.org/linuxgraphics/downloads/skylake-huc-1.07) to improve video (decode?) performance:
+
+    curl -s -f https://01.org/sites/default/files/downloads/intelr-graphics-linux/sklhucver01071398.tar.bz2 \
+    	| tar jxO skl_huc_ver01_07_1398/skl_huc_ver01_07_1398.bin \
+    	| sudo tee /lib/firmware/i915/skl_huc_ver01_07_1398.bin >/dev/null
+
+The MD5 checksum of `/lib/firmware/i915/skl_huc_ver01_07_1398.bin` should be:
+
+    md5sum /lib/firmware/i915/skl_huc_ver01_07_1398.bin
+    aef8b70742eb7ad18434212d62fd720a  /lib/firmware/i915/skl_huc_ver01_07_1398.bin
 
 ## Sensors
 

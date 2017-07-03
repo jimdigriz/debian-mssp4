@@ -21,33 +21,19 @@ auto () {
 	# original, with a '+1' safety
 	#echo "27.05+9.932*l(1+$RAW)" | bc -l | cut -d. -f1
 	# customised
-	echo "15+9.932*l(1+$RAW/3)" | bc -l | cut -d. -f1
+	echo "15+7.5*l(1+$RAW/2)" | bc -l | cut -d. -f1
 }
 
-# xrandr (and also xbacklight) have an inherited 250ms delay due to polling the current state
-set_slow () {
+backlight_set () {
 	xbacklight -time 50 $1%
 }
-get_slow () {
+backlight_get () {
 	xbacklight -get | cut -d. -f1
-}
-
-# using xrandr with '--current' is fast, not sure if it can get out of sync though
-set_fast () {
-	C=$(get_fast)
-	[ "${1%%[0-9]*}" = "=" ] && O="${1#=}*937/100" || O="($(get_fast)$1)*937/100"
-	T=$(echo "$O" | bc)
-	[ $T -ge   0 ] || T=0
-	[ $T -lt 937 ] || T=937
-	xrandr --current --output eDP1 --set Backlight $T
-}
-get_fast () {
-	echo "$(xrandr --current --props | awk '/Backlight: / { print $2 }')*100/937" | bc
 }
 
 [ "${1:-}" ] || set -- =$(auto)
 
-set_fast $1
-get_fast
+backlight_set $1
+backlight_get
 
 exit 0
